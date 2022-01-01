@@ -12,8 +12,6 @@ nav:
       - 贡献指南 : 'about/contributing.md'
       - 术语表 : 'about/terminology.md'
 
-
-
 theme:
   name: material
   language: zh
