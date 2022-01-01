@@ -1,1 +1,29 @@
-site_name: OpenBSD 中文结社文档
+site_name: OpenBSD 中文结社
+repo_url: https://github.com/openbsd-zh-association/docs-openbsd-zh
+copyright: "© 2021–2022 OpenBSD 中文结社贡献者"
+
+nav:
+    - 主页: 'index.md'
+    - FAQ:
+      - OpenBSD 简介: 'openbsd-faq/faq1.md'
+      - 安装指南: 'openbsd-faq/faq4.md'
+    - 关于:
+     #- 中文结社 : 'about/index.md'
+      - 贡献指南 : 'about/contributing.md'
+      - 术语表 : 'about/terminology.md'
+
+theme:
+  name: material
+  language: zh
+  locale: zh_CN
+  palette:
+    primary: deep orange
+    accent: orange
+plugins:
+  - search:
+      lang: zh
+markdown_extensions:
+  - def_list
+  - toc:
+      permalink: true
+      slugify: !!python/name:pymdownx.slugs.uslugify #保证中文链接

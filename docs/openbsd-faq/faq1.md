@@ -1,18 +1,11 @@
 # OpenBSD FAQ - 对OpenBSD的简介  
 
-- 关于OpenBSD
-- 硬件支持
-- 手册页
-- 邮件列表
-- (从其他系统)迁移到OpenBSD
-- 报告Bug
-- 支持本项目
-
 ## 关于OpenBSD
 [OpenBSD项目](https://openbsd.org/index.html)提供了一个自由可用的基于4.4BSD系统的多平台UNIX系操作系统。我们聚焦于正确性、安全性、标准化和可移植性。  
 
 ### 为什么我要使用OpenBSD？  
 这是我们认为OpenBSD是一个很有用操作系统的原因：
+
 - OpenBSD可以运行在许多不同的硬件平台上  
 - OpenBSD在无数的源代码审查后，被各安全专家视为最安全的UNIX系操作系统  
 - OpenBSD是一个具有免费且具有完整特性的UNIX系操作系统，并同时以源代码和二进制格式提供  
@@ -26,6 +19,7 @@ OpenBSD的主要维护者自掏腰包维护此项目。这包括为他们为编�
 
 ### 基本系统中包含什么？ 
 OpenBSD发行时带有大量的第三方软件包，包括：
+
 - X.org  
 - LLVM/Clang  
 - GCC  
@@ -46,6 +40,7 @@ OpenBSD团队大约每六个月发布一个新版本，预计时间为五月和�
 
 ## 硬件支持  
 OpenBSD可以运行在以下平台上：
+
 - [alpha](https://www.openbsd.org/alpha.html)  
 - [amd64](https://www.openbsd.org/amd64.html)  
 - [arm64](https://www.openbsd.org/arm64.html)  
@@ -65,6 +60,7 @@ OpenBSD可以运行在以下平台上：
 ## 手册页  
 OpenBSD带有大量man页面形式的手册页。它们是OpenBSD权威的信息源，因此相当多的工作被进行来确保他们最新且精确无误。对系统进行更改的开发者应当随他们对代码的更改更新手册页。而对于用户，在寻求帮助前也应当先查看手册页。  
 这是一个一些对于新用户有帮助的手册页的列表：
+
 - [afterboot(8)](https://man.openbsd.org/afterboot) - 在第一次完全启动后应当检查的东西  
 - [help(1)](https://man.openbsd.org/help) - 对于新用户和管理员的帮助  
 - [hier(7)](https://man.openbsd.org/hier) - 文件系统的结构  
@@ -82,7 +78,8 @@ OpenBSD带有大量man页面形式的手册页。它们是OpenBSD权威的信息
 - [sendbug(1)](https://man.openbsd.org/sendbug) - 报告一个你找到的Bug  
 
 全部的OpenBSD手册页可以在man.openbsd.org网站或man70.tgz文件中被找到。  
-总之，如果您知道一个命令或者手册页的名字，你可以通过运行``man 命令``来阅读它。如果你不知道命令的名字，或者如果``man 命令``没有找到手册页，你可以通过运行``apropos 一些东西``或者``man -k 一些东西``来查找数据库，“一些东西”就是一个很可能在您要查找的手册页标题中出现的单词。  
+总之，如果您知道一个命令或者手册页的名字，你可以通过运行``man 命令``来阅读它。如果你不知道命令的名字，或者如果``man 命令``没有找到手册页，你可以通过运行``apropos 一些东西``或者``man -k 一些东西``来查找数据库，“一些东西”就是一个很可能在您要查找的手册页标题中出现的单词。 
+
 ```
 $ apropos "time zone"
 tzfile(5) - time zone information
@@ -100,6 +97,7 @@ $ man 5 crontab
 
 ## 邮件列表  
 OpenBSD项目包含几个你可以订阅和跟进的邮件列表。比较受欢迎的邮件列表有：
+
 - announce - 公告和安全警报  
 - bugs - 通过[sendbug(1)](https://man.openbsd.org/sendbug)收到的bug反馈及相关讨论  
 - misc - 总的用户问题和解答  
@@ -113,6 +111,7 @@ OpenBSD项目包含几个你可以订阅和跟进的邮件列表。比较受欢�
 ## （从其他系统）迁移到OpenBSD  
 如果您已经读过其他关于Unix类系统的[优秀的著作](https://www.openbsd.org/books.html)，理解了Unix哲学并也将你的知识面扩展到了某一个特定平台上，您将会对OpenBSD感到非常熟悉。  
 这里有一些OpenBSD和其他Unix变种之间最经常被遇到的差别：
+
 - OpenBSD是一个BSD风格的Unix系统，紧密遵循这4.4BSD的设计思想。Linux与Solaris是System V风格的操作系统。一些Unix系操作系统混合着System V与BSD的风格。一个因此经常造成混乱的地方是[启动脚本](https://www.openbsd.org/faq/faq10.html#rc)。OpenBSD使用[rc(8)](https://man.openbsd.org/rc)系统。  
 - OpenBSD是一个完整的系统，各个部分应当保持同步。它并不是可以被独立升级的、一个内核和一套工具的聚合体。  
 - OpenBSD维护着一套[ports源码树](https://www.openbsd.org/faq/ports/index.html)来提供第三方软件。预编译的[包(packages)](https://www.openbsd.org/faq/faq15.html)由OpenBSD ports团队创建和维护。  
@@ -163,6 +162,7 @@ OpenBSD邮件服务器使用[spamd(8)](https://man.openbsd.org/spamd)实现灰�
 ## 支持本项目  
 我们对曾经为OpenBSD项目作出贡献的人和组织表示极大的感激。  
 OpenBSD项目总是需要来自社区的几种不同种类的支持。如果您觉得OpenBSD很有用，您可以找一种方式以为它做出贡献：
+
 - [捐赠资金](https://www.openbsd.org/donations.html)。这个项目总是需要资金来支付设备和网络链接等等。即使是很小的一笔捐赠也能产生深远的影响。  
 - [捐赠设备和部分](https://www.openbsd.org/want.html)。这个项目总是需要普通的和特定的硬件。  
 - [捐赠您的时间和技术](https://www.openbsd.org/faq/faq5.html#Diff)热爱编写操作系统的程序员很自然总是很受欢迎的，但也有其他的方式可以让人们做出贡献。  
@@ -170,3 +170,4 @@ OpenBSD项目总是需要来自社区的几种不同种类的支持。如果您�
 - 通过向[misc@openbsd.org](misc@openbsd.org)发送新的FAQ素材来帮助维护文档。  
 - 组织一个本地的[用户组](https://www.openbsd.org/groups.html)并让您的朋友们痴迷于OpenBSD  
 - 通过您的雇主为在工作上使用OpenBSD创造一个机会。如果您是一名学生，与您的教授讨论将OpenBSD作为一个学习计算机科学或者工程学的工具的可能性。
+
