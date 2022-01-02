@@ -7,6 +7,7 @@ nav:
     - OpenBSD FAQ:
       - OpenBSD 简介: 'openbsd-faq/faq1.md'
       - 安装指南: 'openbsd-faq/faq4.md'
+      - 系统管理: 'openbsd-faq/faq10.md'
       - 从源码构建系统: 'openbsd-faq/faq5.md'
       - 软件包管理: 'openbsd-faq/faq15.md'
     - 关于:
