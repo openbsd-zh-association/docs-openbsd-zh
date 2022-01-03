@@ -9,5 +9,6 @@
 `disk label` <-> `BSD 盘标`
 
 ：   Disk labels，disklabel（又称为 BSD 盘标）用于管理 OpenBSD 文件系统分区。
+    其用来克服在某些特定架构上对磁盘分区的限制，例如在i386架构上，每个磁盘只能包含四个MBR主分区，而任何一个这样的主分区都可以包含任意数量的OpenBSD分区。
     它们包含有关磁盘的某些详细信息，例如 [disklabel(5)](https://man.openbsd.org/disklabel.5) 手册页中的详细描述的驱动器几何结构和文件系统信息。
-    你可以使用 [disklabel(8)](https://man.openbsd.org/disklabel) 命令编辑标签。
+    你可以使用 [disklabel(8)](https://man.openbsd.org/disklabel) 命令编辑BSD盘标。
