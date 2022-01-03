@@ -8,8 +8,9 @@ nav:
       - OpenBSD 简介: 'openbsd-faq/faq1.md'
       - 安装指南: 'openbsd-faq/faq4.md'
       - 系统管理: 'openbsd-faq/faq10.md'
-      - 从源码构建系统: 'openbsd-faq/faq5.md'
+      - 配置磁盘: 'openbsd-faq/faq14.md'
       - 软件包管理: 'openbsd-faq/faq15.md'
+      - 从源码构建系统: 'openbsd-faq/faq5.md'
     - 贡献者指南:
       - 总述: 'contribution/contributing.md'
       - 翻译规范: 'contribution/translation_rules.md'
