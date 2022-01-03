@@ -10,9 +10,11 @@ nav:
       - 系统管理: 'openbsd-faq/faq10.md'
       - 从源码构建系统: 'openbsd-faq/faq5.md'
       - 软件包管理: 'openbsd-faq/faq15.md'
+    - 贡献者指南:
+      - 总述: 'contribution/contributing.md'
+      - 翻译规范: 'contribution/translation_rules.md'
     - 关于:
      #- 中文结社 : 'about/index.md'
-      - 贡献指南 : 'about/contributing.md'
       - 术语表 : 'about/terminology.md'
 
 theme:
