@@ -11,7 +11,7 @@ nav:
       - 配置磁盘: 'openbsd-faq/faq14.md'
       - 软件包管理: 'openbsd-faq/faq15.md'
       - 从源码构建系统: 'openbsd-faq/faq5.md'
-      - 网络配置:'openbsd-faq/faq6.md'
+      - 网络配置: 'openbsd-faq/faq6.md'
     - 贡献者指南:
       - 总述: 'contribution/contributing.md'
       - 翻译规范: 'contribution/translation_rules.md'
