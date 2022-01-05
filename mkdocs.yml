@@ -12,6 +12,8 @@ nav:
       - 软件包管理: 'openbsd-faq/faq15.md'
       - 从源码构建系统: 'openbsd-faq/faq5.md'
       - 网络配置: 'openbsd-faq/faq6.md'
+      - 键盘和显示控制: 'openbsd-faq/faq7.md'
+      - X 窗口系统: 'openbsd-faq/faq11.md'
     - 贡献者指南:
       - 总述: 'contribution/contributing.md'
       - 翻译规范: 'contribution/translation_rules.md'
