@@ -14,6 +14,9 @@ nav:
       - 网络配置: 'openbsd-faq/faq6.md'
       - 键盘和显示控制: 'openbsd-faq/faq7.md'
       - X 窗口系统: 'openbsd-faq/faq11.md'
+      - 多媒体: 'openbsd-faq/faq13.md'
+      - 虚拟化: 'openbsd-faq/faq16.md'
+      - 虚拟专用网络: 'openbsd-faq/faq17.md'
     - 贡献者指南:
       - 总述: 'contribution/contributing.md'
       - 翻译规范: 'contribution/translation_rules.md'
