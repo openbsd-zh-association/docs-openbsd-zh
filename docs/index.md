@@ -2,6 +2,8 @@
 
 OpenBSD 中文结社文档项目，旨在为中文 Unix 与 BSD 社区创建便于阅读的中文文档。
 
+For non-chinese visitor, here is a page [about us](/about/international-about).
+
 ## 关于 OpenBSD
 
 > 默认安装下，在很长一段时间内只发现了两个远程漏洞！ 

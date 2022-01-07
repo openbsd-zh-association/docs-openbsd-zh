@@ -21,7 +21,8 @@ nav:
       - 总述: 'contribution/contributing.md'
       - 翻译规范: 'contribution/translation_rules.md'
     - 关于:
-     #- 中文结社 : 'about/index.md'
+     #- 中文结社 : 'about/index.md
+      - 'about/international-about.md'
       - 术语表 : 'about/terminology.md'
 
 theme:
