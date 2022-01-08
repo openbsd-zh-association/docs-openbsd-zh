@@ -22,7 +22,7 @@ nav:
       - 翻译规范: 'contribution/translation_rules.md'
     - 关于:
      #- 中文结社 : 'about/index.md
-      - 'about/international-about.md'
+      - International About（英文简介） : 'about/international-about.md'
       - 术语表 : 'about/terminology.md'
 
 theme:
