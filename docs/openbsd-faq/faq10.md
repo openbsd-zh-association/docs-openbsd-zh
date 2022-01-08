@@ -72,7 +72,7 @@ boot> boot -s
 
 ## 时钟同步  
 [OpenNTPD](https://www.openntpd.org/)是一个安全、简单且NTP兼容的在你的计算机上提供准确时间的方法。[ntpd(8)](https://https://man.openbsd.org/ntpd)守护进程默认被激活且将会基于从NTP同伴收到的数据设置系统时间。一旦时间被正确的设置，其将会通过在[ntpd.conf(5)](https://man.openbsd.org/ntpd.conf)中配置的时间服务器高精度地维持。在启动时，``ntpd``只会向前调整时间。如果您的时间已经被向后调整了，请使用[date(1)](https://man.openbsd.org/date)手动调整时间。  
-若要将OpenNTPD作为服务器，请在[ntpd.conf(5)](https://man.openbsd.org/ntpd.conf)文件中加入一行``listen on *``并重新启动守护进程。您也可以制定其仅监听某一个特定的地址或者接口。  
+若要将OpenNTPD作为服务器，请在[ntpd.conf(5)](https://man.openbsd.org/ntpd.conf)文件中加入一行``listen on *``并重新启动守护进程。您也可以指定其仅监听某一个特定的地址或者接口。  
 当您将[ntpd(8)](https://man.openbsd.org/ntpd)用于监听时，其他设备可能不能立刻同步它们的时间。这是因为直到本地时钟以一个合理的稳定水平被同步后，ntpd才会提供时间信息。一旦本地时钟达到此水平，一个"clock now synced"（时间已被同步）信息将会被写入``/var/log/daemon``。
 
 ## 时区  
