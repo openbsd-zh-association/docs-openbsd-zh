@@ -16,7 +16,7 @@
 
 - <strong>无人值守升级：</strong>最简单的方法是使用 [sysupgrade(8)](https://man.openbsd.org/OpenBSD-7.0/sysupgrade.8) 进行无人值守升级。该程序将下载所有安装文件集（install sets），验证其签名，然后重新启动以自动执行升级。无人值守升级完成后，继续[下面](https://www.openbsd.org/faq/upgrade70.html#AfterSets)的操作。
 
-- <strong>交互式升级：</strong>如果您坚持省略一些安装集，您将需要执行[交互式升级](https://www.openbsd.org/faq/upgrade70.html#InteractiveUpgrade)。（带有所有安装集的 sysupgrade 升级。）
+- <strong>交互式升级：</strong>如果你坚持省略一些安装集，你将需要执行[交互式升级](https://www.openbsd.org/faq/upgrade70.html#InteractiveUpgrade)。（带有所有安装集的 sysupgrade 升级。）
 
 - <strong>手动升级：</strong>最后一个选项是[手动升级系统](https://www.openbsd.org/faq/upgrade70.html#NoInstKern)。（不建议这样做，因为它是最容易出错的方法。）
 
@@ -24,7 +24,7 @@
 
 ## 交互式升级
 
-获取并验证 `bsd.rd`。为您的机器下载相应架构的 ramdisk 内核和加密签名的校验和文件。
+获取并验证 `bsd.rd`。为你的机器下载相应架构的 ramdisk 内核和加密签名的校验和文件。
 
 | 文件名 | 对应架构的下载地址 |
 | ------ | ------| 
@@ -55,7 +55,7 @@ bsd.rd: OK
 
 接下来[删除旧文件](https://www.openbsd.org/faq/upgrade70.html#RmFiles)。最后使用 `pkg_add -u` 升级软件包。
 
-您可能需要检查[勘误表页面](https://www.openbsd.org/errata70.html)以了解任何发布后的修复。
+你可能需要检查[勘误表页面](https://www.openbsd.org/errata70.html)以了解任何发布后的修复。
 
 ----
 
@@ -63,17 +63,17 @@ bsd.rd: OK
 
 <span style="color:red">这不是推荐的过程。如果可能，请使用无人值守或交互式升级方法！</span>
 
-有时，您需要对无法进行正常无人值守或交互式升级过程的机器进行升级。
+有时，你需要对无法进行正常无人值守或交互式升级过程的机器进行升级。
 
 ### 准备
 
-- <strong>将安装文件放在一个适当的位置</strong>。确保您有足够的空间！远程升级时空间不足可能是……不幸的。请注意，使用 softdep 会加剧这种情况，因为删除和覆盖的文件不会立即释放它们的空间。考虑在 `/etc/fstab` 中禁用 `softdep` 挂载选项并在进行手动升级之前重新启动。建议在 `/usr` 上至少有 500MB 可用空间。
+- <strong>将安装文件放在一个适当的位置</strong>。确保你有足够的空间！远程升级时空间不足可能是……不幸的。请注意，使用 softdep 会加剧这种情况，因为删除和覆盖的文件不会立即释放它们的空间。考虑在 `/etc/fstab` 中禁用 `softdep` 挂载选项并在进行手动升级之前重新启动。建议在 `/usr` 上至少有 500MB 可用空间。
 
-- <strong>成为 root 用户</strong>。虽然在每个命令之前使用 [doas(1)](https://man.openbsd.org/OpenBSD-7.0/doas) 通常是一个好习惯，但该命令可能会被最后的步骤破坏，因此您应该在开始此过程之前获得 root 权限。此时最好使用 doas 以外的方法验证您对 root 的访问权限，即直接登录或使用 [su(1)](https://man.openbsd.org/OpenBSD-7.0/su)。
+- <strong>成为 root 用户</strong>。虽然在每个命令之前使用 [doas(1)](https://man.openbsd.org/OpenBSD-7.0/doas) 通常是一个好习惯，但该命令可能会被最后的步骤破坏，因此你应该在开始此过程之前获得 root 权限。此时最好使用 doas 以外的方法验证你对 root 的访问权限，即直接登录或使用 [su(1)](https://man.openbsd.org/OpenBSD-7.0/su)。
 
-- <strong>停止和/或禁用任何适当的应用程序</strong>。在此过程中，所有用户态应用程序都会被替换，但可能无法运行，因此可能会发生奇怪的事情。在第一次重新启动期间，您可能还会遇到 DNS 解析问题，因此依赖于 DNS 的 PF 规则和 NFS 挂载可能会导致启动问题。可能还有其他的应用程序，你希望在升级后不要立即运行；也要停止并禁用它们。
+- <strong>停止和/或禁用任何适当的应用程序</strong>。在此过程中，所有用户态应用程序都会被替换，但可能无法运行，因此可能会发生奇怪的事情。在第一次重新启动期间，你可能还会遇到 DNS 解析问题，因此依赖于 DNS 的 PF 规则和 NFS 挂载可能会导致启动问题。可能还有其他的应用程序，你希望在升级后不要立即运行；也要停止并禁用它们。
 
-- <strong>安装新的引导块</strong>。这实际上应该在任何升级结束时完成。如果这被忽略了，那么现在不这样做可能会破坏串行控制台或其他东西，具体取决于您的平台。使用 [installboot(8)](https://man.openbsd.org/OpenBSD-7.0/amd64/installboot) 进行配置，假设 `sd0` 是你的启动盘：
+- <strong>安装新的引导块</strong>。这实际上应该在任何升级结束时完成。如果这被忽略了，那么现在不这样做可能会破坏串行控制台或其他东西，具体取决于你的平台。使用 [installboot(8)](https://man.openbsd.org/OpenBSD-7.0/amd64/installboot) 进行配置，假设 `sd0` 是你的启动盘：
 
 ```
 # installboot sd0
@@ -121,7 +121,7 @@ bsd.rd: OK
 # /sbin/oreboot
 ```
 
-或者，如果您使用 [ksh(1)](https://man.openbsd.org/OpenBSD-7.0/ksh)，您可以：
+或者，如果你使用 [ksh(1)](https://man.openbsd.org/OpenBSD-7.0/ksh)，你可以：
 
 ```
 # cp /sbin/reboot /sbin/oreboot
@@ -138,7 +138,7 @@ bsd.rd: OK
 # ./MAKEDEV all
 ```
 
-**更新引导加载程序**。仍然假设 `sd0` 是您的启动盘：
+**更新引导加载程序**。仍然假设 `sd0` 是你的启动盘：
 
 ```
 # installboot sd0
@@ -150,13 +150,13 @@ bsd.rd: OK
 # sysmerge
 ```
 
-**更新固件**。您的系统可能有新固件。用 [fw_update(1)](https://man.openbsd.org/OpenBSD-7.0/fw_update) 更新它：
+**更新固件**。你的系统可能有新固件。用 [fw_update(1)](https://man.openbsd.org/OpenBSD-7.0/fw_update) 更新它：
 
 ```
 # fw_update
 ```
 
-**完成**。查看引导的控制台输出（使用 `dmesg -s`）并根据需要更正任何故障。以下[配置更改](https://www.openbsd.org/faq/upgrade70.html#ConfigChanges)后的所有步骤也适用于手动升级。最后，删除 `/sbin/oreboot` 并更新软件包：`pkg_add -u`。 再次重新启动以确保您使用最新的固件文件并在您自己的 KARL 生成的内核上运行。
+**完成**。查看引导的控制台输出（使用 `dmesg -s`）并根据需要更正任何故障。以下[配置更改](https://www.openbsd.org/faq/upgrade70.html#ConfigChanges)后的所有步骤也适用于手动升级。最后，删除 `/sbin/oreboot` 并更新软件包：`pkg_add -u`。 再次重新启动以确保你使用最新的固件文件并在你自己的 KARL 生成的内核上运行。
 
 ----
 
@@ -169,13 +169,13 @@ bsd.rd: OK
     默认 SNMPv3 加密已更改为 AES。
     `trap receiver`（陷阱接收器，用于向另一台主机发送陷阱）的协议版本不再默认为 SNMPv2。
 
-    要配置 SNMPv3，您需要在配置中添加一个或多个用户，例如：
+    要配置 SNMPv3，你需要在配置中添加一个或多个用户，例如：
 
     ```
         user "manager" authkey "XblueQ300ZyAbUIbndmWjfl" auth hmac-sha1 enc aes enckey "tVadj9jxq8rdJ"
     ```
 
-    如果您需要恢复 SNMPv1/v2c，您可以在 snmpd.conf(5) 中添加如下内容：
+    如果你需要恢复 SNMPv1/v2c，你可以在 snmpd.conf(5) 中添加如下内容：
 
     ```
       listen on any snmpv1 snmpv2c read
@@ -204,6 +204,6 @@ bsd.rd: OK
 
 ## 特殊的软件包
 
-**net/freeradius**。FreeRADIUS 在 3.0.22 中删除了 LEAP。 这是以前的默认配置，因此如果您启用了 EAP，您可能需要更新 `/etc/raddb/mods-available/eap` 并删除`leap { ... }` 行。
+**net/freeradius**。FreeRADIUS 在 3.0.22 中删除了 LEAP。 这是以前的默认配置，因此如果你启用了 EAP，你可能需要更新 `/etc/raddb/mods-available/eap` 并删除`leap { ... }` 行。
 
 [[FAQ Index](https://www.openbsd.org/faq/index.html)] | [[6.8 -> 6.9](https://www.openbsd.org/faq/upgrade69.html)]
