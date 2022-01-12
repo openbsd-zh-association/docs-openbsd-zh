@@ -17,6 +17,8 @@ nav:
       - 多媒体: 'openbsd-faq/faq13.md'
       - 虚拟化: 'openbsd-faq/faq16.md'
       - 虚拟专用网络: 'openbsd-faq/faq17.md'
+    - 其他:
+      - 升级向导: 'others/upgrade70.md'
     - 贡献者指南:
       - 总述: 'contribution/contributing.md'
       - 翻译规范: 'contribution/translation_rules.md'
