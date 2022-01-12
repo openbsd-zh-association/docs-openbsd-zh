@@ -1,6 +1,6 @@
 # 欢迎！
 
-OpenBSD 中文结社文档项目，旨在为中文 Unix 与 BSD 社区创建便于阅读的中文文档。
+OpenBSD 中文结社文档项目，旨在为中文 Unix 与 BSD 社区创建便于阅读的中文文档。请参阅目录以获取详情。
 
 For non-chinese visitor, here is a page [about us](./about/international-about).
 
