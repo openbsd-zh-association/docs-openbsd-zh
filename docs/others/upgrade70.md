@@ -162,45 +162,48 @@ bsd.rd: OK
 
 ## 配置和语法更改
 
-- **snmpd(8)**。默认安全设置已收紧。
-    默认协议已更改为 SNMPv3。
-    默认的 `public` 和 `private` 社区已被删除。现在必须明确设置社区。
-    `seclevel` 默认值从 `none` 更改为 `enc`。
-    默认 SNMPv3 加密已更改为 AES。
-    `trap receiver`（陷阱接收器，用于向另一台主机发送陷阱）的协议版本不再默认为 SNMPv2。
+**snmpd(8)**。默认安全设置已收紧。
 
-    要配置 SNMPv3，你需要在配置中添加一个或多个用户，例如：
+1. 默认协议已更改为 SNMPv3。
+2. 默认的 `public` 和 `private` 社区已被删除。现在必须明确设置社区。
+3. `seclevel` 默认值从 `none` 更改为 `enc`。
+4. 默认 SNMPv3 加密已更改为 AES。
+5. `trap receiver`（陷阱接收器，用于向另一台主机发送陷阱）的协议版本不再默认为 SNMPv2。
 
-    ```
-        user "manager" authkey "XblueQ300ZyAbUIbndmWjfl" auth hmac-sha1 enc aes enckey "tVadj9jxq8rdJ"
-    ```
+要配置 SNMPv3，你需要在配置中添加一个或多个用户，例如：
 
-    如果你需要恢复 SNMPv1/v2c，你可以在 snmpd.conf(5) 中添加如下内容：
+```
+user "manager" authkey "XblueQ300ZyAbUIbndmWjfl" auth hmac-sha1 enc aes enckey "tVadj9jxq8rdJ"
+```
 
-    ```
-      listen on any snmpv1 snmpv2c read
-      read-only community U9PeBY1694bcxMnm
-      seclevel none
-    ```
+如果你需要恢复 SNMPv1/v2c，你可以在 snmpd.conf(5) 中添加如下内容：
 
-    社区名称不应该是常见的或容易被暴力破解的，特别是如果暴露在互联网上。
+```
+listen on any snmpv1 snmpv2c read
+read-only community U9PeBY1694bcxMnm
+seclevel none
+```
 
-- **snmp(1)**
-    默认协议版本已从 v2c 更改为 v3。
-    默认加密已更改为 AES。
-    默认身份验证已更改为 SHA1。
-    默认社区 `public` 已被删除。
+社区名称不应该是常见的或容易被暴力破解的，特别是如果暴露在互联网上。
+
+**snmp(1)**
+1. 默认协议版本已从 v2c 更改为 v3。
+2. 默认加密已更改为 AES。
+3. 默认身份验证已更改为 SHA1。
+4. 默认社区 `public` 已被删除。
 
 ## 删除的文件
 
-- dmx 库已被删除。
-    ```
-      # rm -f /usr/X11R6/lib/libdmx.* \
-	  /usr/X11R6/include/X11/extensions/dmxext.h \
-	  /usr/X11R6/lib/pkgconfig/dmx.pc \
-	  /usr/X11R6/man/man3/DMX*.3
-    ```
-- 可以借助 sysclean 包进行更详细的清理。
+dmx 库已被删除。
+    
+```
+# rm -f /usr/X11R6/lib/libdmx.* \
+/usr/X11R6/include/X11/extensions/dmxext.h \
+/usr/X11R6/lib/pkgconfig/dmx.pc \
+/usr/X11R6/man/man3/DMX*.3
+```
+
+你可以借助 sysclean 包进行更详细的清理。
 
 ## 特殊的软件包
 
