@@ -37,7 +37,7 @@
 
 4. 如果你运行与你的错误有关的第三方软件，请说明，包括什么版本。如果你在谈论快照，请提及，包括其日期和时间。
 
-5. 内核崩溃（kernel panic）的回溯。如果你的内核出现崩溃并且你处于 [ddb(4)](https://man.openbsd.org/ddb) 提示符下，请按照建议在错误报告中提供崩溃消息以及 `trace` 和 `ps` 命令的输出。如果机器挂起，请尝试在挂起之前启用 `sysctl ddb.console=1` 并通过键盘上的 Ctl+Alt+Esc 进入 DDB（必须在 X 之外），或者如果使用串行控制台则发送 BREAK。如果由于某种原因，崩溃消息不可见，你可以使用 `show panic` 命令再次获取它。只要有可能，这是必不可少的。**没有崩溃消息、回溯和 ps 输出的恐慌报告是无用的。**`show registers` 的输出也可能很有价值。然后，你可能需要使用 `boot dump` 重新启动，以便 [savecore(8)](https://man.openbsd.org/savecore) 可以保存内核映像以进行进一步的事后调试，如 [crash(8)](https://man.openbsd.org/crash) 手册页中所述。
+5. 内核崩溃（kernel panic）的回溯。如果你的内核出现崩溃并且你处于 [ddb(4)](https://man.openbsd.org/ddb) 提示符下，请按照建议在错误报告中提供崩溃消息以及 `trace` 和 `ps` 命令的输出。如果机器挂起，请尝试在挂起之前启用 `sysctl ddb.console=1` 并通过键盘上的 Ctl+Alt+Esc 进入 DDB（必须在 X 之外），或者如果使用串行控制台则发送 BREAK。如果由于某种原因，崩溃消息不可见，你可以使用 `show panic` 命令再次获取它。只要有可能，这是必不可少的。**没有崩溃消息、回溯和 ps 输出的崩溃报告是无用的。**`show registers` 的输出也可能很有价值。然后，你可能需要使用 `boot dump` 重新启动，以便 [savecore(8)](https://man.openbsd.org/savecore) 可以保存内核映像以进行进一步的事后调试，如 [crash(8)](https://man.openbsd.org/crash) 手册页中所述。
 
 6. 如果你在使用 X.Org 服务器的架构上报告 X 窗口的问题，请在报告中包含完整的 `/var/log/Xorg.0.log` 文件以及 `dmesg.boot` 信息。
 
