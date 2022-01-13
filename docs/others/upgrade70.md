@@ -173,7 +173,8 @@ bsd.rd: OK
 要配置 SNMPv3，你需要在配置中添加一个或多个用户，例如：
 
 ```
-user "manager" authkey "XblueQ300ZyAbUIbndmWjfl" auth hmac-sha1 enc aes enckey "tVadj9jxq8rdJ"
+user "manager" authkey "XblueQ300ZyAbUIbndmWjfl" 
+auth hmac-sha1 enc aes enckey "tVadj9jxq8rdJ"
 ```
 
 如果你需要恢复 SNMPv1/v2c，你可以在 snmpd.conf(5) 中添加如下内容：

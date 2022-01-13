@@ -19,6 +19,7 @@ nav:
       - 虚拟专用网络: 'openbsd-faq/faq17.md'
     - 其他:
       - 升级向导: 'others/upgrade70.md'
+      - 报告 BUG: 'others/report.md'
     - 贡献者指南:
       - 总述: 'contribution/contributing.md'
       - 翻译规范: 'contribution/translation_rules.md'
