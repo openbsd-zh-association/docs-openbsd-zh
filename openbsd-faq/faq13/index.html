@@ -1,0 +1,1293 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.3">
+    
+    
+      
+        <title>多媒体 - OpenBSD 中文结社</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.edf004c2.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.e6a45f82.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#ff6e42">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="deep-orange" data-md-color-accent="orange">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#openbsd-faq---多媒体" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="OpenBSD 中文结社" class="md-header__button md-logo" aria-label="OpenBSD 中文结社" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OpenBSD 中文结社
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              多媒体
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/openbsd-zh-association/docs-openbsd-zh/" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="OpenBSD 中文结社" class="md-nav__button md-logo" aria-label="OpenBSD 中文结社" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    OpenBSD 中文结社
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/openbsd-zh-association/docs-openbsd-zh/" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        主页
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          OpenBSD FAQ
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="OpenBSD FAQ" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          OpenBSD FAQ
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq1/" class="md-nav__link">
+        OpenBSD 简介
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq4/" class="md-nav__link">
+        安装指南
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq10/" class="md-nav__link">
+        系统管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq14/" class="md-nav__link">
+        配置磁盘
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq15/" class="md-nav__link">
+        软件包管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq5/" class="md-nav__link">
+        从源码构建系统
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq6/" class="md-nav__link">
+        网络配置
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq7/" class="md-nav__link">
+        键盘和显示控制
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq11/" class="md-nav__link">
+        X 窗口系统
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          多媒体
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        多媒体
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#启用录音" class="md-nav__link">
+    启用录音
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#配置音频硬件" class="md-nav__link">
+    配置音频硬件
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#调整音频电平" class="md-nav__link">
+    调整音频电平
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#使用-usb-音频接口" class="md-nav__link">
+    使用 USB 音频接口
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#播放音频文件" class="md-nav__link">
+    播放音频文件
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#录制音频文件" class="md-nav__link">
+    录制音频文件
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#录制所有音频播放的监听混音" class="md-nav__link">
+    录制所有音频播放的监听混音
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#降低音频延迟" class="md-nav__link">
+    降低音频延迟
+  </a>
+  
+    <nav class="md-nav" aria-label="降低音频延迟">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#低延迟是否可以改善音视频同步" class="md-nav__link">
+    低延迟是否可以改善音视频同步？
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#使用远程音频硬件" class="md-nav__link">
+    使用远程音频硬件
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#选择默认音频设备" class="md-nav__link">
+    选择默认音频设备
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#调试音频问题" class="md-nav__link">
+    调试音频问题
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#使用-midi-乐器" class="md-nav__link">
+    使用 MIDI 乐器
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#使用网络摄像头" class="md-nav__link">
+    使用网络摄像头
+  </a>
+  
+    <nav class="md-nav" aria-label="使用网络摄像头">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#启用视频录制" class="md-nav__link">
+    启用视频录制
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#受支持的硬件" class="md-nav__link">
+    受支持的硬件
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#录制网络摄像头流" class="md-nav__link">
+    录制网络摄像头流
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#控制网络摄像头设置" class="md-nav__link">
+    控制网络摄像头设置
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#在网络浏览器中访问网络摄像头" class="md-nav__link">
+    在网络浏览器中访问网络摄像头
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq16/" class="md-nav__link">
+        虚拟化
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq17/" class="md-nav__link">
+        虚拟专用网络
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          其他
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="其他" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          其他
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../others/upgrade70/" class="md-nav__link">
+        升级向导
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../others/report/" class="md-nav__link">
+        报告 BUG
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../others/current/" class="md-nav__link">
+        跟随 -current 和使用快照
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../others/mail/" class="md-nav__link">
+        邮件列表
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          贡献者指南
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="贡献者指南" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          贡献者指南
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contribution/contributing/" class="md-nav__link">
+        总述
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contribution/translation_rules/" class="md-nav__link">
+        翻译规范
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          关于
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="关于" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          关于
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/international-about/" class="md-nav__link">
+        International About（英文简介）
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/terminology/" class="md-nav__link">
+        术语表
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#启用录音" class="md-nav__link">
+    启用录音
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#配置音频硬件" class="md-nav__link">
+    配置音频硬件
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#调整音频电平" class="md-nav__link">
+    调整音频电平
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#使用-usb-音频接口" class="md-nav__link">
+    使用 USB 音频接口
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#播放音频文件" class="md-nav__link">
+    播放音频文件
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#录制音频文件" class="md-nav__link">
+    录制音频文件
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#录制所有音频播放的监听混音" class="md-nav__link">
+    录制所有音频播放的监听混音
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#降低音频延迟" class="md-nav__link">
+    降低音频延迟
+  </a>
+  
+    <nav class="md-nav" aria-label="降低音频延迟">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#低延迟是否可以改善音视频同步" class="md-nav__link">
+    低延迟是否可以改善音视频同步？
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#使用远程音频硬件" class="md-nav__link">
+    使用远程音频硬件
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#选择默认音频设备" class="md-nav__link">
+    选择默认音频设备
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#调试音频问题" class="md-nav__link">
+    调试音频问题
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#使用-midi-乐器" class="md-nav__link">
+    使用 MIDI 乐器
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#使用网络摄像头" class="md-nav__link">
+    使用网络摄像头
+  </a>
+  
+    <nav class="md-nav" aria-label="使用网络摄像头">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#启用视频录制" class="md-nav__link">
+    启用视频录制
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#受支持的硬件" class="md-nav__link">
+    受支持的硬件
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#录制网络摄像头流" class="md-nav__link">
+    录制网络摄像头流
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#控制网络摄像头设置" class="md-nav__link">
+    控制网络摄像头设置
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#在网络浏览器中访问网络摄像头" class="md-nav__link">
+    在网络浏览器中访问网络摄像头
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+<a href="https://github.com/openbsd-zh-association/docs-openbsd-zh/edit/master/docs/openbsd-faq/faq13.md" title="编辑此页" class="md-content__button md-icon">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+</a>
+
+
+<h1 id="openbsd-faq---多媒体">OpenBSD FAQ - 多媒体<a class="headerlink" href="#openbsd-faq---多媒体" title="Permanent link">&para;</a></h1>
+<h2 id="启用录音">启用录音<a class="headerlink" href="#启用录音" title="Permanent link">&para;</a></h2>
+<p>出于隐私原因，OpenBSD 中默认禁用录音。你可以使用 <code>kern.audio.record sysctl</code> 启用该功能。</p>
+<pre><code># sysctl kern.audio.record=1
+# echo kern.audio.record=1 &gt;&gt; /etc/sysctl.conf
+</code></pre>
+<h2 id="配置音频硬件">配置音频硬件<a class="headerlink" href="#配置音频硬件" title="Permanent link">&para;</a></h2>
+<p>每个声卡型号都有自己的一组控件。有些声卡根本没有控件，其他可能有一百个或更多控件。你可以以 root 身份运行 <a href="https://man.openbsd.org/mixerctl">mixctl(8)</a> 列出所有控件和当前设置。</p>
+<p>并非每个音频芯片的每个选项都必须连接外部世界。例如，列出的输出可能多于实际连接的输出。音频设备的控件可能会有不同的标签。 通常控件有一个有意义的标签，但有时必须简单地尝试不同的设置来查看每个控件的效果。</p>
+<p>以下是要考虑的控件列表：</p>
+<p><strong>静音和电平控制</strong> —— 即使主控制似乎设置正确，信号路径中也可能有多个静音或电平控制。在下面的示例中，设备具有主录音电平和麦克风增益控制：</p>
+<pre><code>record.adc-0:1=248,248
+record.adc-0:1_source=mic
+inputs.mic=85,85
+</code></pre>
+<p><strong>外部放大器断电 (External Amplifier Power-Down, EAPD)</strong> —— 此开关通常用于笔记本电脑的省电，可能需要设置以获得输出信号：</p>
+<pre><code>outputs.spkr_eapd=on
+</code></pre>
+<p><strong>录音源</strong> —— 一些设备有多个麦克风输入。此类控制的示例：</p>
+<pre><code>record.source=mic
+record.adc-0:1_source=mic
+</code></pre>
+<p>要使更改在每次重新启动时生效，请编辑 /etc/mixerctl.conf 文件。例如：</p>
+<pre><code>record.adc-0:1_source=mic
+inputs.mic=85,85
+</code></pre>
+<h2 id="调整音频电平">调整音频电平<a class="headerlink" href="#调整音频电平" title="Permanent link">&para;</a></h2>
+<p><a href="https://man.openbsd.org/sndioctl">sndioctl(1)</a> 实用程序用于以普通用户身份操作音频控件。不带参数运行它会列出所有控件和当前设置。</p>
+<p><code>output.level</code> 控件始终存在。它要么对应于硬件控制，要么在软件中模拟。</p>
+<h2 id="使用-usb-音频接口">使用 USB 音频接口<a class="headerlink" href="#使用-usb-音频接口" title="Permanent link">&para;</a></h2>
+<p>dmesg 输出中 USB 音频接口的示例可能如下所示：</p>
+<pre><code>uaudio0 at uhub2 port 1 configuration 1 interface 1 &quot;ABC C-Media USB Audio Device&quot; rev 1.10/1.00 addr 2
+uaudio0: class v1, full-speed, sync, channels: 2 play, 1 rec, 8 ctls
+audio1 at uaudio0
+</code></pre>
+<p>在大多数系统上，第一个音频设备是内部声卡。连接后，USB 音频设备将成为第二个。在默认的 <a href="https://man.openbsd.org/sndiod">sndiod(8)</a> 配置中，这两个设备分别被编程为 <code>snd/0</code>（默认）和 <code>snd/1</code>，并且可以独立使用。设置为使用 <code>snd/1</code> 的程序将使用 USB 设备。</p>
+<p><a href="https://man.openbsd.org/sndiod">sndiod(8)</a> 可以配置为使 <code>snd/0</code> 对应于 USB 设备（如果它已连接）或未连接时对应于内部设备：</p>
+<pre><code># rcctl set sndiod flags -f rsnd/0 -F rsnd/1
+# rcctl restart sndiod
+</code></pre>
+<p>当服务器打开设备时，它会首先尝试 USB 设备。如果它不存在，则使用内部设备。如果 USB 设备断开连接，sndiod 会尝试使用内部声卡继续操作。如果再次连接 USB 设备，sndiod 将在下次尝试打开设备时看到它。要强制 sndiod 在设备之间切换，请重新加载服务器：</p>
+<pre><code># rcctl reload sndiod
+</code></pre>
+<h2 id="播放音频文件">播放音频文件<a class="headerlink" href="#播放音频文件" title="Permanent link">&para;</a></h2>
+<p>OpenBSD 带有 <a href="https://man.openbsd.org/aucat">aucat(1)</a>，这是一个能够播放未压缩的 WAV、AIFF 和 AU 文件的程序。它可以用于非常简单的情况或测试播放：</p>
+<pre><code>$ aucat -i filename.wav
+</code></pre>
+<p>还有许多其他播放器可作为支持其他音频格式的<a href="https://www.openbsd.org/faq/faq15.html">软件包</a>。</p>
+<h2 id="录制音频文件">录制音频文件<a class="headerlink" href="#录制音频文件" title="Permanent link">&para;</a></h2>
+<p>使用 <code>kern.audio.record</code> sysctl 启用录音后，<a href="https://man.openbsd.org/aucat">aucat(1)</a> 可用于录制未压缩的 WAV、AIFF 和 AU 文件。</p>
+<pre><code>$ aucat -o file.wav
+</code></pre>
+<p>上述命令将开始录制 WAV 格式的文件。按 CTRL+C 完成录制。</p>
+<p>要播放文件，请运行：</p>
+<pre><code>$ aucat -i file.wav
+</code></pre>
+<p>如果录音似乎可以正常工作，但录音的播放无声或不符合预期，则混音器可能需要进行一些配置。确保您选择了正确的声源进行录音，并且未静音。</p>
+<p>如果需要，可以使用 ports 源码树中的适当程序压缩生成的 WAV 文件。或者可以使用诸如 sox、ffmpeg 或 audacity 之类的 port 来录制、处理和压缩音频文件。</p>
+<h2 id="录制所有音频播放的监听混音">录制所有音频播放的监听混音<a class="headerlink" href="#录制所有音频播放的监听混音" title="Permanent link">&para;</a></h2>
+<p>监控流记录来自所有播放设备的组合音频输出，允许你复制或保存通过音频子系统的任何内容。此功能可用于屏幕录像或任何类型的现场音频混合。</p>
+<p>使用以下命令为 <a href="https://man.openbsd.org/sndiod">sndiod(8)</a> 创建监视器子设备 <code>mon</code>：</p>
+<pre><code># rcctl set sndiod flags -s default -m play,mon -s mon
+# rcctl restart sndiod
+</code></pre>
+<p>将你的程序配置为从 <code>snd/0.mon</code> 设备录制音频，例如：</p>
+<pre><code>$ aucat -f snd/0.mon -o file.wav
+</code></pre>
+<p>此时，你的系统播放的任何内容都记录在 <code>file.wav</code> 中。</p>
+<h2 id="降低音频延迟">降低音频延迟<a class="headerlink" href="#降低音频延迟" title="Permanent link">&para;</a></h2>
+<p>延迟是程序决定播放样本与用户听到样本之间的时间。由于音频数据总是被缓冲，这个延迟与音频缓冲区大小成正比。建议使用以下值：</p>
+<ul>
+<li>实时合成器：5ms。这是敲击 MIDI 键盘上的键和实际听到音符之间的时间。粗略地说，5ms 对应于声音传播 1.75m 所需的时间。</li>
+<li>游戏：50ms。这是你看到事件和听到相应声音之间的时间。</li>
+<li>电影播放器等：500 毫秒及以上。 此类应用程序提前“知道”要播放的声音，并以与相应图片同时播放的方式发送音频数据。</li>
+</ul>
+<p>音频缓冲区越小（以实现低延迟），溢出/欠载的可能性就越大。缓冲区溢出/不足会导致声音断断续续。</p>
+<p>sndiod(8) 对所有音频应用程序施加了最小延迟，默认延迟为 160 毫秒。如果你计划使用需要较低延迟的应用程序，请使用 -b 选项选择所需的延迟（以帧数表示）。例如，在 48000 个样本/秒（samples/second）时，50 毫秒的延迟对应于：</p>
+<p>48000 个样本/秒 × 0.050 秒 = 2400 个样本</p>
+<p>然后执行</p>
+<pre><code># rcctl set sndiod flags -b2400
+</code></pre>
+<h3 id="低延迟是否可以改善音视频同步">低延迟是否可以改善音视频同步？<a class="headerlink" href="#低延迟是否可以改善音视频同步" title="Permanent link">&para;</a></h3>
+<p>不，将音频与视频同步不需要低延迟。同步问题通常是由软件本身引起的。强制应用程序使用较小的缓冲区（通过在低延迟模式下启动 sndiod(8)）可能会在某些情况下隐藏实际问题，并给人一种软件运行更好的感觉，但显然正确的做法是开始搜索相应的错误。</p>
+<h2 id="使用远程音频硬件">使用远程音频硬件<a class="headerlink" href="#使用远程音频硬件" title="Permanent link">&para;</a></h2>
+<p>sndiod(8) 可以配置为接受来自网络的连接，允许其他机器也使用声卡。在带有声卡的远程系统上，运行：</p>
+<pre><code># rcctl set sndiod flags -L-
+</code></pre>
+<p>在本地系统上，将您的程序配置为使用 <code>snd@hostname/0</code>，其中“主机名（hostname）”是远程系统的地址。<code>AUDIODEVICE</code> 环境变量可以设置为上述值，使远程声卡成为默认的音频设备。</p>
+<p>任何能够连接到远程主机的 TCP 端口 11025 的系统都可以使用音频设备。 出于隐私原因，在给定时间，一个系统中只有一个用户可以连接到该系统。 如果多个系统必须同时使用音频设备，则 sndio(7) 授权 cookie 必须相同。例如，将你的 <code>~/.sndio/cookie</code> 复制到可能使用音频设备的所有帐户。</p>
+<p>为避免故障，端口 11025 上的 TCP 流量可以使用数据包过滤器进行优先级排序。使用默认配置时，sndiod 将消耗大约 200kB/s 的网络带宽。</p>
+<h2 id="选择默认音频设备">选择默认音频设备<a class="headerlink" href="#选择默认音频设备" title="Permanent link">&para;</a></h2>
+<p>默认音频设备的选择由 <code>AUDIODEVICE</code> 环境变量决定。如果未设置，则默认使用 <code>snd/0</code>，它是 <a href="https://man.openbsd.org/sndiod">sndiod(8)</a> 管理的第一个音频设备。 选择默认设备的最灵活方法是导出可能在用户的登录配置文件中的 <code>AUDIODEVICE</code>。</p>
+<p>另一种更改默认音频输出设备的方法是使所需设备成为 <a href="https://man.openbsd.org/sndiod">sndiod(8)</a> 管理的第一个设备。例如，要使用外部 DAC 而不是主板的板载音频，只需更改 <a href="https://man.openbsd.org/sndiod">sndiod(8)</a> 的启动标志以使用该设备：</p>
+<pre><code># rcctl set sndiod flags -f rsnd/1
+# rcctl restart sndiod
+</code></pre>
+<p>这将使第二个音频设备 (<code>rsnd/1</code>) 成为默认设备。</p>
+<h2 id="调试音频问题">调试音频问题<a class="headerlink" href="#调试音频问题" title="Permanent link">&para;</a></h2>
+<p>如果你在播放音频时没有听到任何声音，则可能是调音台控制调低音量或只是静音。请参阅<a href="https://www.openbsd.org/faq/faq13.html#confaudio">本节</a>以配置混音器。在报告问题之前，请取消<strong>所有</strong>输入和输出的静音。</p>
+<p>如果你认为你的设备应该可以正常工作，但无论出于何种原因不能正常工作，那么是时候进行一些调试了。以下步骤可以确定 DAC 是否正在处理数据。</p>
+<pre><code># cat &gt; /dev/audio0 &lt; /dev/zero &amp;
+[1] 9926
+# audioctl play.{bytes,errors}
+play.bytes=3312000
+play.errors=0
+# audioctl play.{bytes,errors}
+play.bytes=7065600
+play.errors=0
+# audioctl play.{bytes,errors}
+play.bytes=9379200
+play.errors=0
+# kill %1
+# fg %1
+cat &gt; /dev/audio0 &lt; /dev/zero
+Terminated
+</code></pre>
+<p>在这里，我们看到每次检查时，处理的数据计数 <code>play.bytes</code> 都在增加，所以数据在流动。我们还看到，设备没有少运行任何样本（<code>play.errors</code>）。这也是好事。</p>
+<p>请注意，即使你在运行上述测试时插入了扬声器，你也不应该听到任何声音。 该测试向设备发送 “zero” 信号，这对于所有当前支持的默认编码是静音的。</p>
+<p>由于我们知道设备可以处理数据，因此最好再次检查混音器设置。 确保所有输出和所有输入都未静音且处于合理水平。</p>
+<p>如果此时你仍有问题，可能是时候<a href="https://www.openbsd.org/report.html">提交错误报告</a>了。除了完整的 dmesg 和问题描述等正常的错误报告信息外，还请包括 <code>mixerctl -v</code> 的默认输出以及上述 DAC 处理测试的输出。</p>
+<h2 id="使用-midi-乐器">使用 MIDI 乐器<a class="headerlink" href="#使用-midi-乐器" title="Permanent link">&para;</a></h2>
+<p>乐器数字接口 (MIDI) 协议提供了一种标准化且有效的方法，可以将音乐表演信息表示为电子数据。MIDI 数据仅包含合成器播放声音所需的指令，而不是实际的声音。</p>
+<p>要播放 MIDI 数据，需要一个连接到机器的 MIDI 端口的合成器。同样，要录制 MIDI 数据，需要 MIDI 乐器（例如 MIDI 键盘）。高级 MIDI 乐器可能包含多个子部分（合成器、键盘、控制面等...）。它们在 OpenBSD 上显示为多个 MIDI 端口。</p>
+<p>当您已经运行 OpenBSD 时，在 dmesg(8) 命令的输出中查找 MIDI 端口。dmesg 输出中的 MIDI 端口示例是：</p>
+<pre><code>umidi0 at uhub2 port 2 configuration 1 interface 0 &quot;Roland Roland XV-2020&quot; rev 1.10/1.00 addr 2
+midi0 at umidi0: &lt;USB MIDI I/F&gt;
+umidi1 at uhub1 port 2 configuration 1 interface 1 &quot;Evolution Electronics Ltd. USB Keystation 61es&quot; rev 1.00/1.25 addr 3
+midi1 at umidi1: &lt;USB MIDI I/F&gt;
+</code></pre>
+<p>它显示了两个附加的 <a href="https://man.openbsd.org/midi">midi(4)</a> 驱动程序，程序称为：</p>
+<ul>
+<li><code>midi/0</code> - 通过 USB 连接的合成器</li>
+<li><code>midi/1</code> - MIDI 主键盘</li>
+</ul>
+<p>键盘的输出可以连接到合成器的输入，如下所示：</p>
+<pre><code>$ midicat -q midi/0 -q midi/1
+</code></pre>
+<p>现在你可以听到你在合成器上的 MIDI 键盘上演奏的内容。</p>
+<p><a href="https://man.openbsd.org/sndiod">sndiod(8)</a> 服务器暴露了 MIDI 直通端口，允许程序互相发送 MIDI 数据。例如，如果你没有连接硬件合成器，你可以启动一个软件合成器（如 audio/fluidsynth 端口），然后把它作为 MIDI 输出。</p>
+<pre><code>$ midicat -q midi/0 -q midithru/0
+</code></pre>
+<h2 id="使用网络摄像头">使用网络摄像头<a class="headerlink" href="#使用网络摄像头" title="Permanent link">&para;</a></h2>
+<h3 id="启用视频录制">启用视频录制<a class="headerlink" href="#启用视频录制" title="Permanent link">&para;</a></h3>
+<p>出于隐私原因，OpenBSD 中默认禁用视频录制。<code>kern.video.record</code> sysctl 可用于启用它。</p>
+<pre><code># sysctl kern.video.record=1
+# echo kern.video.record=1 &gt;&gt; /etc/sysctl.conf
+</code></pre>
+<h3 id="受支持的硬件">受支持的硬件<a class="headerlink" href="#受支持的硬件" title="Permanent link">&para;</a></h3>
+<p><a href="https://man.openbsd.org/uvideo">uvideo(4)</a> 设备驱动程序支持许多遵循 USB 视频类 (UVC) 规范的网络摄像头，并通过 <a href="https://man.openbsd.org/video.4">video(4)</a> 层向用户公开。</p>
+<p>受支持的网络摄像头（或其他视频设备）在 dmesg 中的显示如下所示：</p>
+<pre><code>uvideo0 at uhub0 port 8 configuration 1 interface 0 &quot;Azurewave Integrated Camera&quot; rev 2.01/69.05 addr 10
+video0 at uvideo0
+uvideo1 at uhub0 port 8 configuration 1 interface 2 &quot;Azurewave Integrated Camera&quot; rev 2.01/69.05 addr 10
+video1 at uvideo1
+</code></pre>
+<p>该设备可通过 <code>/dev/video0</code> 访问。</p>
+<p>一些笔记本电脑还为红外摄像头连接了第二个（无法使用的）视频设备。你可以使用 <a href="https://man.openbsd.org/video.1">video(1)</a> 命令找到可用的相机设备：</p>
+<pre><code>$ video -q -f /dev/video0
+video device /dev/video0:
+  encodings: yuy2
+  frame sizes (width x height, in pixels) and rates (in frames per second):
+        320x180: 30
+        320x240: 30
+        352x288: 30
+        424x240: 30
+        640x360: 30
+        640x480: 30
+        848x480: 20
+        960x540: 15
+        1280x720: 10
+  controls: brightness, contrast, saturation, hue, gamma, sharpness, white_balance_temperature
+$ video -q -f /dev/video1
+video: /dev/video1 has no usable YUV encodings
+</code></pre>
+<p>默认只允许 root 访问视频设备。必须更改设备的权限才能将其作为普通用户使用：</p>
+<pre><code># chown $USER /dev/video0
+</code></pre>
+<h3 id="录制网络摄像头流">录制网络摄像头流<a class="headerlink" href="#录制网络摄像头流" title="Permanent link">&para;</a></h3>
+<p>本节使用 <code>graphics/ffmpeg</code> 包中的 <code>ffplay</code> 和 <code>ffmpeg</code>。要查看给定相机的功能，请运行以下命令：</p>
+<pre><code>$ ffplay -f v4l2 -list_formats all -i /dev/video0
+[...]
+[video4linux2,v4l2 @ 0x921f8420800] Raw       : yuyv422 : YUYV : 640x480 320x180 320x240 352x288 424x240 640x360 848x480 960x540 1280x720
+[video4linux2,v4l2 @ 0x921f8420800] Compressed:   mjpeg : MJPEG : 1280x720 320x180 320x240 352x288 424x240 640x360 640x480 848x480 960x540
+</code></pre>
+<p>第一行显示未压缩的 YUYV 格式显示支持的分辨率。这种格式的帧率可能非常低。第二行显示支持的 MJPEG 压缩视频分辨率，它可以提供更高的帧率。</p>
+<p>选择其中一种 MJPEG 分辨率并运行以下命令进行测试：</p>
+<pre><code>$ ffplay -f v4l2 -input_format mjpeg -video_size 1280x720 -i /dev/video0
+[...]
+Input #0, video4linux2,v4l2, from '/dev/video0':B sq=    0B f=0/0
+  Duration: N/A, start: 1599377893.546533, bitrate: N/A
+    Stream #0:0: Video: mjpeg (Baseline), yuvj422p(pc, bt470bg/unknown/unknown), 1280x720, 30 fps, 30 tbr, 1000k tbn, 1000k tbc
+</code></pre>
+<p>网络摄像头流应与分辨率和帧率一起显示。</p>
+<p>如果可行，可以使用 <code>ffmpeg</code> 录制视频，如下所示：</p>
+<pre><code>$ ffmpeg -f v4l2 -input_format mjpeg -video_size 1280x720 -i /dev/video0 ~/video.mkv
+</code></pre>
+<p>按 “q” 结束录制。</p>
+<h3 id="控制网络摄像头设置">控制网络摄像头设置<a class="headerlink" href="#控制网络摄像头设置" title="Permanent link">&para;</a></h3>
+<p>网络摄像头通常具有亮度、对比度和其他可使用 <a href="https://man.openbsd.org/video.1">video(1)</a> 命令更改的控件。</p>
+<pre><code>$ video -c
+brightness=128
+contrast=32
+saturation=64
+hue=0
+gamma=120
+sharpness=3
+white_balance_temperature=auto
+</code></pre>
+<p>例如，亮度设置可以更改为 200：</p>
+<pre><code>$ video brightness=200
+brightness: 128 -&gt; 200
+</code></pre>
+<p>可以使用 <code>video -d</code> 将所有设置恢复为默认值。</p>
+<p>如果设置为 “auto” 值，某些设置支持自动调整。</p>
+<h3 id="在网络浏览器中访问网络摄像头">在网络浏览器中访问网络摄像头<a class="headerlink" href="#在网络浏览器中访问网络摄像头" title="Permanent link">&para;</a></h3>
+<p>默认情况下，Chromium 可以访问 <code>/dev/video</code>。要允许 Chromium 访问其他视频设备，必须将设备路径添加到 <code>/etc/chromium/unveil.main</code> 和 <code>/etc/chromium/unveil.utility_video</code>。</p>
+<p>默认情况下，Firefox 可以访问 <code>/dev/video</code> 和 <code>/dev/video0</code>。 要允许 Firefox 访问其他视频设备，必须将设备路径添加到 <code>/etc/firefox/unveil.main</code>。</p>
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="页脚">
+      
+        
+        <a href="../faq11/" class="md-footer__link md-footer__link--prev" aria-label="上一页: X 窗口系统" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              X 窗口系统
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../faq16/" class="md-footer__link md-footer__link--next" aria-label="下一页: 虚拟化" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              虚拟化
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2021–2022 OpenBSD 中文结社贡献者
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "search": "../../assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.e1a181d9.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,1013 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.3">
+    
+    
+      
+        <title>软件包管理 - OpenBSD 中文结社</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.edf004c2.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.e6a45f82.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#ff6e42">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="deep-orange" data-md-color-accent="orange">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#openbsd-faq---软件包管理" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="OpenBSD 中文结社" class="md-header__button md-logo" aria-label="OpenBSD 中文结社" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OpenBSD 中文结社
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              软件包管理
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/openbsd-zh-association/docs-openbsd-zh/" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="OpenBSD 中文结社" class="md-nav__button md-logo" aria-label="OpenBSD 中文结社" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    OpenBSD 中文结社
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/openbsd-zh-association/docs-openbsd-zh/" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        主页
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          OpenBSD FAQ
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="OpenBSD FAQ" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          OpenBSD FAQ
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq1/" class="md-nav__link">
+        OpenBSD 简介
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq4/" class="md-nav__link">
+        安装指南
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq10/" class="md-nav__link">
+        系统管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq14/" class="md-nav__link">
+        配置磁盘
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          软件包管理
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        软件包管理
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#介绍" class="md-nav__link">
+    介绍
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#选择镜像" class="md-nav__link">
+    选择镜像
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#查询软件包" class="md-nav__link">
+    查询软件包
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#安装软件包" class="md-nav__link">
+    安装软件包
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#升级软件包" class="md-nav__link">
+    升级软件包
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#移除软件包" class="md-nav__link">
+    移除软件包
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#在另一台机器上复制已安装的软件包" class="md-nav__link">
+    在另一台机器上复制已安装的软件包
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#不完整的软件包安装或删除" class="md-nav__link">
+    不完整的软件包安装或删除
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq5/" class="md-nav__link">
+        从源码构建系统
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq6/" class="md-nav__link">
+        网络配置
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq7/" class="md-nav__link">
+        键盘和显示控制
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq11/" class="md-nav__link">
+        X 窗口系统
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq13/" class="md-nav__link">
+        多媒体
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq16/" class="md-nav__link">
+        虚拟化
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq17/" class="md-nav__link">
+        虚拟专用网络
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          其他
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="其他" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          其他
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../others/upgrade70/" class="md-nav__link">
+        升级向导
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../others/report/" class="md-nav__link">
+        报告 BUG
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../others/current/" class="md-nav__link">
+        跟随 -current 和使用快照
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../others/mail/" class="md-nav__link">
+        邮件列表
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          贡献者指南
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="贡献者指南" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          贡献者指南
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contribution/contributing/" class="md-nav__link">
+        总述
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contribution/translation_rules/" class="md-nav__link">
+        翻译规范
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          关于
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="关于" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          关于
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/international-about/" class="md-nav__link">
+        International About（英文简介）
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/terminology/" class="md-nav__link">
+        术语表
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#介绍" class="md-nav__link">
+    介绍
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#选择镜像" class="md-nav__link">
+    选择镜像
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#查询软件包" class="md-nav__link">
+    查询软件包
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#安装软件包" class="md-nav__link">
+    安装软件包
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#升级软件包" class="md-nav__link">
+    升级软件包
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#移除软件包" class="md-nav__link">
+    移除软件包
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#在另一台机器上复制已安装的软件包" class="md-nav__link">
+    在另一台机器上复制已安装的软件包
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#不完整的软件包安装或删除" class="md-nav__link">
+    不完整的软件包安装或删除
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+<a href="https://github.com/openbsd-zh-association/docs-openbsd-zh/edit/master/docs/openbsd-faq/faq15.md" title="编辑此页" class="md-content__button md-icon">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+</a>
+
+
+<h1 id="openbsd-faq---软件包管理">OpenBSD FAQ - 软件包管理<a class="headerlink" href="#openbsd-faq---软件包管理" title="Permanent link">&para;</a></h1>
+<h2 id="介绍">介绍<a class="headerlink" href="#介绍" title="Permanent link">&para;</a></h2>
+<p>在 OpenBSD 系统上可能有许多应用程序需要使用。为了使这个软件更易于安装和管理，它被移植（port）到 OpenBSD 并打包。软件包系统的目的是跟踪安装了哪些软件，以便可以轻松更新或删除它。借助该系统的帮助，在几分钟内可以获取并安装大量软件包，并将所有内容放在正确的位置。</p>
+<p>Ports collections 并没有经过与 OpenBSD 基本系统相同的全面安全审计。尽管我们努力保持软件包的高品质，但我们只是没有足够的资源来确保相同水平的稳健性和安全性。</p>
+<p>OpenBSD ports 团队认为软件包（package）才是他们移植工作的目标， 而不是 port 本身。一般来说，我们建议你使用软件包，而不是从 ports 构建一个应用程序。</p>
+<p>借助多个实用程序，可以轻松管理软件包：</p>
+<ul>
+<li><a href="https://man.openbsd.org/pkg_add">pkg_add(1)</a> - 用于安装和更新软件包</li>
+<li><a href="https://man.openbsd.org/pkg_check">pkg_check(8)</a> - 用于检查已安装软件包的一致性</li>
+<li><a href="https://man.openbsd.org/pkg_delete">pkg_delete(1)</a> - 用于删除已安装的软件包</li>
+<li><a href="https://man.openbsd.org/pkg_info">pkg_info(1)</a> - 用于显示有关包的信息</li>
+</ul>
+<p>为了正常运行应用程序 X，可能需要安装其他应用程序 Y 和 Z。 应用程序 X 被称为依赖于这些其他应用程序，这就是为什么 Y 和 Z 被称为 X 的依赖关系。反过来，Y 可能需要其他应用程序 P 和 Q，而 Z 可能需要应用程序 R 才能正常运行。这样，就形成了一个完整的依赖树。</p>
+<p>软件包看起来像简单的 <code>.tgz</code> 包。基本上它们就是这样，但有一个关键的区别：它们包含一些额外的打包信息。这些信息可被 <code>pkg_add(1)</code> 用于多种用途：</p>
+<ul>
+<li>差异性检查：软件包是否已经安装，或者是否与其他已安装的包或文件名冲突？</li>
+<li>在继续安装包之前，系统上不存在的依赖项会自动获取并安装。</li>
+<li>有关包的信息记录在默认情况下位于 <code>/var/db/pkg</code> 的中心存储库中。除其他外，这将防止在包本身被删除之前删除包的依赖项。这有助于确保应用程序不会被粗心的用户意外破坏。</li>
+</ul>
+<h2 id="选择镜像">选择镜像<a class="headerlink" href="#选择镜像" title="Permanent link">&para;</a></h2>
+<p><a href="https://man.openbsd.org/pkg_add">pkg_add(1)</a> 将在两个位置查找软件包：<a href="https://man.openbsd.org/installurl">installurl(5)</a> 文件 (<code>/etc/installurl</code>) 或 <code>PKG_PATH</code> 环境变量。前者是首选方法，在安装系统时被配置为默认方案。</p>
+<p>如果需要使用多个镜像，<code>PKG_PATH</code> 允许通过冒号分隔的列表执行此操作：</p>
+<pre><code class="language-shell"># export PKG_PATH=scp://user@company-build-server/usr/ports/packages/%a/all:https://trusted-public-server/%m:installpath
+</code></pre>
+<p>虽然默认设置对大多数人来说应该适用，但你可以在<a href="https://www.openbsd.org/ftp.html">镜像页面</a>上找到备用位置列表。</p>
+<h2 id="查询软件包">查询软件包<a class="headerlink" href="#查询软件包" title="Permanent link">&para;</a></h2>
+<p>大量预编译包可用于最常见的计算机架构。</p>
+<p>要搜索任何给定的包名称，请使用 <a href="https://man.openbsd.org/pkg_info">pkg_info(1)</a> 的 <code>-Q</code> 标志（flag）。</p>
+<pre><code class="language-shell">$ pkg_info -Q unzip
+lunzip-1.8
+unzip-6.0p9
+unzip-6.0p9-iconv
+</code></pre>
+<p>查找你要查找的内容的另一种方法是使用 <code>pkglocate</code> 命令，该命令可从 <code>pkglocatedb</code> 包中获得。</p>
+<pre><code class="language-shell">$ pkglocate mutool
+mupdf-1.11p1-js:textproc/mupdf,js:/usr/local/bin/mutool
+mupdf-1.11p1-js:textproc/mupdf,js:/usr/local/man/man1/mutool.1
+mupdf-1.11p1:textproc/mupdf:/usr/local/bin/mutool
+mupdf-1.11p1:textproc/mupdf:/usr/local/man/man1/mutool.1
+</code></pre>
+<p>如果你正在寻找特定的文件名，它可用于查找包含该文件的包。</p>
+<p>你会注意到某些软件包有几种不同的种类。这些被称为 <strong>flavors</strong>。<a href="https://www.openbsd.org/faq/ports/ports.html#PortsFlavors">Ports 常见问题解答</a>详细解释了 flavors，但这基本上意味着它们配置了不同的选项集。例如，一个包可能有可选的数据库支持、对没有 X11 的系统的支持等。一些包也被分成可以单独安装的子包（subpackages）。</p>
+<h2 id="安装软件包">安装软件包<a class="headerlink" href="#安装软件包" title="Permanent link">&para;</a></h2>
+<p><a href="https://man.openbsd.org/pkg_add">pkg_add(1)</a> 实用程序用于安装软件包。如果存在多种版本的软件包，系统将提示你选择要安装的版本。</p>
+<pre><code class="language-shell"># pkg_add rsync
+Ambiguous: choose package for rsync
+a       0: &lt;None&gt;
+        1: rsync-3.1.2p0
+        2: rsync-3.1.2p0-iconv
+Your choice:
+</code></pre>
+<p>在这里，如果你需要标准包，请选择 <strong>1</strong>，如果需要 iconv 支持，请选择 <strong>2</strong>。 你还可以使用 <code>pkg_add rsync--</code>（对于默认值）或 <code>pkg_add rsync--iconv</code>（对于 iconv 版本）直接在命令行上选择 flavor。</p>
+<p>你可以在一行中指定多个包名，然后一次性安装所有包及其依赖项。你还可以指定包的绝对位置，无论是本地文件还是远程 URL。 支持的 URL 前缀是 http、https、ftp 和 scp。</p>
+<p>对于某些软件包，将提供有关应用程序配置或使用的重要附加信息。</p>
+<pre><code class="language-shell"># pkg_add jove
+jove-4.16.0.73p0: ok
+--- +jove-4.16.0.73p0 -------------------
+See /usr/local/share/jove/README about changes to /etc/rc or
+/etc/rc.local so that the system recovers jove files
+on reboot after a system crash
+</code></pre>
+<p>此外，某些软件包在位于 <code>/usr/local/share/doc/pkg-readmes</code> 的文件中提供配置和其他信息。</p>
+<p>为了你的安全，如果你正在安装之前安装并删除的软件包，则不会覆盖已修改的配置文件。更新包时也是如此。</p>
+<p>有时你可能会遇到类似以下示例中的错误：</p>
+<pre><code class="language-shell"># pkg_add xv
+xv-3.10ap4:jpeg-6bp3: ok
+xv-3.10ap4:png-1.2.14p0: ok
+xv-3.10ap4:tiff-3.8.2p0: ok
+Can't install xv-3.10ap15 because of libraries
+|library X11.16.1 not found
+| not found anywhere
+Direct dependencies for xv-3.10ap15 resolve to png-1.6.31 jasper-1.900.1p5 tiff-4.0.8p1 jpeg-1.5.1p0v0
+Full dependency tree is png-1.6.31 tiff-4.0.8p1 jasper-1.900.1p5 jpeg-1.5.1p0v0
+</code></pre>
+<p>软件包中捆绑的打包信息包括有关该包希望安装的共享库的信息。如果找不到所需的库之一，则不会安装该软件包，因为它无论如何都不会工作。</p>
+<p>有几件事要检查：</p>
+<ul>
+<li>你的系统可能不完整：你没有安装含有待安装的软件包所需的依赖库的文件集。</li>
+<li>你的系统（或软件包）可能已过时：你有所需库的旧版本。确保基本系统和任何已安装的软件包都是最新的。</li>
+<li>如果你正在运行 <code>-current</code>，基础系统和包快照可能会稍微不同步。你可以等待镜像站同步后并重试。</li>
+</ul>
+<h2 id="升级软件包">升级软件包<a class="headerlink" href="#升级软件包" title="Permanent link">&para;</a></h2>
+<p>可以使用 <a href="https://man.openbsd.org/pkg_add">pkg_add(1)</a> 更新已安装的软件包，如下所示：</p>
+<pre><code class="language-shell"># pkg_add -u
+</code></pre>
+<p>这将尝试更新所有已安装的软件包，包括它们的依赖项。</p>
+<h2 id="移除软件包">移除软件包<a class="headerlink" href="#移除软件包" title="Permanent link">&para;</a></h2>
+<p>要删除包，只需使用 <a href="https://man.openbsd.org/pkg_delete">pkg_delete(1)</a>：</p>
+<pre><code class="language-shell"># pkg_delete screen
+</code></pre>
+<p>同样，已修改的配置文件不会被删除。</p>
+<p>不再需要的依赖项之后可以使用 <code>-a</code> 标志删除：</p>
+<pre><code class="language-shell"># pkg_delete -a
+</code></pre>
+<h2 id="在另一台机器上复制已安装的软件包">在另一台机器上复制已安装的软件包<a class="headerlink" href="#在另一台机器上复制已安装的软件包" title="Permanent link">&para;</a></h2>
+<p>使用与旧机器相同的一组软件包安装新的 OpenBSD 系统是一个相当常见的用例。 <a href="https://man.openbsd.org/pkg_info">pkg_info(1)</a> 的 <code>-mz</code> 标志将产生适当的结果以使此任务更容易。</p>
+<ul>
+<li><code>-m</code> 标志仅选择手动安装的软件包。不记录依赖项，因为它们是自动拉入的。</li>
+<li><code>-z</code> 标志从输出中排除版本信息。只显示 flavor 和分支，确保未来的软件包安装将选择适当的版本。</li>
+</ul>
+<p>例如：</p>
+<pre><code class="language-shell">$ pkg_info -mz | tee list
+abcde--
+mpv--
+python--%3.6
+vim--no_x11
+</code></pre>
+<p>将 “list” 文件复制到另一台机器上并运行：</p>
+<pre><code class="language-shell"># pkg_add -l list
+</code></pre>
+<p>每个包规范都有一个附加到其名称的 flavor（<code>--</code> 作为默认值），并且在多个版本中共存的包也具有分支信息。在这种情况下，后续的 <a href="https://man.openbsd.org/pkg_add">pkg_add(1)</a> 命令将选择 <code>3.6</code> 版本分支的当前 python 包。</p>
+<h2 id="不完整的软件包安装或删除">不完整的软件包安装或删除<a class="headerlink" href="#不完整的软件包安装或删除" title="Permanent link">&para;</a></h2>
+<p>在一些奇怪的情况下，由于与其他文件冲突，你可能会发现一个包没有完全添加。不完整的安装通常在包名前加上 “partial-” 标记。 例如，当你在安装过程中碰巧按下 CTRL+C 终止安装时，就会发生这种情况。安装可以稍后完成，“partial-*” 包会消失，也可以用 <a href="https://man.openbsd.org/pkg_delete">pkg_delete(8)</a> 删除。</p>
+<p>更严重的系统故障，例如文件系统问题，可能会导致 <code>/var/db/pkg</code> 损坏或不一致。</p>
+<p><a href="https://man.openbsd.org/pkg_check">pkg_check(8)</a> 实用程序可以帮助清理。</p>
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="页脚">
+      
+        
+        <a href="../faq14/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 配置磁盘" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              配置磁盘
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../faq5/" class="md-footer__link md-footer__link--next" aria-label="下一页: 从源码构建系统" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              从源码构建系统
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2021–2022 OpenBSD 中文结社贡献者
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "search": "../../assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.e1a181d9.min.js"></script>
+      
+    
+  </body>
+</html>

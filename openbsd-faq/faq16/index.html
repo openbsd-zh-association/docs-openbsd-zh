@@ -1,0 +1,1032 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.3">
+    
+    
+      
+        <title>虚拟化 - OpenBSD 中文结社</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.edf004c2.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.e6a45f82.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#ff6e42">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="deep-orange" data-md-color-accent="orange">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#openbsd-faq---虚拟化" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="OpenBSD 中文结社" class="md-header__button md-logo" aria-label="OpenBSD 中文结社" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OpenBSD 中文结社
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              虚拟化
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/openbsd-zh-association/docs-openbsd-zh/" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="OpenBSD 中文结社" class="md-nav__button md-logo" aria-label="OpenBSD 中文结社" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    OpenBSD 中文结社
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/openbsd-zh-association/docs-openbsd-zh/" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        主页
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          OpenBSD FAQ
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="OpenBSD FAQ" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          OpenBSD FAQ
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq1/" class="md-nav__link">
+        OpenBSD 简介
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq4/" class="md-nav__link">
+        安装指南
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq10/" class="md-nav__link">
+        系统管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq14/" class="md-nav__link">
+        配置磁盘
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq15/" class="md-nav__link">
+        软件包管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq5/" class="md-nav__link">
+        从源码构建系统
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq6/" class="md-nav__link">
+        网络配置
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq7/" class="md-nav__link">
+        键盘和显示控制
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq11/" class="md-nav__link">
+        X 窗口系统
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq13/" class="md-nav__link">
+        多媒体
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          虚拟化
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        虚拟化
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#介绍" class="md-nav__link">
+    介绍
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#前提条件" class="md-nav__link">
+    前提条件
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#启动一个虚拟机" class="md-nav__link">
+    启动一个虚拟机
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#网络" class="md-nav__link">
+    网络
+  </a>
+  
+    <nav class="md-nav" aria-label="网络">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#方法一虚拟机只需要与主机和彼此交流" class="md-nav__link">
+    方法一：虚拟机只需要与主机和彼此交流
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#方法二用于虚拟机的-nat-网络" class="md-nav__link">
+    方法二：用于虚拟机的 NAT 网络
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#方法三对-vm-网络配置的额外控制" class="md-nav__link">
+    方法三：对 VM 网络配置的额外控制
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#方法四虚拟机作为同一网络上的真实主机" class="md-nav__link">
+    方法四：虚拟机作为同一网络上的真实主机
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq17/" class="md-nav__link">
+        虚拟专用网络
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          其他
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="其他" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          其他
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../others/upgrade70/" class="md-nav__link">
+        升级向导
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../others/report/" class="md-nav__link">
+        报告 BUG
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../others/current/" class="md-nav__link">
+        跟随 -current 和使用快照
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../others/mail/" class="md-nav__link">
+        邮件列表
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          贡献者指南
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="贡献者指南" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          贡献者指南
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contribution/contributing/" class="md-nav__link">
+        总述
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contribution/translation_rules/" class="md-nav__link">
+        翻译规范
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          关于
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="关于" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          关于
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/international-about/" class="md-nav__link">
+        International About（英文简介）
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/terminology/" class="md-nav__link">
+        术语表
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#介绍" class="md-nav__link">
+    介绍
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#前提条件" class="md-nav__link">
+    前提条件
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#启动一个虚拟机" class="md-nav__link">
+    启动一个虚拟机
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#网络" class="md-nav__link">
+    网络
+  </a>
+  
+    <nav class="md-nav" aria-label="网络">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#方法一虚拟机只需要与主机和彼此交流" class="md-nav__link">
+    方法一：虚拟机只需要与主机和彼此交流
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#方法二用于虚拟机的-nat-网络" class="md-nav__link">
+    方法二：用于虚拟机的 NAT 网络
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#方法三对-vm-网络配置的额外控制" class="md-nav__link">
+    方法三：对 VM 网络配置的额外控制
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#方法四虚拟机作为同一网络上的真实主机" class="md-nav__link">
+    方法四：虚拟机作为同一网络上的真实主机
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+<a href="https://github.com/openbsd-zh-association/docs-openbsd-zh/edit/master/docs/openbsd-faq/faq16.md" title="编辑此页" class="md-content__button md-icon">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+</a>
+
+
+<h1 id="openbsd-faq---虚拟化">OpenBSD FAQ - 虚拟化<a class="headerlink" href="#openbsd-faq---虚拟化" title="Permanent link">&para;</a></h1>
+<h2 id="介绍">介绍<a class="headerlink" href="#介绍" title="Permanent link">&para;</a></h2>
+<p>OpenBSD 带有 <a href="https://man.openbsd.org/vmm">vmm(4)</a> 管理程序和 <a href="https://man.openbsd.org/vmd">vmd(8)</a> 守护进程。你可以使用 <a href="https://man.openbsd.org/vmctl">vmctl(8)</a> 控制程序控制虚拟机，也可使用存储在 <a href="https://man.openbsd.org/vm.conf">vm.conf(5)</a> 文件中的配置设置来配置虚拟机。</p>
+<p>支持使用以下功能：</p>
+<ul>
+<li>对虚拟机的串行控制台访问</li>
+<li><a href="https://man.openbsd.org/tap">tap(4)</a> 接口</li>
+<li>每个 VM 用户/组所有权</li>
+<li>权限分离</li>
+<li>raw、qcow2 和 qcow2 派生镜像文件</li>
+<li>访客系统（guest system）内存的转储和恢复</li>
+<li>虚拟交换机管理</li>
+<li>暂停和取消暂停虚拟机</li>
+</ul>
+<p>以下功能暂不支持：</p>
+<ul>
+<li>图形化界面</li>
+<li>快照</li>
+<li>访客 SMP 支持</li>
+<li>硬件直通</li>
+<li>跨主机实时迁移</li>
+<li>实时硬件更改</li>
+</ul>
+<p>支持的访客操作系统（guest operating system）目前仅限于 OpenBSD 和 Linux。 由于尚不支持 VGA，因此来宾操作系统必须支持串行控制台。</p>
+<h2 id="前提条件">前提条件<a class="headerlink" href="#前提条件" title="Permanent link">&para;</a></h2>
+<p>需要具有嵌套分页支持的 CPU 才能使用 <a href="https://man.openbsd.org/vmm">vmm(4)</a>。可以通过查看处理器特性标识来检查支持情况：SLAT 代表 AMD 或 EPT 代表 Intel。 在某些情况下，必须在系统的 BIOS 中手动启用虚拟化功能。执行此操作后，请务必运行 <a href="https://man.openbsd.org/fw_update">fw_update(8)</a> 命令以获取所需的 <code>vmm-firmware</code> 包。</p>
+<p>可以使用以下命令检查处理器兼容性：</p>
+<pre><code>$ dmesg | egrep '(VMX/EPT|SVM/RVI)'
+</code></pre>
+<p>然后启用并启动 <a href="https://man.openbsd.org/vmd">vmd(8)</a> 服务。</p>
+<pre><code># rcctl enable vmd
+# rcctl start vmd
+</code></pre>
+<h2 id="启动一个虚拟机">启动一个虚拟机<a class="headerlink" href="#启动一个虚拟机" title="Permanent link">&para;</a></h2>
+<p>在以下示例中，将创建一个具有 50GB 磁盘空间和 1GB RAM 的虚拟机（virtual machine，VM）。它将从 install70.iso 镜像文件启动。</p>
+<pre><code># vmctl create -s 50G disk.qcow2
+vmctl: qcow2 imagefile created
+# vmctl start -m 1G -L -i 1 -r install70.iso -d disk.qcow2 example
+vmctl: started vm 1 successfully, tty /dev/ttyp8
+# vmctl show
+   ID   PID VCPUS  MAXMEM  CURMEM     TTY        OWNER NAME
+    1 72118     1    1.0G   88.1M   ttyp8         root example
+</code></pre>
+<p>要查看新创建的 VM 的控制台，请连接到其串行控制台：</p>
+<pre><code># vmctl console example
+Connected to /dev/ttyp8 (speed 115200)
+</code></pre>
+<p>要离开串行控制台，需要使用转义序列 <code>~.</code>。更多信息请参见 <a href="https://man.openbsd.org/cu">cu(1)</a> 手册页。当通过 SSH 使用 <code>vmctl</code> 串行控制台时，<code>~</code>（波浪符）字符必须被转义以防止 <a href="https://man.openbsd.org/ssh">ssh(1)</a> 丢弃连接。要通过 SSH 退出串行控制台，请使用 <code>~~.</code> 来代替。</p>
+<p>可以使用 <a href="https://man.openbsd.org/vmctl">vmctl(8)</a> 停止 VM。</p>
+<pre><code># vmctl stop example
+stopping vm: requested to shutdown vm 1
+</code></pre>
+<p>虚拟机可以在有或没有 <a href="https://man.openbsd.org/vm.conf">vm.conf(5)</a> 文件的情况下启动。以下 <code>/etc/vm.conf</code> 示例将复制上述配置：</p>
+<pre><code>vm &quot;example&quot; {
+    memory 1G
+    enable
+    disk /home/user/disk.qcow2
+    local interface
+}
+</code></pre>
+<p><a href="https://man.openbsd.org/vm.conf">vm.conf(5)</a> 中的一些配置属性可以由 <a href="https://man.openbsd.org/vmd">vmd(8)</a> 在系统运行时重新加载。其他变化，如调整内存或磁盘空间的数量，需要重新启动虚拟机。</p>
+<h2 id="网络">网络<a class="headerlink" href="#网络" title="Permanent link">&para;</a></h2>
+<p>可以通过多种不同的方式配置 vmm(4) 虚拟机的网络访问设置，本节详细介绍了其中的四种。</p>
+<p>在下面的示例中，将针对不同的用例提及各种 IPv4 地址范围：</p>
+<ul>
+<li>私有位址 (<a href="https://tools.ietf.org/html/rfc1918">RFC1918</a>) 是为私有网络保留的地址，例如 <code>10.0.0.0/8</code>、<code>172.16.0.0/12</code> 和 <code>192.168.0.0/16</code>，它们不是全局可路由的。</li>
+<li>共享地址（Shared Addresses） (<a href="https://tools.ietf.org/html/rfc6598">RFC6598</a>) 类似于私有地址，因为它们不可全局路由，但旨在用于可以执行地址转换的设备上。地址空间为 <code>100.64.0.0/10</code>。</li>
+</ul>
+<h3 id="方法一虚拟机只需要与主机和彼此交流">方法一：虚拟机只需要与主机和彼此交流<a class="headerlink" href="#方法一虚拟机只需要与主机和彼此交流" title="Permanent link">&para;</a></h3>
+<p>对于此设置，vmm 使用<em>本地接口（local interfaces）</em>：使用上面定义的共享地址空间的接口。</p>
+<p>使用 <a href="https://man.openbsd.org/vmctl">vmctl(8)</a> 的 <code>-L</code> 标志在虚拟机中创建一个本地接口，它将通过 DHCP 从 vmd 接收地址。这实质上创建了两个接口：一个用于主机，另一个用于 VM。</p>
+<h3 id="方法二用于虚拟机的-nat-网络">方法二：用于虚拟机的 NAT 网络<a class="headerlink" href="#方法二用于虚拟机的-nat-网络" title="Permanent link">&para;</a></h3>
+<p>此设置建立在以前的基础上，并允许 VM 连接到主机外部的网络。它需要 <a href="https://man.openbsd.org/sysctl.2#ip.forwarding">IP 转发</a>才能工作。</p>
+<p><code>/etc/pf.conf</code> 中的以下行将启用<a href="https://www.openbsd.org/faq/pf/nat.html">网络地址转换</a>（NAT）并将 DNS 请求重定向到指定的服务器：</p>
+<pre><code>match out on egress from 100.64.0.0/10 to any nat-to (egress)
+pass in proto { udp tcp } from 100.64.0.0/10 to any port domain \
+    rdr-to $dns_server port domain
+</code></pre>
+<p>重新加载 pf 规则集，VM 现在可以连接到 Internet。</p>
+<h3 id="方法三对-vm-网络配置的额外控制">方法三：对 VM 网络配置的额外控制<a class="headerlink" href="#方法三对-vm-网络配置的额外控制" title="Permanent link">&para;</a></h3>
+<p>有时，您可能希望对虚拟机的虚拟网络进行额外控制，例如能够将某些虚拟机放在它们自己的虚拟交换机上。这可以使用 <a href="https://man.openbsd.org/bridge">bridge(4)</a> 和 <a href="https://man.openbsd.org/vether">vether(4)</a> 接口来完成。</p>
+<p>创建一个 <code>vether0</code> 接口，该接口将具有如上定义的私有 IPv4 地址。 在本例中，我们将使用 10.0.0.0/8 子网。</p>
+<pre><code># echo 'inet 10.0.0.1 255.255.255.0' &gt; /etc/hostname.vether0
+# sh /etc/netstart vether0
+</code></pre>
+<p>使用 <code>vether0</code> 接口作为桥端口创建 <code>bridge0</code> 接口：</p>
+<pre><code># echo 'add vether0' &gt; /etc/hostname.bridge0
+# sh /etc/netstart bridge0
+</code></pre>
+<p>如果虚拟网络上的 VM 需要访问物理机之外的网络，请确保正确设置 NAT。<code>/etc/pf.conf</code> 中调整后的 NAT 行可能如下所示：</p>
+<pre><code>match out on egress from vether0:network to any nat-to (egress)
+</code></pre>
+<p><a href="https://man.openbsd.org/vm.conf">vm.conf(5)</a> 中的以下几行可用于确保定义了虚拟交换机：</p>
+<pre><code>switch &quot;my_switch&quot; {
+    interface bridge0
+}
+
+vm &quot;my_vm&quot; {
+    ...
+    interface { switch &quot;my_switch&quot; }
+}
+</code></pre>
+<p>在 <code>my_vm</code> 虚拟机中，现在可以为 <code>vio0</code> 分配 <code>10.0.0.0/24</code> 网络上的地址并将默认路由设置为 <code>10.0.0.1</code>。</p>
+<p>为方便起见，你可能需要在 <code>vether0</code> 上设置一个 <a href="https://www.openbsd.org/faq/faq6.html#DHCP">DHCP 服务器</a>。</p>
+<h3 id="方法四虚拟机作为同一网络上的真实主机">方法四：虚拟机作为同一网络上的真实主机<a class="headerlink" href="#方法四虚拟机作为同一网络上的真实主机" title="Permanent link">&para;</a></h3>
+<p>在这种情况下，VM 接口将连接到与主机相同的网络，因此可以对其进行配置，就好像它物理连接到主机网络一样。此选项仅适用于基于以太网的设备，因为 IEEE 802.11 标准禁止无线接口参与网络桥接。</p>
+<p>使用主机网络接口作为桥端口创建 <code>bridge0</code> 接口。在此示例中，主机网络接口是 <code>em0</code> —— 在此，你应该将其替换为你希望将 VM 连接到的接口名称：</p>
+<pre><code># echo 'add em0' &gt; /etc/hostname.bridge0
+# sh /etc/netstart bridge0
+</code></pre>
+<p>如上例所示，新建或修改 <a href="https://man.openbsd.org/vm.conf">vm.conf(5)</a> 文件以确保定义了虚拟交换机：</p>
+<pre><code>switch &quot;my_switch&quot; {
+    interface bridge0
+}
+
+vm &quot;my_vm&quot; {
+    ...
+    interface { switch &quot;my_switch&quot; }
+}
+</code></pre>
+<p><code>my_vm</code> 虚拟机现在可以参与到主机网络中，就像它被物理连接一样。</p>
+<p><strong>注意</strong>：如果主机接口（上例中的 em0）也使用 DHCP 配置，则在该接口上运行的 <a href="https://man.openbsd.org/dhcpleased">dhcpleased(8)</a> 可能会阻止 DHCP 请求到达 VM。在这种情况下，你应该选择一个不使用 DHCP 的不同主机接口，或者在启动 VM 之前终止分配给该接口的任何 <a href="https://man.openbsd.org/dhcpleased">dhcpleased(8)</a> 进程，或者为 VM 使用静态 IP 地址。</p>
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="页脚">
+      
+        
+        <a href="../faq13/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 多媒体" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              多媒体
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../faq17/" class="md-footer__link md-footer__link--next" aria-label="下一页: 虚拟专用网络" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              虚拟专用网络
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2021–2022 OpenBSD 中文结社贡献者
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "search": "../../assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.e1a181d9.min.js"></script>
+      
+    
+  </body>
+</html>

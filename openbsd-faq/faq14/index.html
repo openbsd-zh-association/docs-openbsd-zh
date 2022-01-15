@@ -1,0 +1,1457 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.3">
+    
+    
+      
+        <title>配置磁盘 - OpenBSD 中文结社</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.edf004c2.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.e6a45f82.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#ff6e42">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="deep-orange" data-md-color-accent="orange">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#openbsd-faq---配置磁盘" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="OpenBSD 中文结社" class="md-header__button md-logo" aria-label="OpenBSD 中文结社" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OpenBSD 中文结社
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              配置磁盘
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/openbsd-zh-association/docs-openbsd-zh/" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="OpenBSD 中文结社" class="md-nav__button md-logo" aria-label="OpenBSD 中文结社" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    OpenBSD 中文结社
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/openbsd-zh-association/docs-openbsd-zh/" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        主页
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          OpenBSD FAQ
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="OpenBSD FAQ" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          OpenBSD FAQ
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq1/" class="md-nav__link">
+        OpenBSD 简介
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq4/" class="md-nav__link">
+        安装指南
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq10/" class="md-nav__link">
+        系统管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          配置磁盘
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        配置磁盘
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#磁盘和分区" class="md-nav__link">
+    磁盘和分区
+  </a>
+  
+    <nav class="md-nav" aria-label="磁盘和分区">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#驱动器识别" class="md-nav__link">
+    驱动器识别
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#分区和文件系统" class="md-nav__link">
+    分区和文件系统
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#disklabel-唯一标识符" class="md-nav__link">
+    Disklabel 唯一标识符
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#使用-fdisk" class="md-nav__link">
+    使用 fdisk
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bsd-盘标" class="md-nav__link">
+    BSD 盘标
+  </a>
+  
+    <nav class="md-nav" aria-label="BSD 盘标">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#删除-bsd-盘标后恢复分区" class="md-nav__link">
+    删除 BSD 盘标后恢复分区
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#amd64-启动过程" class="md-nav__link">
+    amd64 启动过程
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#软更新" class="md-nav__link">
+    软更新
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#根分区备份altroot" class="md-nav__link">
+    根分区备份（/altroot）
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#复制文件系统" class="md-nav__link">
+    复制文件系统
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#磁盘配额" class="md-nav__link">
+    磁盘配额
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#访问其他文件系统" class="md-nav__link">
+    访问其他文件系统
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#挂载磁盘镜像" class="md-nav__link">
+    挂载磁盘镜像
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#磁盘分区扩容" class="md-nav__link">
+    磁盘分区扩容
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#raid-和磁盘加密" class="md-nav__link">
+    RAID 和磁盘加密
+  </a>
+  
+    <nav class="md-nav" aria-label="RAID 和磁盘加密">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#安装至镜像" class="md-nav__link">
+    安装至镜像
+  </a>
+  
+    <nav class="md-nav" aria-label="安装至镜像">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#重建镜像" class="md-nav__link">
+    重建镜像
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#全盘加密" class="md-nav__link">
+    全盘加密
+  </a>
+  
+    <nav class="md-nav" aria-label="全盘加密">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#使用密钥盘" class="md-nav__link">
+    使用密钥盘
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#加密外部磁盘" class="md-nav__link">
+    加密外部磁盘
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq15/" class="md-nav__link">
+        软件包管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq5/" class="md-nav__link">
+        从源码构建系统
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq6/" class="md-nav__link">
+        网络配置
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq7/" class="md-nav__link">
+        键盘和显示控制
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq11/" class="md-nav__link">
+        X 窗口系统
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq13/" class="md-nav__link">
+        多媒体
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq16/" class="md-nav__link">
+        虚拟化
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq17/" class="md-nav__link">
+        虚拟专用网络
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          其他
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="其他" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          其他
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../others/upgrade70/" class="md-nav__link">
+        升级向导
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../others/report/" class="md-nav__link">
+        报告 BUG
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../others/current/" class="md-nav__link">
+        跟随 -current 和使用快照
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../others/mail/" class="md-nav__link">
+        邮件列表
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          贡献者指南
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="贡献者指南" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          贡献者指南
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contribution/contributing/" class="md-nav__link">
+        总述
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contribution/translation_rules/" class="md-nav__link">
+        翻译规范
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          关于
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="关于" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          关于
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/international-about/" class="md-nav__link">
+        International About（英文简介）
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/terminology/" class="md-nav__link">
+        术语表
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#磁盘和分区" class="md-nav__link">
+    磁盘和分区
+  </a>
+  
+    <nav class="md-nav" aria-label="磁盘和分区">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#驱动器识别" class="md-nav__link">
+    驱动器识别
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#分区和文件系统" class="md-nav__link">
+    分区和文件系统
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#disklabel-唯一标识符" class="md-nav__link">
+    Disklabel 唯一标识符
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#使用-fdisk" class="md-nav__link">
+    使用 fdisk
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bsd-盘标" class="md-nav__link">
+    BSD 盘标
+  </a>
+  
+    <nav class="md-nav" aria-label="BSD 盘标">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#删除-bsd-盘标后恢复分区" class="md-nav__link">
+    删除 BSD 盘标后恢复分区
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#amd64-启动过程" class="md-nav__link">
+    amd64 启动过程
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#软更新" class="md-nav__link">
+    软更新
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#根分区备份altroot" class="md-nav__link">
+    根分区备份（/altroot）
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#复制文件系统" class="md-nav__link">
+    复制文件系统
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#磁盘配额" class="md-nav__link">
+    磁盘配额
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#访问其他文件系统" class="md-nav__link">
+    访问其他文件系统
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#挂载磁盘镜像" class="md-nav__link">
+    挂载磁盘镜像
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#磁盘分区扩容" class="md-nav__link">
+    磁盘分区扩容
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#raid-和磁盘加密" class="md-nav__link">
+    RAID 和磁盘加密
+  </a>
+  
+    <nav class="md-nav" aria-label="RAID 和磁盘加密">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#安装至镜像" class="md-nav__link">
+    安装至镜像
+  </a>
+  
+    <nav class="md-nav" aria-label="安装至镜像">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#重建镜像" class="md-nav__link">
+    重建镜像
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#全盘加密" class="md-nav__link">
+    全盘加密
+  </a>
+  
+    <nav class="md-nav" aria-label="全盘加密">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#使用密钥盘" class="md-nav__link">
+    使用密钥盘
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#加密外部磁盘" class="md-nav__link">
+    加密外部磁盘
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+<a href="https://github.com/openbsd-zh-association/docs-openbsd-zh/edit/master/docs/openbsd-faq/faq14.md" title="编辑此页" class="md-content__button md-icon">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+</a>
+
+
+<h1 id="openbsd-faq---配置磁盘">OpenBSD FAQ - 配置磁盘<a class="headerlink" href="#openbsd-faq---配置磁盘" title="Permanent link">&para;</a></h1>
+<h2 id="磁盘和分区">磁盘和分区<a class="headerlink" href="#磁盘和分区" title="Permanent link">&para;</a></h2>
+<p>在 OpenBSD 中设置磁盘的细节因<a href="https://www.openbsd.org/plat.html">平台</a>而异，因此你应该阅读你部署的平台的 <code>INSTALL.&lt;arch&gt;</code> 文件中的说明。</p>
+<h3 id="驱动器识别">驱动器识别<a class="headerlink" href="#驱动器识别" title="Permanent link">&para;</a></h3>
+<p>在大多数平台上，OpenBSD 使用两个驱动程序处理大容量存储：</p>
+<ul>
+<li><a href="https://man.openbsd.org/wd">wd(4)</a>：类似 IDE 的磁盘：IDE、SATA、MFM 或 ESDI 磁盘，或连接到 wdc(4) 或 <a href="https://man.openbsd.org/pciide">pciide(4)</a> 接口的闪存设备。</li>
+<li><a href="https://man.openbsd.org/sd">sd(4)</a>：类 SCSI 磁盘：使用 SCSI 命令的设备、USB 磁盘、连接到 <a href="https://man.openbsd.org/ahci">ahci(4)</a> 接口的 SATA 磁盘以及连接到 RAID 控制器的磁盘阵列。</li>
+</ul>
+<p>设备按启动时检测到的顺序编号，从零开始。因此，第一个类似 IDE 的磁盘将是 <code>wd0</code>，而第三个类似 SCSI 的磁盘将是 <code>sd2</code>。请注意，OpenBSD 不一定会按照与引导 ROM 相同的顺序对驱动器进行编号。</p>
+<h3 id="分区和文件系统">分区和文件系统<a class="headerlink" href="#分区和文件系统" title="Permanent link">&para;</a></h3>
+<p>术语“分区”在 OpenBSD 中可以表示两种不同的含义：</p>
+<ul>
+<li><a href="https://man.openbsd.org/disklabel">disklabel(8)</a> 分区，也称为文件系统分区。</li>
+<li><a href="https://man.openbsd.org/fdisk">fdisk(8)</a> 分区，有时称为主引导记录 (MBR) 分区。</li>
+</ul>
+<p>所有 OpenBSD 平台都使用 disklabel 程序作为管理文件系统分区的主要方式。在使用 fdisk 的平台上，一个 MBR 分区可保存所有 OpenBSD 文件系统。这个分区可以分成 16 个 disklabel 分区，标记为 <code>a</code> 到 <code>p</code>。有几个标签很特别：</p>
+<ul>
+<li>a：启动盘的 a 分区就是你的根分区。</li>
+<li>b: 启动盘的 b 分区通常是交换分区。</li>
+<li>c：c 分区始终是整个磁盘。</li>
+</ul>
+<p>要在 disklabel 分区上创建新文件系统，请使用 <a href="https://man.openbsd.org/newfs">newfs(8)</a> 命令：</p>
+<pre><code># newfs sd2a
+</code></pre>
+<p>因此，一个设备名加上一个 disklabel 标识了一个 OpenBSD 文件系统。 例如，标识符 <code>sd2a</code> 指的是第三个 <code>sd</code> 设备的 <code>a</code> 分区上的文件系统。它的设备文件将是块设备的 <code>/dev/sd2a</code> 和原始（字符）设备的 <code>/dev/rsd2a</code>。 记住一个很少使用的命令是需要块设备还是字符设备是困难的。因此，许多命令都使用 <a href="https://man.openbsd.org/opendev">opendev(3)</a> 函数，它会根据需要自动将 <code>sd0</code> 扩展为 <code>/dev/rsd0c</code> 或 <code>/dev/sd0c</code>。</p>
+<h3 id="disklabel-唯一标识符">Disklabel 唯一标识符<a class="headerlink" href="#disklabel-唯一标识符" title="Permanent link">&para;</a></h3>
+<p>默认情况下，磁盘由 <a href="https://man.openbsd.org/fstab">fstab(5)</a> 文件中的 Disklabel 唯一标识符 (DUID) 标识。 DUID 是在首次创建磁盘标签时生成的 16 位十六进制数字随机数。它们由 <a href="https://man.openbsd.org/diskmap">diskmap(4)</a> 设备管理。要显示所有磁盘的 DUID，请执行以下操作：</p>
+<pre><code>$ sysctl hw.disknames
+hw.disknames=wd0:bfb4775bb8397569,cd0:,wd1:56845c8da732ee7b,wd2:f18e359c8fa2522b
+</code></pre>
+<p>你可以通过附加句点和分区号来指定磁盘上的分区。例如，<code>f18e359c8fa2522b.d</code> 是磁盘 <code>f18e359c8fa2522b</code> 的 <code>d</code> 分区，并且将始终引用同一个存储块，无论设备连接到系统的顺序如何，或者它连接到什么样的接口。如果你把数据放在 <code>wd2d</code> 上，然后从系统中删除 <code>wd1</code> 并重新启动，你的数据现在在 <code>wd1d</code> 上，因为你的旧 <code>wd2</code> 现在是 <code>wd1</code>。 但是，驱动器的 DUID 在启动后不会改变。</p>
+<h2 id="使用-fdisk">使用 fdisk<a class="headerlink" href="#使用-fdisk" title="Permanent link">&para;</a></h2>
+<p><a href="https://man.openbsd.org/fdisk">fdisk(8)</a> 实用程序在某些平台（i386、amd64 和 macppc）上用于创建系统引导 ROM 识别的分区。通常，只有一个 OpenBSD fdisk 分区会被放置在一个磁盘上，然后该分区将被细分为 disklabel 分区。</p>
+<p>运行下列指令查看你的分区表：</p>
+<pre><code># fdisk sd0
+Disk: sd0       geometry: 553/255/63 [8883945 Sectors]
+Offset: 0       Signature: 0xAA55
+         Starting       Ending       LBA Info:
+ #: id    C   H  S -    C   H  S [       start:      size   ]
+------------------------------------------------------------------------
+ 0: 12    0   1  1 -    2 254 63 [          63:       48132 ] Compaq Diag.
+ 1: 00    0   0  0 -    0   0  0 [           0:           0 ] unused
+ 2: 00    0   0  0 -    0   0  0 [           0:           0 ] unused
+*3: A6    3   0  1 -  552 254 63 [       48195:     8835750 ] OpenBSD
+</code></pre>
+<p>在这里，标有 * 的 OpenBSD 分区 (id <code>A6</code>) 表示它是可引导分区。</p>
+<p>一个完全空白的磁盘需要在引导前将主引导记录的引导代码写入磁盘。通常，你需要做的就是：</p>
+<pre><code># fdisk -iy sd0
+</code></pre>
+<p>或者，在交互模式下使用 reinit 或 update 命令:</p>
+<p>使用 <code>-e</code> 标志启动交互式编辑模式：</p>
+<pre><code># fdisk -e sd0
+Enter 'help' for information
+fdisk: 1&gt;
+</code></pre>
+<p>请注意，<code>quit</code> 会保存更改并退出程序，而 <code>exit</code> 会退出而不保存。这与许多人现在在其他环境中习惯的情况相反。另请注意，<code>fdisk</code> 在保存更改之前不会发出警告。</p>
+<p>如果你的系统有维护或诊断分区，建议你在保留该分区或安装 OpenBSD <strong>之前</strong>将其安装。</p>
+<h2 id="bsd-盘标">BSD 盘标<a class="headerlink" href="#bsd-盘标" title="Permanent link">&para;</a></h2>
+<p>BSD 盘标（Disk labels，disklabel）用于管理 OpenBSD 文件系统分区。它们包含有关磁盘的某些详细信息，例如 <a href="https://man.openbsd.org/disklabel.5">disklabel(5)</a> 手册页中的详细描述的驱动器几何结构和文件系统信息。你可以使用 <a href="https://man.openbsd.org/disklabel">disklabel(8)</a> 命令编辑标签。</p>
+<p>这可以帮助克服某些架构的磁盘分区限制。例如，在 i386 上，只有四个主 MBR 分区可用。使用 BSD 盘标 ，这些主分区之一包含你所有的 OpenBSD 分区，而其他三个仍可用于其他操作系统。</p>
+<p>在使用 fdisk 的平台上，你应该在 BSD 盘标和 fdisk 中保留未使用的第一个逻辑磁道。出于这个原因，默认是在块 64 处启动第一个分区。</p>
+<p>不要将 swap 分区放在 sparc64 上磁盘的最开头。虽然 Solaris 经常这样做，但 OpenBSD 要求引导分区位于磁盘的开头。</p>
+<h3 id="删除-bsd-盘标后恢复分区">删除 BSD 盘标后恢复分区<a class="headerlink" href="#删除-bsd-盘标后恢复分区" title="Permanent link">&para;</a></h3>
+<p>如果你的分区表已损坏，你可以尝试多种方法来恢复它。</p>
+<p>作为日常系统维护的一部分，每个磁盘的 BSD 盘标副本都保存在 <code>/var/backups</code> 中。 假设你仍然有 <code>/var</code> 分区，你可以简单地读取输出，并使用 <code>-R</code> 标志将其放回 BSD 盘标中。</p>
+<p>如果你无法再看到该分区，则有两种选择：修复磁盘足够多的部分以便你可以看到它，或者修复磁盘足够多的部分以便你可以取出数据。<a href="https://man.openbsd.org/scan_ffs">scan_ffs(8)</a> 实用程序将查看磁盘以查找分区。你可以使用它找到的信息重新创建 BSD 盘标。如果你只想恢复 <code>/var</code>，你可以为 <code>/var</code> 重新创建分区，然后恢复备份的标签并从中添加其余部分。<a href="https://man.openbsd.org/disklabel">disklabel(8)</a> 实用程序将更新内核对 BSD 盘标的理解并尝试将标签写入磁盘。因此，即使包含 BSD 盘标的磁盘区域不可读，你也可以挂载直到下次重新启动。</p>
+<h2 id="amd64-启动过程">amd64 启动过程<a class="headerlink" href="#amd64-启动过程" title="Permanent link">&para;</a></h2>
+<p>有关 amd64 引导程序的详细信息，请参见 <a href="https://man.openbsd.org/boot_amd64">boot_amd64(8)</a> 手册页。启动过程如下：</p>
+<ul>
+<li>主引导记录 (MBR) 和 GUID 分区表 (GPT)。<a href="https://man.openbsd.org/fdisk">fdisk(8)</a> 手册页包含详细信息。</li>
+<li>分区引导记录 (PBR)。引导盘的 OpenBSD 分区的前 512 字节包含第一阶段引导加载程序 <a href="https://man.openbsd.org/biosboot">biosboot(8)</a>。 它由 <a href="https://man.openbsd.org/installboot">installboot(8)</a> 实用程序安装。</li>
+<li>第二阶段引导加载程序 <code>/boot</code>。PBR 加载 <a href="https://man.openbsd.org/boot.8">boot(8)</a> 程序，该程序具有定位和加载内核的任务。</li>
+</ul>
+<p>因此，启动过程的一开始可能如下所示：</p>
+<pre><code>Using drive 0, partition 3.                      &lt;- MBR
+Loading......                                    &lt;- PBR
+probing: pc0 com0 com1 mem[638K 1918M a20=on]    &lt;- /boot
+disk: hd0+ hd1+
+&gt;&gt; OpenBSD/amd64 BOOT 3.33
+boot&gt;
+booting hd0a:/bsd 4464500+838332 [58+204240+181750]=0x56cfd0
+entry point at 0x100120
+
+[ using 386464 bytes of bsd ELF symbol table ]
+Copyright (c) 1982, 1986, 1989, 1991, 1993       &lt;- Kernel
+        The Regents of the University of California.  All rights reserved.
+</code></pre>
+<h2 id="软更新">软更新<a class="headerlink" href="#软更新" title="Permanent link">&para;</a></h2>
+<p>软更新（Soft Updates）基于 <a href="https://www.ece.cmu.edu/~ganger/papers/CSE-TR-254-95/">Greg Ganger 和 Yale Patt</a> 提出并由 <a href="https://www.mckusick.com/softdep/">Kirk McKusick</a> 为 FreeBSD 开发的想法。软更新对缓冲区缓存操作进行了部分排序，这允许从 FFS 代码中删除同步写入目录条目的要求。因此，可以看到磁盘写入性能的大幅提升。</p>
+<p>要启用软更新必须使用 mount-time 选项。 使用 <a href="https://man.openbsd.org/mount">mount(8)</a> 实用程序挂载分区时，你可以指定希望在该分区上启用软更新。下面是一个示例 <a href="https://man.openbsd.org/fstab">fstab(5)</a> 条目，它有一个我们希望安装有软更新的分区 <code>sd0a</code>。</p>
+<pre><code>/dev/sd0a / ffs rw,softdep 1 1
+</code></pre>
+<h2 id="根分区备份altroot">根分区备份（/altroot）<a class="headerlink" href="#根分区备份altroot" title="Permanent link">&para;</a></h2>
+<p>OpenBSD 在 <a href="https://man.openbsd.org/daily">daily(8)</a> 脚本中提供了一个 <code>/altroot</code> 工具。 如果在 <code>/etc/daily.local</code> 或 root 的 <a href="https://man.openbsd.org/crontab.5">crontab(5)</a> 中设置了环境变量 <code>ROOTBACKUP=1</code>，并且在 <a href="https://man.openbsd.org/fstab">fstab(5)</a> 中将分区指定为挂载到 <code>/altroot</code> 并使用 <code>xx</code> 挂载选项，则每天晚上整个根分区的内容将复制到 <code>/altroot</code> 分区。</p>
+<p>假设你要将根分区备份到 DUID 为 <code>bfb4775bb8397569.a</code> 指定的分区，在 <code>/etc/fstab</code> 中添加以下内容：</p>
+<pre><code>bfb4775bb8397569.a /altroot ffs xx 0 0
+</code></pre>
+<p>然后，在 <code>/etc/daily.local</code> 中设置适当的环境变量：</p>
+<pre><code># echo ROOTBACKUP=1 &gt;&gt;/etc/daily.local
+</code></pre>
+<p>由于 <code>/altroot</code> 进程将捕获你的 <code>/etc</code> 目录，这将确保每天更新同步根分区的任何配置更改。这是使用 <a href="https://man.openbsd.org/dd">dd(1)</a> 完成的 “磁盘镜像” 副本，而不是逐个文件的副本，因此你的 <code>/altroot</code> 分区应至少与根分区的大小相同。通常，你需要将 <code>/altroot</code> 分区放置在已配置为在主磁盘出现故障时完全可引导的不同磁盘上。</p>
+<h2 id="复制文件系统">复制文件系统<a class="headerlink" href="#复制文件系统" title="Permanent link">&para;</a></h2>
+<p>要使用 <a href="https://man.openbsd.org/dump">dump(8)</a> 和 <a href="https://man.openbsd.org/restore">restore(8)</a> 将目录 <code>/SRC</code> 下的所有内容复制到目录 <code>/DST</code>，请执行以下操作：</p>
+<pre><code># cd /SRC &amp;&amp; dump 0f - . | (cd /DST &amp;&amp; restore -rf - )
+</code></pre>
+<p>或者使用 <a href="https://man.openbsd.org/tar">tar(1)</a></p>
+<pre><code># cd /SRC &amp;&amp; tar cf - . | (cd /DST &amp;&amp; tar xpf - )
+</code></pre>
+<h2 id="磁盘配额">磁盘配额<a class="headerlink" href="#磁盘配额" title="Permanent link">&para;</a></h2>
+<p>配额用于限制某些用户和组可用的磁盘空间量。</p>
+<p>使用关键字 <code>userquota</code> 和 <code>groupquota</code> 来标记 <a href="https://man.openbsd.org/fstab">fstab(5)</a> 中要对其实施配额的每个文件系统。默认情况下，文件 <code>quota.user</code> 和 <code>quota.group</code> 将在这些文件系统的根目录下创建。这是一个示例 <code>/etc/fstab</code> 行：</p>
+<pre><code>0123456789abcdef.k /home ffs rw,nodev,nosuid,userquota 1 2
+</code></pre>
+<p>要设置用户的配额，请使用 <a href="https://man.openbsd.org/edquota">edquota(8)</a>。例如:</p>
+<pre><code># edquota ericj
+</code></pre>
+<p>并编辑软限制和硬限制：</p>
+<pre><code>Quotas for user ericj:
+/home: KBytes in use: 62, limits (soft = 1000000, hard = 1500000)
+        inodes in use: 25, limits (soft = 0, hard = 0)
+</code></pre>
+<p>在本例中，软限制设置为 1000000k，硬限制设置为 1500000k。由于相应的软限制和硬限制都设置为 0，因此不会强制执行对文件总数（inode）数量的限制。超过软限制的用户会收到警告并获得宽限期，以使他们的磁盘使用量低于限制。可以使用 <a href="https://man.openbsd.org/edquota">edquota(8)</a> 上的 <code>-t</code> 选项设置宽限期。宽限期结束后，软限制作为硬限制处理。这通常会导致分配失败。</p>
+<p>使用 <a href="https://man.openbsd.org/quotaon">quotaon(8)</a> 启用配额：</p>
+<pre><code># quotaon -a
+</code></pre>
+<p>这将扫描 <a href="https://man.openbsd.org/fstab">fstab(5)</a> 并使用配额选项在文件系统上启用配额。使用 <a href="https://man.openbsd.org/quota">quota(1)</a> 查看配额统计信息。</p>
+<h2 id="访问其他文件系统">访问其他文件系统<a class="headerlink" href="#访问其他文件系统" title="Permanent link">&para;</a></h2>
+<p>从 <a href="https://man.openbsd.org/mount">mount(8)</a> 手册开始，其中包含解释如何挂载一些最常用文件系统的示例。可以通过以下方式获得支持的文件系统和相关命令的部分列表：</p>
+<pre><code>$ man -k -s 8 mount
+</code></pre>
+<p>请注意，支持可能仅限于只读操作。</p>
+<h2 id="挂载磁盘镜像">挂载磁盘镜像<a class="headerlink" href="#挂载磁盘镜像" title="Permanent link">&para;</a></h2>
+<p>要在 OpenBSD 中挂载磁盘镜像，你必须配置 <a href="https://man.openbsd.org/vnd">vnd(4)</a> 设备。 例如，如果你有一个位于 <code>/tmp/ISO.image</code> 的 ISO 镜像，你将执行以下步骤来挂载该镜像：</p>
+<pre><code># vnconfig vnd0 /tmp/ISO.image
+# mount -t cd9660 /dev/vnd0c /mnt
+</code></pre>
+<p>由于这是 CD 和 DVD 使用的 ISO 9660 镜像格式，因此在安装它时必须指定 <code>cd9660</code>的类型。</p>
+<p>要卸载映像并取消配置 vnd(4) 设备，请执行以下操作：</p>
+<pre><code># umount /mnt
+# vnconfig -u vnd0
+</code></pre>
+<p>有关更多信息，请参阅 <a href="https://man.openbsd.org/vnconfig">vnconfig(8)</a> 和 <a href="https://man.openbsd.org/mount">mount(8)</a>。</p>
+<h2 id="磁盘分区扩容">磁盘分区扩容<a class="headerlink" href="#磁盘分区扩容" title="Permanent link">&para;</a></h2>
+<p>如果现有分区后跟未分配的可用空间，你可以使用 growfs(8) 实用程序增加其大小。确保当前未挂载该分区。使用 <code>disklabel -E sd0</code> 以交互方式编辑你的分区表，并使用 <code>m</code> 命令修改分区的大小。你可以使用 <a href="https://man.openbsd.org/growfs">growfs(8)</a> 调整文件系统以使用整个分区：</p>
+<pre><code># growfs sd0h
+</code></pre>
+<p>在再次挂载分区之前，必须使用 <a href="https://man.openbsd.org/fsck">fsck(8)</a> 检查其完整性：</p>
+<pre><code># fsck /dev/sd0h
+</code></pre>
+<h2 id="raid-和磁盘加密">RAID 和磁盘加密<a class="headerlink" href="#raid-和磁盘加密" title="Permanent link">&para;</a></h2>
+<p><a href="https://man.openbsd.org/bioctl">bioctl(8)</a> 命令通过 <a href="https://man.openbsd.org/bio">bio(4)</a> 层管理硬件和软件 RAID 设备。<a href="https://man.openbsd.org/softraid">softraid(4)</a> 子系统允许将多个 OpenBSD <a href="https://man.openbsd.org/disklabel">disklabel(8)</a> 分区组合成一个虚拟 <a href="https://man.openbsd.org/sd">sd(4)</a> 磁盘。这个虚拟磁盘被视为和任何其他磁盘一样的磁盘，首先用 <a href="https://www.openbsd.org/faq/faq14.html#fdisk">fdisk</a>（在支持 fdisk 的平台上）分区，然后像往常一样创建 BSD 盘标。</p>
+<p>支持的 softraid 规则包括：</p>
+<ul>
+<li>RAID0（带区集）</li>
+<li>RAID1（镜像）</li>
+<li>RAID1C（使用磁盘加密镜像）</li>
+<li>RAID5（带浮动奇偶校验的带区集）</li>
+<li>CONCAT（无冗余连接，类似于 JBOD）</li>
+<li>CRYPTO（磁盘加密）</li>
+</ul>
+<p>磁盘设置可能因平台而异，并且<strong>并非所有平台都支持从 softraid 设备启动</strong>。 目前只能从 i386、amd64、arm64 和 sparc64 上的 RAID1 和加密卷启动 softraid。</p>
+<h3 id="安装至镜像">安装至镜像<a class="headerlink" href="#安装至镜像" title="Permanent link">&para;</a></h3>
+<p>本节介绍将 OpenBSD 安装到一对镜像硬盘驱动器，并假设你熟悉<a href="https://www.openbsd.org/faq/faq4.html">安装过程</a>。</p>
+<p>在使用安装脚本之前，你将进入一个 shell 并设置一个 <a href="https://man.openbsd.org/softraid">softraid(4)</a> 设备。</p>
+<p>安装内核在启动时只有有限数量的 <code>/dev</code> 条目，因此你需要为你的 softraid 设置手动创建所需的磁盘设备。例如，如果你需要支持三个 <a href="https://man.openbsd.org/sd">sd(4)</a> 设备，则可以从 shell 提示符执行以下操作：</p>
+<pre><code>Welcome to the OpenBSD/amd64 7.0 installation program.
+(I)nstall, (U)pgrade, (A)utoinstall or (S)hell? s
+# cd /dev
+# sh MAKEDEV sd0 sd1 sd2
+</code></pre>
+<p>安装程序现在将完全支持 <code>sd0</code>、<code>sd1</code> 和 <code>sd2</code> 设备。如果要从 USB 驱动器安装这些<a href="https://www.openbsd.org/faq/faq4.html#FilesNeeded">套件</a>，也不要忘记考虑该设备。</p>
+<p>接下来，使用 <a href="https://man.openbsd.org/fdisk">fdisk(8)</a> 初始化磁盘并使用 <a href="https://man.openbsd.org/disklabel">disklabel(8)</a> 创建 RAID 分区。</p>
+<p>如果你从 MBR 启动，请执行以下操作：</p>
+<pre><code># fdisk -iy sd0
+# fdisk -iy sd1
+</code></pre>
+<p>如果你使用 GPT 进行 UEFI 引导，请执行以下操作：</p>
+<pre><code># fdisk -iy -g -b 960 sd0
+# fdisk -iy -g -b 960 sd1
+</code></pre>
+<p>在第一台设备上创建分区布局（partition layout）：</p>
+<pre><code># disklabel -E sd0
+Label editor (enter '?' for help at any prompt)
+sd0&gt; a a
+offset: [64]
+size: [39825135] *
+FS type: [4.2BSD] RAID
+sd0*&gt; w
+sd0&gt; q
+No label changes.
+</code></pre>
+<p>将分区布局复制到第二个设备：</p>
+<pre><code># disklabel sd0 &gt; layout
+# disklabel -R sd1 layout
+# rm layout
+</code></pre>
+<p>使用 <a href="https://man.openbsd.org/bioctl">bioctl(8)</a> 命令组装镜像：</p>
+<pre><code># bioctl -c 1 -l sd0a,sd1a softraid0
+scsibus1 at softraid0: 1 targets
+sd2 at scsibus2 targ 0 lun 0: &lt;OPENBSD, SR RAID 1, 005&gt; SCSI2 0/direct fixed
+sd2: 10244MB, 512 bytes/sec, 20980362 sec total
+</code></pre>
+<p>这表明我们现在有一个新的 SCSI 总线和一个新的磁盘 sd2。系统启动时将自动检测并组装此卷。</p>
+<p>即使你创建了多个 RAID 阵列，设备名称也将始终为 <code>softraid0</code>。不会有 <code>softraid1</code> 或其他任何东西。</p>
+<p>因为新设备可能有很多无用数据，你可能需要使用主引导记录和磁盘标签，所以强烈建议将它的第一个块清零。使用此命令要<strong>非常小心</strong>；在错误的设备上应用它可能会导致非常糟糕的一天。这假设新的 softraid 设备创建为 <code>sd2</code>。</p>
+<pre><code># dd if=/dev/zero of=/dev/rsd2c bs=1m count=1
+</code></pre>
+<p>你现在已准备好在你的系统上安装 OpenBSD。通过在启动介质控制台上调用 “安装” 或 “退出” 来正常执行安装。在新的 softraid 磁盘（此处示例中的 sd2）上创建所有分区，而不是在 <code>sd0</code> 或 <code>sd1</code>（非 RAID 磁盘）上。</p>
+<p>要检查镜像的状态，请运行以下命令：</p>
+<pre><code># bioctl sd2
+</code></pre>
+<p>每晚检查状态的 cron 作业可能是个好主意。</p>
+<h4 id="重建镜像">重建镜像<a class="headerlink" href="#重建镜像" title="Permanent link">&para;</a></h4>
+<p>当驱动器发生故障时，你将更换故障驱动器，创建 RAID 和其他 BSD 盘标分区，然后重建镜像。假设你的 RAID 卷是 <code>sd2</code> 并且你正在用 <code>sd1m</code> 替换出现故障的设备，以下命令应该可以工作：</p>
+<pre><code># bioctl -R /dev/sd1m sd2
+</code></pre>
+<p>这也可以在<a href="https://www.openbsd.org/faq/faq10.html#LostPW">单用户模式</a>下或从<a href="https://www.openbsd.org/faq/faq4.html#bsd.rd">安装内核</a>执行。</p>
+<h3 id="全盘加密">全盘加密<a class="headerlink" href="#全盘加密" title="Permanent link">&para;</a></h3>
+<p>与 RAID 非常相似，OpenBSD 中的全盘加密由 <a href="https://man.openbsd.org/softraid">softraid(4)</a> 子系统和 <a href="https://man.openbsd.org/bioctl">bioctl(8)</a> 命令处理。本节介绍了将 OpenBSD 安装到单个加密磁盘的过程，这与上一节非常相似。请注意，此时<strong>不支持</strong> “堆叠” 软 RAID 模式。</p>
+<p>在初始提示下选择 (S)hell：</p>
+<pre><code>Welcome to the OpenBSD/amd64 7.0 installation program.
+(I)nstall, (U)pgrade, (A)utoinstall or (S)hell? s
+</code></pre>
+<p>从这里开始，你将在实时（live）环境中获得一个 shell 来操作磁盘。在这个例子中，我们将安装到 <code>sd0</code> SATA 驱动器，擦除它之前的所有内容。</p>
+<p>由于安装程序默认没有很多设备节点，请确保 <code>/dev/sd0</code> 设备存在：</p>
+<pre><code># cd /dev &amp;&amp; sh MAKEDEV sd0
+</code></pre>
+<p>首先，你可能需要使用以下内容将随机数据写入驱动器：</p>
+<pre><code># dd if=/dev/urandom of=/dev/rsd0c bs=1m
+</code></pre>
+<p>这可能是一个非常耗时的过程，具体取决于 CPU 和磁盘的速度以及磁盘的大小。 如果你不向整个设备写入随机数据，攻击者可能会推断出实际使用了多少空间。</p>
+<p>接下来，使用 <a href="https://man.openbsd.org/fdisk">fdisk(8)</a> 初始化磁盘并使用 <a href="https://man.openbsd.org/disklabel">disklabel(8)</a> 创建 softraid 分区。</p>
+<p>如果你从 MBR 启动，请执行以下操作：</p>
+<pre><code># fdisk -iy sd0
+</code></pre>
+<p>如果你使用 GPT 进行 UEFI 引导，请执行以下操作：</p>
+<pre><code># fdisk -iy -g -b 960 sd0
+</code></pre>
+<p>接下来，创建分区布局：</p>
+<pre><code># disklabel -E sd0
+Label editor (enter '?' for help at any prompt)
+sd0&gt; a a            
+offset: [64]
+size: [39825135] *
+FS type: [4.2BSD] RAID
+sd0*&gt; w
+sd0&gt; q
+No label changes.
+</code></pre>
+<p>我们将使用整个磁盘，但请注意，加密设备可以拆分为多个分区，就好像它是一个普通的硬盘驱动器一样。</p>
+<p>现在我们可以在我们的 “a” 分区上构建加密设备。</p>
+<pre><code># bioctl -c C -l sd0a softraid0
+New passphrase:
+Re-type passphrase:
+sd1 at scsibus2 targ 1 lun 0: &lt;OPENBSD, SR CRYPTO, 005&gt; SCSI2 0/direct fixed
+sd1: 19445MB, 512 bytes/sector, 39824607 sectors
+softraid0: CRYPTO volume attached as sd1
+</code></pre>
+<p>你可能想要使用<a href="https://www.openbsd.org/faq/faq14.html#softraidFDEkeydisk">密钥盘</a>（keydisk）而不是密码短语：</p>
+<p>确保 <code>/dev/sd1</code> 设备被考虑在内：</p>
+<pre><code># cd /dev &amp;&amp; sh MAKEDEV sd1
+</code></pre>
+<p>写入 <code>sd1</code> 的所有数据现在都将在 XTS 模式下使用 AES 加密。</p>
+<p>与前面的示例一样，我们将覆盖新的伪设备（pseudo-device）的第一兆字节。</p>
+<pre><code># dd if=/dev/zero of=/dev/rsd1c bs=1m count=1
+</code></pre>
+<p>键入 exit 返回主安装程序，然后选择此新设备作为你的安装设备。</p>
+<pre><code>[...]
+Available disks are: sd0 sd1.
+Which disk is the root disk? ('?' for details) [sd0] sd1
+</code></pre>
+<p>启动时将提示你输入密码，但所有其他操作都应透明处理。</p>
+<h4 id="使用密钥盘">使用密钥盘<a class="headerlink" href="#使用密钥盘" title="Permanent link">&para;</a></h4>
+<p>作为使用密码短语的替代方法，可以使用存储在单独设备（例如 U 盘）上的密钥来解锁你的加密磁盘。</p>
+<p>使用 <a href="https://man.openbsd.org/fdisk">fdisk(8)</a> 初始化你的密钥盘（keydisk），然后使用 <a href="https://man.openbsd.org/disklabel">disklabel(8)</a> 为密钥数据创建一个 1 MB 的 RAID 分区。 如果你的密钥盘是 <code>sd1</code> 而你要加密的驱动器是 <code>sd0</code>，则输出将如下所示：</p>
+<pre><code># bioctl -c C -k sd1a -l sd0a softraid0
+sd2 at scsibus3 targ 1 lun 0: &lt;OPENBSD, SR CRYPTO, 005&gt; SCSI2 0/direct fixed
+sd2: 19445MB, 512 bytes/sector, 39824607 sectors
+softraid0: CRYPTO volume attached as sd2
+</code></pre>
+<p>系统不会提示你输入密码，因为你使用的是密钥盘。必须在启动时插入密钥盘。</p>
+<p>你可以使用 <a href="https://man.openbsd.org/dd">dd(1)</a> 备份和恢复你的密钥盘：</p>
+<pre><code># dd bs=8192 skip=1 if=/dev/rsd1a of=backup-keydisk.img
+# dd bs=8192 seek=1 if=backup-keydisk.img of=/dev/rsd1a
+</code></pre>
+<h3 id="加密外部磁盘">加密外部磁盘<a class="headerlink" href="#加密外部磁盘" title="Permanent link">&para;</a></h3>
+<p>本节说明如何为外部 USB 驱动器设置加密软 RAID 卷。如果你已经阅读了有关全盘加密的部分，那么应该非常熟悉。步骤概要如下：</p>
+<ul>
+<li>用随机数据覆盖驱动器的内容</li>
+<li>使用 <a href="https://man.openbsd.org/disklabel">disklabel(8)</a> 创建所需的 RAID 类型分区</li>
+<li>使用 <a href="https://man.openbsd.org/bioctl">bioctl(8)</a> 加密驱动器</li>
+<li>将新伪分区的第一兆字节归零</li>
+<li>使用 <a href="https://man.openbsd.org/newfs">newfs(8)</a> 在伪设备上创建文件系统</li>
+<li>解锁并使用 <a href="https://man.openbsd.org/mount">mount(8)</a> 挂载新的伪设备</li>
+<li>根据需要访问文件</li>
+<li>卸载驱动器并分离加密容器</li>
+</ul>
+<p>下面是这些步骤的快速示例，其中 <code>sd3</code> 是 USB 驱动器：</p>
+<pre><code># dd if=/dev/urandom of=/dev/rsd3c bs=1m
+# fdisk -iy sd3
+# disklabel -E sd3 # make an &quot;a&quot; partition of type RAID
+# bioctl -c C -l sd3a softraid0
+New passphrase:
+Re-type passphrase:
+softraid0: CRYPTO volume attached as sd4
+# dd if=/dev/zero of=/dev/rsd4c bs=1m count=1
+# fdisk -iy sd4
+# disklabel -E sd4 # make an &quot;i&quot; partition
+# newfs sd4i
+# mkdir -p /mnt/secretstuff
+# mount /dev/sd4i /mnt/secretstuff
+# mv somefile /mnt/secretstuff/
+# umount /mnt/secretstuff
+# bioctl -d sd4
+</code></pre>
+<p>用于创建卷的相同 <a href="https://man.openbsd.org/bioctl">bioctl(8)</a> 命令可用于稍后附加它。</p>
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="页脚">
+      
+        
+        <a href="../faq10/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 系统管理" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              系统管理
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../faq15/" class="md-footer__link md-footer__link--next" aria-label="下一页: 软件包管理" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              软件包管理
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2021–2022 OpenBSD 中文结社贡献者
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "search": "../../assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.e1a181d9.min.js"></script>
+      
+    
+  </body>
+</html>

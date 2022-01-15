@@ -1,0 +1,1243 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.3">
+    
+    
+      
+        <title>虚拟专用网络 - OpenBSD 中文结社</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.edf004c2.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.e6a45f82.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#ff6e42">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="deep-orange" data-md-color-accent="orange">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#openbsd-faq---虚拟专用网络vpn" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="OpenBSD 中文结社" class="md-header__button md-logo" aria-label="OpenBSD 中文结社" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OpenBSD 中文结社
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              虚拟专用网络
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/openbsd-zh-association/docs-openbsd-zh/" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="OpenBSD 中文结社" class="md-nav__button md-logo" aria-label="OpenBSD 中文结社" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    OpenBSD 中文结社
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/openbsd-zh-association/docs-openbsd-zh/" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        主页
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          OpenBSD FAQ
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="OpenBSD FAQ" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          OpenBSD FAQ
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq1/" class="md-nav__link">
+        OpenBSD 简介
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq4/" class="md-nav__link">
+        安装指南
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq10/" class="md-nav__link">
+        系统管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq14/" class="md-nav__link">
+        配置磁盘
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq15/" class="md-nav__link">
+        软件包管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq5/" class="md-nav__link">
+        从源码构建系统
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq6/" class="md-nav__link">
+        网络配置
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq7/" class="md-nav__link">
+        键盘和显示控制
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq11/" class="md-nav__link">
+        X 窗口系统
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq13/" class="md-nav__link">
+        多媒体
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq16/" class="md-nav__link">
+        虚拟化
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          虚拟专用网络
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        虚拟专用网络
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#介绍" class="md-nav__link">
+    介绍
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#身份验证" class="md-nav__link">
+    身份验证
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#配置-ikev2-服务器" class="md-nav__link">
+    配置 IKEv2 服务器
+  </a>
+  
+    <nav class="md-nav" aria-label="配置 IKEv2 服务器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#构建点对点-vpn" class="md-nav__link">
+    构建点对点 VPN
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#连接到-ikev2-openbsd-vpn" class="md-nav__link">
+    连接到 IKEv2 OpenBSD VPN
+  </a>
+  
+    <nav class="md-nav" aria-label="连接到 IKEv2 OpenBSD VPN">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#使用-openbsd-客户端" class="md-nav__link">
+    使用 OpenBSD 客户端
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#使用-android-客户端" class="md-nav__link">
+    使用 Android 客户端
+  </a>
+  
+    <nav class="md-nav" aria-label="使用 Android 客户端">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#使用-mschap-v2-进行-eap-身份验证" class="md-nav__link">
+    使用 MSCHAP-V2 进行 EAP 身份验证
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#使用-x509-证书认证" class="md-nav__link">
+    使用 X.509 证书认证
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#使用-windows-客户端" class="md-nav__link">
+    使用 Windows 客户端
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#连接到-ikev1l2tp-openbsd-vpn" class="md-nav__link">
+    连接到 IKEv1/L2TP OpenBSD VPN
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          其他
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="其他" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          其他
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../others/upgrade70/" class="md-nav__link">
+        升级向导
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../others/report/" class="md-nav__link">
+        报告 BUG
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../others/current/" class="md-nav__link">
+        跟随 -current 和使用快照
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../others/mail/" class="md-nav__link">
+        邮件列表
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          贡献者指南
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="贡献者指南" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          贡献者指南
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contribution/contributing/" class="md-nav__link">
+        总述
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contribution/translation_rules/" class="md-nav__link">
+        翻译规范
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          关于
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="关于" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          关于
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/international-about/" class="md-nav__link">
+        International About（英文简介）
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/terminology/" class="md-nav__link">
+        术语表
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#介绍" class="md-nav__link">
+    介绍
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#身份验证" class="md-nav__link">
+    身份验证
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#配置-ikev2-服务器" class="md-nav__link">
+    配置 IKEv2 服务器
+  </a>
+  
+    <nav class="md-nav" aria-label="配置 IKEv2 服务器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#构建点对点-vpn" class="md-nav__link">
+    构建点对点 VPN
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#连接到-ikev2-openbsd-vpn" class="md-nav__link">
+    连接到 IKEv2 OpenBSD VPN
+  </a>
+  
+    <nav class="md-nav" aria-label="连接到 IKEv2 OpenBSD VPN">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#使用-openbsd-客户端" class="md-nav__link">
+    使用 OpenBSD 客户端
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#使用-android-客户端" class="md-nav__link">
+    使用 Android 客户端
+  </a>
+  
+    <nav class="md-nav" aria-label="使用 Android 客户端">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#使用-mschap-v2-进行-eap-身份验证" class="md-nav__link">
+    使用 MSCHAP-V2 进行 EAP 身份验证
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#使用-x509-证书认证" class="md-nav__link">
+    使用 X.509 证书认证
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#使用-windows-客户端" class="md-nav__link">
+    使用 Windows 客户端
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#连接到-ikev1l2tp-openbsd-vpn" class="md-nav__link">
+    连接到 IKEv1/L2TP OpenBSD VPN
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+<a href="https://github.com/openbsd-zh-association/docs-openbsd-zh/edit/master/docs/openbsd-faq/faq17.md" title="编辑此页" class="md-content__button md-icon">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+</a>
+
+
+<h1 id="openbsd-faq---虚拟专用网络vpn">OpenBSD FAQ - 虚拟专用网络（VPN）<a class="headerlink" href="#openbsd-faq---虚拟专用网络vpn" title="Permanent link">&para;</a></h1>
+<h2 id="介绍">介绍<a class="headerlink" href="#介绍" title="Permanent link">&para;</a></h2>
+<p>OpenBSD 带有 <a href="https://man.openbsd.org/iked">iked(8)</a>，这是一个现代的、权限分离的 IKEv2 服务器。它可以同时充当响应者（responder），例如接收连接请求的服务器；或发起者（initiator），例如客户端发起与响应者的连接。<a href="https://man.openbsd.org/ikectl">ikectl(8)</a> 实用程序用于控制服务器，它从 <a href="https://man.openbsd.org/iked.conf">iked.conf(5)</a> 文件中获取其配置。</p>
+<p><a href="https://man.openbsd.org/ikectl">ikectl(8)</a> 实用程序还允许您为 IKEv2 对等方维护一个简单的 X.509 数字证书认证机构 (CA)。</p>
+<p>IKEv1 服务器 (<a href="https://man.openbsd.org/isakmpd">isakmpd(8)</a>) 也可用，结合 <a href="https://man.openbsd.org/npppd">npppd(8)</a>，它允许您构建 IKEv1/L2TP VPN，其中 IKEv2 无法部署。</p>
+<p>也可通过 <a href="https://man.openbsd.org/wg">wg(4)</a> 设备获得原生的 WireGuard 支持。正如手册所解释的，它可以像 OpenBSD 中的所有其他<a href="https://www.openbsd.org/faq/faq6.html">网络接口</a>一样进行配置。</p>
+<h2 id="身份验证">身份验证<a class="headerlink" href="#身份验证" title="Permanent link">&para;</a></h2>
+<p><a href="https://man.openbsd.org/iked">iked(8)</a> 支持以下认证方法：</p>
+<ul>
+<li>预共享密钥（不推荐）</li>
+<li>RSA 和 ECDSA 公钥：连接到 iked、RouterOS 和其他一些实现时轻松设置</li>
+<li>EAP MSCHAPv2（服务端带有 X.509 证书）：iked 仅在“响应者”（服务器）端支持此功能</li>
+<li>X.509 证书：Windows、Android 和 Apple 客户端通常需要</li>
+</ul>
+<p>默认情况下，RSA 公钥在启动时在 <code>/etc/iked/local.pub</code> 中生成，私钥存储在 <code>/etc/iked/private/local.key</code> 中。</p>
+<h2 id="配置-ikev2-服务器">配置 IKEv2 服务器<a class="headerlink" href="#配置-ikev2-服务器" title="Permanent link">&para;</a></h2>
+<h3 id="构建点对点-vpn">构建点对点 VPN<a class="headerlink" href="#构建点对点-vpn" title="Permanent link">&para;</a></h3>
+<p>这可以通过交换默认提供的 RSA 公钥来实现：应该将第一个系统（“server1”）上的 <code>/etc/iked/local.pub</code> 复制到第二个系统上的 <code>/etc/iked/pubkeys/fqdn/server1.domain</code> 系统（“server2”）。 然后，应该将第二个系统上的 <code>/etc/iked/local.pub</code> 复制到第一个系统上的 <code>/etc/iked/pubkeys/fqdn/server2.domain</code>。 将 “serverX.domain” 替换为你自己的 FQDN。</p>
+<p>从这时起，我们假设 server1 的公共 IP 为 <code>192.0.2.1</code>，内网 IP 为 <code>10.0.1.0/24</code>，而 server2 的公共 IP 为 <code>198.51.100.1</code>，内网 IP 为 <code>10.0.2.0/24</code>。</p>
+<p>要使发起方能够到达响应方，应在响应方上打开 <code>isakmp</code> UDP 端口。如果对等方之一在 NAT 之后，则 <code>ipsec-nat-t</code> UDP 端口也应在响应方上打开。如果两个对等点都有公共 IP，则应该允许 ESP 协议。</p>
+<pre><code>pass in log on $ext_if proto udp from 198.51.100.1 to 192.0.2.1 port {isakmp, ipsec-nat-t} tag IKED
+pass in log on $ext_if proto esp from 198.51.100.1 to 192.0.2.1 tag IKED
+</code></pre>
+<p>（充当响应者的）server1 的示例 <code>/etc/iked.conf</code> 配置可能如下所示：</p>
+<pre><code>ikev2 'server1_rsa' passive esp \
+        from 10.0.1.0/24 to 10.0.2.0/24 \
+        local 192.0.2.1 peer 198.51.100.1 \
+        srcid server1.domain
+</code></pre>
+<p>以及作为发起者的 server2 的简单配置：</p>
+<pre><code>ikev2 'server2_rsa' active esp \
+        from 10.0.2.0/24 to 10.0.1.0/24 \
+        peer 192.0.2.1 \
+        srcid server2.domain
+</code></pre>
+<p>使用 <code>iked -dv</code> 可以帮助你了解交换过程。在这个例子中，响应者处于 NAT 网络中：</p>
+<pre><code>server1# iked -dv
+...
+ikev2_recv: IKE_SA_INIT request from initiator 198.51.100.1:500 to 192.0.2.1:500 policy 'server1_rsa' id 0, 510 bytes
+ikev2_msg_send: IKE_SA_INIT response from 192.0.2.1:500 to 198.51.100.1:500 msgid 0, 451 bytes
+ikev2_recv: IKE_AUTH request from initiator 198.51.100.1:4500 to 192.0.2.1:4500 policy 'server1_rsa' id 1, 800 bytes
+ikev2_msg_send: IKE_AUTH response from 192.0.2.1:4500 to 198.51.100.1:4500 msgid 1, 720 bytes, NAT-T
+sa_state: VALID -&gt; ESTABLISHED from 198.51.100.1:4500 to 192.0.2.1:4500 policy 'server1_rsa'
+</code></pre>
+<p>在发起者：</p>
+<pre><code>server2# iked -dv
+...
+ikev2_msg_send: IKE_SA_INIT request from 0.0.0.0:500 to 192.0.2.1:500 msgid 0, 510 bytes
+ikev2_recv: IKE_SA_INIT response from responder 192.0.2.1:500 to 198.51.100.1:500 policy 'server2_rsa' id 0, 451 bytes
+ikev2_msg_send: IKE_AUTH request from 198.51.100.1:4500 to 192.0.2.1:4500 msgid 1, 800 bytes, NAT-T
+ikev2_recv: IKE_AUTH response from responder 192.0.2.1:4500 to 198.51.100.1:4500 policy 'server2_rsa' id 1, 720 bytes
+sa_state: VALID -&gt; ESTABLISHED from 192.0.2.1:4500 to 198.51.100.1:4500 policy 'server2_rsa'
+</code></pre>
+<p>可以使用 <a href="https://man.openbsd.org/ipsecctl">ipsecctl(8)</a> 查看 IPsec 流：</p>
+<pre><code>server1# ipsecctl -sa
+FLOWS:
+flow esp in from 10.0.2.0/24 to 10.0.1.0/24 peer 198.51.100.1 srcid FQDN/server1.domain dstid FQDN/server2.domain type use
+flow esp out from 10.0.1.0/24 to 10.0.2.0/24 peer 198.51.100.1 srcid FQDN/server1.domain dstid FQDN/server2.domain type require
+flow esp out from ::/0 to ::/0 type deny
+
+SAD:
+esp tunnel from 192.0.2.1 to 198.51.100.1 spi 0xabb5968a auth hmac-sha2-256 enc aes-256
+esp tunnel from 198.51.100.1 to 192.0.2.1 spi 0xb1fc90b8 auth hmac-sha2-256 enc aes-256
+
+server2# ipsecctl -sa
+FLOWS:
+flow esp in from 10.0.1.0/24 to 10.0.2.0/24 peer 192.0.2.1 srcid FQDN/server2.domain dstid FQDN/server1.domain type use
+flow esp out from 10.0.2.0/24 to 10.0.1.0/24 peer 192.0.2.1 srcid FQDN/server2.domain dstid FQDN/server1.domain type require
+flow esp out from ::/0 to ::/0 type deny
+
+SAD:
+esp tunnel from 192.0.2.1 to 198.51.100.1 spi 0xabb5968a auth hmac-sha2-256 enc aes-256
+esp tunnel from 198.51.100.1 to 192.0.2.1 spi 0xb1fc90b8 auth hmac-sha2-256 enc aes-256
+</code></pre>
+<p>这样，两个内部网络应该能够相互访问。 它们之间的流量应该在 <code>enc0</code> 接口上解封装后出现，并且可以这样过滤。在该示例中，<code>tag VPN</code> 已添加到策略中：</p>
+<pre><code># pfctl -vvsr|grep VPN
+@16 pass log on enc0 tagged VPN
+# tcpdump -nei pflog0 rnr 16
+00:03:26.793522 rule 16/(match) pass in on enc0: 10.0.2.24 &gt; 10.0.1.13: icmp: echo request
+</code></pre>
+<p>一些警告的话：</p>
+<ul>
+<li>如果响应者未设置 <code>srcid</code>，则 iked 将默认尝试使用与其 FQDN 匹配的密钥。</li>
+<li>响应者<strong>不需要</strong>设置 <code>local</code>，它只是确保 <code>iked</code> 在正确的接口上监听。</li>
+<li>响应者<strong>不需要</strong>设置 <code>peer</code>，它只是确保连接来自受信任的 IP。</li>
+</ul>
+<p>如果 VPN 端点需要到达远程内部网络，或者内部网络需要到达远程 VPN 端点，则必须在两端设置额外的流：</p>
+<ul>
+<li>从本地公网 IP 到远程网络</li>
+<li>从内网到远程公网 IP</li>
+</ul>
+<p>响应者配置将如下所示：</p>
+<pre><code>ikev2 'server1_rsa' passive esp \
+        from 10.0.1.0/24 to 10.0.2.0/24 \
+        from 10.0.1.0/24 to 198.51.100.1 \
+        from 192.0.2.1 to 10.0.2.0/24 \
+        local 192.0.2.1 peer 198.51.100.1 \
+        srcid server1.domain
+</code></pre>
+<p>发起者的配置将是：</p>
+<pre><code>ikev2 'server2_rsa' active esp \
+        from 10.0.2.0/24 to 10.0.1.0/24 \
+        from 10.0.2.0/24 to 192.0.2.1 \
+        from 198.51.100.1 to 10.0.1.0/24 \
+        peer 192.0.2.1 \
+        srcid server2.domain
+</code></pre>
+<h2 id="连接到-ikev2-openbsd-vpn">连接到 IKEv2 OpenBSD VPN<a class="headerlink" href="#连接到-ikev2-openbsd-vpn" title="Permanent link">&para;</a></h2>
+<p>作为 <em>road warrior</em> 连接到 IKEv2 VPN 与前一种情况类似，不同之处在于发起者通常计划通过响应者路由其互联网流量，响应者将对其应用 NAT，因此发起者流量似乎来自响应者的 公网IP。</p>
+<p>根据用例，由于所有流量都将通过响应方，因此必须确保将发起方配置为使用它可以访问的 DNS 服务器（可能是响应方上的一个）。</p>
+<h3 id="使用-openbsd-客户端">使用 OpenBSD 客户端<a class="headerlink" href="#使用-openbsd-客户端" title="Permanent link">&para;</a></h3>
+<p>在我们的示例中，<code>10.0.5.0/24</code> 网络用于支持 VPN。实际的内部 IP 地址将由 iked 自动安装在 lo1 接口上。我们假设客户端的公共 IP 是 <code>203.0.113.2</code>。</p>
+<p>与前面的示例一样，交换默认提供的 RSA 公钥足以在响应者和发起者之间设置简单的身份验证：第一个系统（“server1”）上的 <code>/etc/iked/local.pub</code> 应复制到 第二个系统（“roadwarrior”）上的 <code>/etc/iked/pubkeys/fqdn/server1.domain</code>。然后，应该首先将第二个系统上的 <code>/etc/iked/local.pub</code> 复制到 <code>/etc/iked/pubkeys/fqdn/roadwarrior</code>。 将 “serverX.domain” 替换为你自己的 FQDN。</p>
+<p>响应者的 <a href="https://man.openbsd.org/iked.conf">iked.conf(5)</a> 创建从任何目的地到地址池中的动态 IP 租用的流，这将在运行时决定，并用 ROADW 标记数据包：</p>
+<pre><code>ikev2 'responder_rsa' passive esp \
+        from any to dynamic \
+        local 192.0.2.1 peer any \
+        srcid server1.domain \
+        config address 10.0.5.0/24 \
+        tag &quot;ROADW&quot;
+</code></pre>
+<p>响应者需要向发起者提供一个 IP 地址。这是通过 <code>config</code> 指令实现的。使用 <code>config address</code> 选项时，<code>to dynamic</code> 将替换为分配的动态 IP 地址。</p>
+<p>它还需要允许来自任何主机的 IPsec（因为客户端可能从任何地方连接），允许在 <code>enc0</code> 上标记为 ROADW 的流量并对其应用 NAT：</p>
+<pre><code>pass in log on $ext_if proto udp from any to 192.0.2.1 port {isakmp, ipsec-nat-t} tag IKED
+pass in log on $ext_if proto esp from any to 192.0.2.1 tag IKED
+pass log on enc0 tagged ROADW
+match out log on $ext_if inet tagged ROADW nat-to $ext_if
+</code></pre>
+<p>发起者配置一个全局流以将其所有流量发送给响应者，告诉它使用名为 “roadwarrior” 的密钥来标识自己：</p>
+<pre><code>ikev2 'roadwarrior' active esp \
+        from dynamic to any \
+        peer 192.0.2.1 \
+        srcid roadwarrior \
+        dstid server1.domain \
+        request address any \
+        iface lo1
+</code></pre>
+<p>发起者使用 <code>request address any</code> 选项向响应方请求动态 IP 地址。<code>iface lo1</code> 选项指定将安装接收地址和相应路由的接口。响应者应该为 <em>road warrior</em> 客户端正确配置 NAT。</p>
+<p>你可以使用 <code>ikectl decouple</code>（<code>iked</code> 仍在运行，挂起 <code>ikectl Couple</code> 以便它重新连接到响应者）或使用 <code>ikectl reset sa &amp;&amp; rcctl stop iked</code> 永久停止 <code>iked</code> 并确保没有被遗弃的数据流，从而优雅地停止启动器上的 VPN .</p>
+<h3 id="使用-android-客户端">使用 Android 客户端<a class="headerlink" href="#使用-android-客户端" title="Permanent link">&para;</a></h3>
+<p>默认的 Android VPN 客户端仅支持 IKEv1。 要使用 IKEv2，可以选择 <a href="https://www.strongswan.org/">strongSwan</a>。</p>
+<p>你还需要设置 PKI 和 X.509 证书，以便发起方可以验证响应方通告的证书：</p>
+<pre><code>server1# ikectl ca vpn create
+server1# ikectl ca vpn install
+certificate for CA 'vpn' installed into /etc/iked/ca/ca.crt
+CRL for CA 'vpn' installed to /etc/iked/crls/ca.crl
+server1# ikectl ca vpn certificate server1.domain create
+server1# ikectl ca vpn certificate server1.domain install
+writing RSA key
+server1# cp /etc/iked/ca/ca.crt /var/www/htdocs/
+</code></pre>
+<p>在 android 设备上，进入 <code>http://192.0.2.1/ca.crt</code> 并在 strongSwan 客户端中导入 CA 证书。现在有几种选择可以向响应者验证发起者：</p>
+<ul>
+<li>带有用户名/密码的 EAP</li>
+<li>X.509 证书</li>
+</ul>
+<h4 id="使用-mschap-v2-进行-eap-身份验证">使用 MSCHAP-V2 进行 EAP 身份验证<a class="headerlink" href="#使用-mschap-v2-进行-eap-身份验证" title="Permanent link">&para;</a></h4>
+<p>响应者配置需要一份指定用户名/密码列表，并且它将使用 <code>eap "mschap-v2"</code>（这是目前唯一支持的 EAP 方法），如下所示：</p>
+<pre><code>user 'android' 'password'
+ikev2 'responder_eap' passive esp \
+        from any to dynamic \
+        local 192.0.2.1 peer any \
+        srcid server1.domain \
+        eap &quot;mschap-v2&quot; \
+        config address 10.0.5.0/24 \
+        config name-server 192.0.2.1 \
+        tag &quot;ROADW&quot;
+</code></pre>
+<p>在 strongSwan 客户端中，使用以下命令配置新配置文件：</p>
+<ul>
+<li>VPN 类型的 <em>IKEv2 EAP</em></li>
+<li><code>192.0.2.1</code> 为<em>服务器</em>领域</li>
+<li>在响应者配置中设置的登录名/密码值（login/password）</li>
+<li><em>CA 证书</em>（CA certificate）字段新导入的 <code>CN=VPN CA</code> 证书</li>
+<li><em>用户身份</em>（User identity）字段的 <code>client1.domain</code></li>
+<li><em>服务器标识</em>（Server identity）字段中的 server1.domain（在“高级设置”下）</li>
+</ul>
+<p>这样，Android 设备就可以连接到响应者，使用 CA 证书验证响应者证书，使用 EAP 登录名/密码向响应者验证自身，获取 <code>10.0.5.0/24</code> 网络中的地址，而它的所有流量都通过 VPN，使用 <code>192.0.2.1</code> 作为其 DNS 服务器。</p>
+<h4 id="使用-x509-证书认证">使用 X.509 证书认证<a class="headerlink" href="#使用-x509-证书认证" title="Permanent link">&para;</a></h4>
+<p>对于这种方法，会为客户端生成一个证书，安装在 <code>iked ca</code> 中，导出为归档文件，并且 <code>.pfx</code> 文件应该在线可用，以便客户端可以安装它。<code>.pfx</code> 文件包含了：</p>
+<ul>
+<li>X.509 证书</li>
+<li>使用 RSA 加密的 X.509 私钥，</li>
+<li>用于加密 X.509 私钥的 RSA 私钥</li>
+<li>RSA 公钥</li>
+</ul>
+<pre><code>server1# ikectl ca vpn certificate client1.domain create
+server1# cp /etc/ssl/vpn/client1.domain.crt /etc/iked/certs/
+server1# ikectl ca vpn certificate client1.domain export
+server1# tar -C /tmp -xzf client1.domain.tgz *pfx
+server1# cp /tmp/export/client1.domain.pfx /var/www/htdocs/client1.domain.pfx
+</code></pre>
+<p>配置新配置文件时，必须在 strongSwan 客户端中导入 CA 公共证书和客户端证书包。</p>
+<p>响应者配置稍微简单一些，因为不需要指定 eap 也不需要设置用户名/密码：</p>
+<pre><code>ikev2 'responder_x509' passive esp \
+        from any to dynamic \
+        local 192.0.2.1 peer any \
+        srcid server1.domain \
+        config address 10.0.5.0/24 \
+        config name-server 192.0.2.1 \
+        tag &quot;ROADW&quot;
+</code></pre>
+<p>在 strongSwan 客户端中，配置一个新的配置文件需要使用：</p>
+<ul>
+<li>VPN 类型的 <em>IKEv2 证书</em></li>
+<li><code>192.0.2.1</code> 为服务器领域</li>
+<li><em>用户证书</em>字段新导入的 <code>CN=client1.domain</code> 证书</li>
+<li><em>用户身份</em>字段的 <code>client1.domain</code></li>
+<li><em>服务器标识</em>字段中的 <code>server1.domain</code>（在“高级设置”下）</li>
+</ul>
+<p>与 EAP 案例一样，Android 设备现在可以连接到响应者并使用 VPN。</p>
+<h3 id="使用-windows-客户端">使用 Windows 客户端<a class="headerlink" href="#使用-windows-客户端" title="Permanent link">&para;</a></h3>
+<p>Windows 7 及更高版本提供 IKEv2 启动器，该启动器也需要使用 X.509 证书，需要将其导出为 .pfx/.p12 包并导入到本地计算机（而不是用户帐户）证书存储中，两者均用于 CA 和客户端，使用图形化 Microsoft 管理控制台（在命令行中键入 <code>mmc</code> 并将证书管理单元添加为计算机帐户）或使用 Windows 10 的 <code>certutil</code> 命令。在 <code>certificate authority</code> 存储中导入 <code>ca.crt</code> 和在 <code>personal</code> 存储中导入 <code>ClientIP .p12</code>。<a href="https://wiki.strongswan.org/projects/strongswan/wiki/Win7Certs">StrongSwan</a> 项目有一个带有截图的，关于这个主题的很好的文档。</p>
+<p>Windows 不允许为客户端设置 <code>srcid</code> 参数，因此客户端证书的 CN 字段必须与发送到响应者的客户端 FQDN 或默认情况下的 IP 匹配。 还要求响应者上的 <code>srcid</code> 与响应者 FQDN（或它的 IP，如果不使用 FQDN）相匹配 —— 否则可能会遇到可怕的 <code>error 3801</code>。Libreswan 项目有有关于这些<a href="https://libreswan.org/wiki/Interoperability#Windows_Certificate_requirements">要求</a>的<a href="https://libreswan.org/wiki/VPN_server_for_remote_clients_using_IKEv2#Common_Windows_7_client_errors">宝贵细节</a>。</p>
+<p>导入证书后，使用以下命令配置新的 VPN 连接：</p>
+<ul>
+<li>常规选项卡中填入目标主机名的响应者 FQDN</li>
+<li>安全选项卡中的类型设置为 <em>IKEv2</em></li>
+<li>身份验证选择 “机器证书（machine certificate）” 或 “EAP 身份验证（EAP authentication）”</li>
+<li>如果使用 EAP，连接时会提示登录名/密码</li>
+</ul>
+<p>响应者的配置文件将类似于前文的 Android 案例。</p>
+<pre><code>user 'windows' 'password'
+ikev2 'responder_eap' passive esp \
+        from any to dynamic \
+        local 192.0.2.1 peer any \
+        srcid server1.domain.fqdn \
+        eap &quot;mschap-v2&quot; \
+        config address 10.0.5.0/24 \
+        config name-server 192.0.2.1 \
+        tag &quot;ROADW&quot;
+</code></pre>
+<p>默认情况下，所有 Windows 流量现在都将通过 IKEv2 VPN。</p>
+<p>在撰写本文时，当前版本的 Windows 默认使用弱加密 (3DES/SHA1)。 可以使用 PowerShell 命令 <code>Set-VpnConnectionIPsecConfiguration</code> 更正此问题。</p>
+<h2 id="连接到-ikev1l2tp-openbsd-vpn">连接到 IKEv1/L2TP OpenBSD VPN<a class="headerlink" href="#连接到-ikev1l2tp-openbsd-vpn" title="Permanent link">&para;</a></h2>
+<p>有时，人们无法控制 VPN 服务器，只能选择连接到 IKEv1 服务器。 在这种情况下，需要 <code>xl2tpd</code> 第三方包作为 L2TP 客户端。</p>
+<p>首先需要启用 <a href="https://man.openbsd.org/isakmpd">isakmpd(8)</a> 和 <code>ipsec</code> 服务，以便启动守护进程并在启动时加载 <a href="https://man.openbsd.org/ipsec.conf">ipsec.conf(5)</a> 配置文件：</p>
+<pre><code># rcctl enable ipsec
+# rcctl enable isakmpd
+# rcctl set isakmpd flags -K
+</code></pre>
+<p>以下 <a href="https://man.openbsd.org/ipsec.conf">ipsec.conf(5)</a> 配置应该允许使用提供的 PSK 连接到 <code>A.B.C.D</code> 的 IKEv1 服务器，只允许 L2TP 的 UDP 端口 1701：</p>
+<pre><code>ike dynamic esp transport proto udp from egress to A.B.C.D port l2tp \
+        psk mekmitasdigoat
+</code></pre>
+<p>启动 <a href="https://man.openbsd.org/isakmpd">isakmpd(8)</a> 并使用 <a href="https://man.openbsd.org/ipsec.conf">ipsecctl(8)</a> 加载 <a href="https://man.openbsd.org/ipsec.conf">ipsec.conf(5)</a> 应该允许您可视化配置的安全关联 (Security Associations, SA) 和流：</p>
+<pre><code># rcctl start isakmpd
+# ipsecctl -f /etc/ipsec.conf
+# ipsecctl -sa
+FLOWS:
+flow esp in proto udp from A.B.C.D port l2tp to W.X.Y.Z peer A.B.C.D srcid my.client.fqdn dstid A.B.C.D/32 type use
+flow esp out proto udp from W.X.Y.Z to A.B.C.D port l2tp peer A.B.C.D srcid my.client.fqdn dstid A.B.C.D/32 type require
+
+SAD:
+esp transport from A.B.C.D to W.X.Y.Z spi 0x0d16ad1c auth hmac-sha1 enc aes
+esp transport from W.X.Y.Z to A.B.C.D spi 0xcd0549ba auth hmac-sha1 enc aes
+</code></pre>
+<p>如果不是这种情况，当双方交换加密参数以商定可用的最佳组合时，可能需要调整阶段 1（主要）和阶段 2（快速）参数。 理想情况下，这些参数应该由远程服务器管理员提供，并且应该在 <a href="https://man.openbsd.org/ipsec.conf">ipsec.conf(5)</a> 中使用：</p>
+<pre><code>ike dynamic esp transport proto udp from egress to A.B.C.D port l2tp \
+        main auth &quot;hmac-sha1&quot; enc &quot;3des&quot; group modp1024 \
+        quick auth &quot;hmac-sha1&quot; enc &quot;aes&quot; \
+        psk mekmitasdigoat
+</code></pre>
+<p>一旦 IKEv1 隧道启动并运行，就需要配置 L2TP 隧道。OpenBSD 默认不提供 L2TP 客户端，因此需要安装 <code>xl2tpd</code>。</p>
+<pre><code># pkg_add xl2tpd
+</code></pre>
+<p>有关如何正确设置 L2TP 客户端的说明，请参阅 <code>/usr/local/share/doc/pkg-readmes/xl2tpd</code>。</p>
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="页脚">
+      
+        
+        <a href="../faq16/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 虚拟化" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              虚拟化
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../../others/upgrade70/" class="md-footer__link md-footer__link--next" aria-label="下一页: 升级向导" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              升级向导
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2021–2022 OpenBSD 中文结社贡献者
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "search": "../../assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.e1a181d9.min.js"></script>
+      
+    
+  </body>
+</html>

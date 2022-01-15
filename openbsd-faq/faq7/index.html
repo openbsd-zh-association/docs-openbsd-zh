@@ -1,0 +1,1120 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.3">
+    
+    
+      
+        <title>键盘和显示控制 - OpenBSD 中文结社</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.edf004c2.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.e6a45f82.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#ff6e42">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="deep-orange" data-md-color-accent="orange">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#openbsd-faq---键盘和显示控制" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="OpenBSD 中文结社" class="md-header__button md-logo" aria-label="OpenBSD 中文结社" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OpenBSD 中文结社
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              键盘和显示控制
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/openbsd-zh-association/docs-openbsd-zh/" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="OpenBSD 中文结社" class="md-nav__button md-logo" aria-label="OpenBSD 中文结社" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    OpenBSD 中文结社
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/openbsd-zh-association/docs-openbsd-zh/" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        主页
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          OpenBSD FAQ
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="OpenBSD FAQ" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          OpenBSD FAQ
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq1/" class="md-nav__link">
+        OpenBSD 简介
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq4/" class="md-nav__link">
+        安装指南
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq10/" class="md-nav__link">
+        系统管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq14/" class="md-nav__link">
+        配置磁盘
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq15/" class="md-nav__link">
+        软件包管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq5/" class="md-nav__link">
+        从源码构建系统
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq6/" class="md-nav__link">
+        网络配置
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          键盘和显示控制
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        键盘和显示控制
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#在控制台上工作" class="md-nav__link">
+    在控制台上工作
+  </a>
+  
+    <nav class="md-nav" aria-label="在控制台上工作">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#重新映射键盘" class="md-nav__link">
+    重新映射键盘
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#控制台鼠标支持" class="md-nav__link">
+    控制台鼠标支持
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#切换控制台" class="md-nav__link">
+    切换控制台
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vga-硬件上的控制台" class="md-nav__link">
+    VGA 硬件上的控制台
+  </a>
+  
+    <nav class="md-nav" aria-label="VGA 硬件上的控制台">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#回滚缓冲区" class="md-nav__link">
+    回滚缓冲区
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#添加更多虚拟控制台" class="md-nav__link">
+    添加更多虚拟控制台
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#更改控制台字体和分辨率" class="md-nav__link">
+    更改控制台字体和分辨率
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#清空非活动控制台" class="md-nav__link">
+    清空非活动控制台
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#配置串口控制台" class="md-nav__link">
+    配置串口控制台
+  </a>
+  
+    <nav class="md-nav" aria-label="配置串口控制台">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#更改-etcttys-以获取登录提示" class="md-nav__link">
+    更改 /etc/ttys 以获取登录提示
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#amd64-和-i386" class="md-nav__link">
+    amd64 和 i386
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sparc64" class="md-nav__link">
+    sparc64
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#macppc" class="md-nav__link">
+    macppc
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#尝试使用我的-tty-设备时出现输入输出错误" class="md-nav__link">
+    尝试使用我的 tty 设备时出现输入/输出错误
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq11/" class="md-nav__link">
+        X 窗口系统
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq13/" class="md-nav__link">
+        多媒体
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq16/" class="md-nav__link">
+        虚拟化
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq17/" class="md-nav__link">
+        虚拟专用网络
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          其他
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="其他" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          其他
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../others/upgrade70/" class="md-nav__link">
+        升级向导
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../others/report/" class="md-nav__link">
+        报告 BUG
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../others/current/" class="md-nav__link">
+        跟随 -current 和使用快照
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../others/mail/" class="md-nav__link">
+        邮件列表
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          贡献者指南
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="贡献者指南" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          贡献者指南
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contribution/contributing/" class="md-nav__link">
+        总述
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contribution/translation_rules/" class="md-nav__link">
+        翻译规范
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          关于
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="关于" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          关于
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/international-about/" class="md-nav__link">
+        International About（英文简介）
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/terminology/" class="md-nav__link">
+        术语表
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#在控制台上工作" class="md-nav__link">
+    在控制台上工作
+  </a>
+  
+    <nav class="md-nav" aria-label="在控制台上工作">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#重新映射键盘" class="md-nav__link">
+    重新映射键盘
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#控制台鼠标支持" class="md-nav__link">
+    控制台鼠标支持
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#切换控制台" class="md-nav__link">
+    切换控制台
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vga-硬件上的控制台" class="md-nav__link">
+    VGA 硬件上的控制台
+  </a>
+  
+    <nav class="md-nav" aria-label="VGA 硬件上的控制台">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#回滚缓冲区" class="md-nav__link">
+    回滚缓冲区
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#添加更多虚拟控制台" class="md-nav__link">
+    添加更多虚拟控制台
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#更改控制台字体和分辨率" class="md-nav__link">
+    更改控制台字体和分辨率
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#清空非活动控制台" class="md-nav__link">
+    清空非活动控制台
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#配置串口控制台" class="md-nav__link">
+    配置串口控制台
+  </a>
+  
+    <nav class="md-nav" aria-label="配置串口控制台">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#更改-etcttys-以获取登录提示" class="md-nav__link">
+    更改 /etc/ttys 以获取登录提示
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#amd64-和-i386" class="md-nav__link">
+    amd64 和 i386
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sparc64" class="md-nav__link">
+    sparc64
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#macppc" class="md-nav__link">
+    macppc
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#尝试使用我的-tty-设备时出现输入输出错误" class="md-nav__link">
+    尝试使用我的 tty 设备时出现输入/输出错误
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+<a href="https://github.com/openbsd-zh-association/docs-openbsd-zh/edit/master/docs/openbsd-faq/faq7.md" title="编辑此页" class="md-content__button md-icon">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+</a>
+
+
+<h1 id="openbsd-faq---键盘和显示控制">OpenBSD FAQ - 键盘和显示控制<a class="headerlink" href="#openbsd-faq---键盘和显示控制" title="Permanent link">&para;</a></h1>
+<h2 id="在控制台上工作">在控制台上工作<a class="headerlink" href="#在控制台上工作" title="Permanent link">&para;</a></h2>
+<h3 id="重新映射键盘">重新映射键盘<a class="headerlink" href="#重新映射键盘" title="Permanent link">&para;</a></h3>
+<p><a href="https://man.openbsd.org/kbd">kbd(8)</a> 实用程序可用于更改键盘编码（keyboard encoding）。大多数键盘选项都可以使用 <a href="https://man.openbsd.org/wsconsctl">wsconsctl(8)</a> 实用程序进行控制。例如，要使用 <a href="https://man.openbsd.org/wsconsctl">wsconsctl(8)</a> 更改键映射，可以执行以下操作：</p>
+<pre><code># wsconsctl keyboard.encoding=uk
+</code></pre>
+<p>重新映射 [Caps Lock] 为左控制键 [Control L]：</p>
+<pre><code># wsconsctl keyboard.map+=&quot;keysym Caps_Lock = Control_L&quot;
+</code></pre>
+<p>要永久更改，请使用 <a href="https://man.openbsd.org/wsconsctl.conf">wsconsctl.conf(5)</a> 文件。</p>
+<h3 id="控制台鼠标支持">控制台鼠标支持<a class="headerlink" href="#控制台鼠标支持" title="Permanent link">&para;</a></h3>
+<p>对于 <a href="https://www.openbsd.org/alpha.html">alpha</a>、<a href="https://www.openbsd.org/amd64.html">amd64</a> 和 <a href="https://www.openbsd.org/i386.html">i386</a> 平台，OpenBSD 提供 <a href="https://man.openbsd.org/wsmoused">wsmoused(8)</a>。它可以使用 <a href="https://man.openbsd.org/rcctl">rcctl(8)</a> 实用程序启用，在 <a href="https://www.openbsd.org/faq/faq10.html#rc">rc 脚本</a>的 FAQ 中也有描述。</p>
+<h3 id="切换控制台">切换控制台<a class="headerlink" href="#切换控制台" title="Permanent link">&para;</a></h3>
+<p>在大多数 alpha、macppc、amd64 和 i386 系统上，OpenBSD 默认提供六个虚拟终端：<code>/dev/ttyC0</code> 到 <code>/dev/ttyC5</code>。你可以使用 <code>[CTRL]+[ALT]</code> 和 <code>[F1]</code> 到 <code>[F6]</code> 在它们之间切换。虚拟终端 <code>ttyC4</code> 保留供 <a href="https://www.openbsd.org/faq/faq11.html">X 窗口系统</a>使用。</p>
+<h2 id="vga-硬件上的控制台">VGA 硬件上的控制台<a class="headerlink" href="#vga-硬件上的控制台" title="Permanent link">&para;</a></h2>
+<p>注意：本节讨论 <a href="https://man.openbsd.org/vga">vga(4)</a> 驱动程序的功能。并非所有视频卡都支持它们。以下说明<strong>不适用于使用 <a href="https://man.openbsd.org/drm">drm(4)</a> 驱动程序的现代图形硬件。</strong></p>
+<h3 id="回滚缓冲区">回滚缓冲区<a class="headerlink" href="#回滚缓冲区" title="Permanent link">&para;</a></h3>
+<p>在一些平台和硬件组合上，OpenBSD 提供了一个控制台回滚缓冲区。这使你可以查看已经滚动过屏幕的信息。要在缓冲区中上下移动，请使用 <code>[SHIFT]+[PGUP]</code> 和 <code>[SHIFT]+[PGDN]</code>。你可以向上移动和查看的页面数为 8。切换控制台将清除回滚缓冲区。由于空间限制，安装内核没有这个功能。</p>
+<h3 id="添加更多虚拟控制台">添加更多虚拟控制台<a class="headerlink" href="#添加更多虚拟控制台" title="Permanent link">&para;</a></h3>
+<p>如果您希望拥有多于默认数量的虚拟控制台，请使用 <a href="https://man.openbsd.org/wsconscfg">wsconscfg(8)</a> 命令为 <code>ttyC6</code>、<code>ttyC7</code> 及更多的虚拟控制台创建屏幕。例如：</p>
+<pre><code># wsconscfg -t 80x25 6       # this will not work on systems using drm(4)
+</code></pre>
+<p>这将为 <code>ttyC6</code> 创建一个虚拟终端，通过 <code>[CTRL]+[ALT]+[F7]</code> 访问。要在新创建的虚拟控制台上获得 <code>login:</code> 提示，你需要在 <a href="https://man.openbsd.org/ttys">ttys(5)</a> 中将其设置为 <code>on</code>，然后重新启动或使用 <a href="https://man.openbsd.org/kill">kill(1)</a> 向 <a href="https://man.openbsd.org/init">init(8)</a> 发送 HUP 信号。如果下次启动计算机时需要额外的屏幕，请将此命令添加到 <a href="https://man.openbsd.org/rc.local">rc.local(8)</a>。</p>
+<h3 id="更改控制台字体和分辨率">更改控制台字体和分辨率<a class="headerlink" href="#更改控制台字体和分辨率" title="Permanent link">&para;</a></h3>
+<p>许多 alpha、amd64 和 i386 上的 VGA 视频卡能够显示 50 行的更高文本分辨率，而不是通常的 25 行。标准的 80x25 文本屏幕使用 8x16 像素字体。为了使行数加倍，我们首先使用 <a href="https://man.openbsd.org/wsfontload">wsfontload(8)</a> 加载一个 8x8 像素的字体。然后我们使用 <a href="https://man.openbsd.org/wsconscfg">wsconscfg(8)</a> 删除并重新创建一个具有所需屏幕分辨率的虚拟控制台。这可以通过在 <a href="https://man.openbsd.org/rc.local">rc.local(8)</a> 脚本的末尾添加以下命令在启动时自动完成：</p>
+<pre><code>wsfontload -h 8 -e ibm /usr/share/misc/pcvtfonts/vt220l.808 # load 8x8 font
+wsconscfg -dF 5         # delete screen 5 accessed by [CTRL]+[ALT]+[F6]
+wsconscfg -t 80x50 5        # add screen 5 with 50 lines of 80 characters
+</code></pre>
+<p>如果你希望修改其他屏幕，只需为你希望以 80x50 分辨率运行的任何屏幕重复以上删除和添加屏幕步骤。你无法更改通过 <code>[CTRL]+[ALT]+[F1]</code> 访问的主控制台设备 <code>ttyC0</code> 的分辨率。请避免更改 X 用作图形屏幕的屏幕 4。</p>
+<h2 id="清空非活动控制台">清空非活动控制台<a class="headerlink" href="#清空非活动控制台" title="Permanent link">&para;</a></h2>
+<p>如果你希望在一段时间不活动后不使用 X 清空控制台，请修改以下 <a href="https://man.openbsd.org/wscons">wscons(4)</a> 变量：</p>
+<ul>
+<li><code>display.screen_off</code> 确定以毫秒为单位的消隐时间（the blanking time）。</li>
+<li><code>display.kbdact</code> 如果设置为 <code>on</code>，键盘活动将取消空白屏幕。</li>
+<li><code>display.msact</code> 如果设置为 <code>on</code>，<a href="https://www.openbsd.org/faq/faq7.html#ConsoleMouse">控制台鼠标</a>活动将取消空白屏幕。</li>
+<li><code>display.outact</code> 如果设置为 <code>on</code>，屏幕输出将取消空白屏幕。</li>
+<li><code>display.vblank</code> 如果设置为 <code>on</code> 将禁用垂直同步脉冲。这将导致许多显示器进入节能模式。</li>
+</ul>
+<p>例如：</p>
+<pre><code># wsconsctl display.screen_off=60000
+display.screen_off -&gt; 60000
+</code></pre>
+<p>通过编辑 <a href="https://man.openbsd.org/wsconsctl.conf">wsconsctl.conf(5)</a> 永久设置它们。当 <code>display.kbdact</code> 或 <code>display.outact</code> 设置为 <code>on</code> 时，消隐器被激活。请注意，这两者之一必须关闭。</p>
+<h2 id="配置串口控制台">配置串口控制台<a class="headerlink" href="#配置串口控制台" title="Permanent link">&para;</a></h2>
+<p>OpenBSD 在大多数平台上都支持串口控制台，但是不同的平台之间的细节差异很大。除了允许用户登录外，它们还可用于记录控制台输出。</p>
+<p>在 OpenBSD 系统上获得功能齐全的串口控制台有两个部分：</p>
+<ul>
+<li>启用串口作为交互终端，以便用户在运行多用户时可以登录。</li>
+<li>配置 OpenBSD 以使用你的串口端口作为状态和单用户模式的控制台。这部分非常依赖平台特定的配置。</li>
+</ul>
+<h3 id="更改-etcttys-以获取登录提示">更改 <code>/etc/ttys</code> 以获取登录提示<a class="headerlink" href="#更改-etcttys-以获取登录提示" title="Permanent link">&para;</a></h3>
+<p>终端会话由 <a href="https://man.openbsd.org/ttys">ttys(5)</a> 文件控制。在 OpenBSD 给你一个 <code>login:</code> 提示之前，它必须在 <code>/etc/ttys</code> 中启用。默认情况下，串行终端在通常连接有键盘和屏幕的平台上是禁用的。我们将使用 <code>amd64</code> 平台作为示例。在这种情况下，你必须编辑以下行：</p>
+<pre><code>tty00   &quot;/usr/libexec/getty std.9600&quot;   unknown off
+</code></pre>
+<p>修改成如下文本：</p>
+<pre><code>tty00   &quot;/usr/libexec/getty std.9600&quot;   vt220   on secure
+</code></pre>
+<p>在这里，<code>tty00</code> 是我们用作控制台的串行端口，而 <code>vt220</code> 是与你的终端匹配的 <a href="https://man.openbsd.org/termcap.5">termcap(5)</a> 条目。其他可能的选项可能包括 <code>vt100</code>、<code>xterm</code> 等。<code>on</code> 通过为该串行端口激活 <a href="https://man.openbsd.org/getty">getty(8)</a> 来启用登录提示。<code>secure</code> 允许在此控制台上进行 <code>root</code> 登录。<code>9600</code> 是终端波特率。</p>
+<p>请注意，你可以在不执行此步骤的情况下使用串行控制台进行安装，因为系统在单用户模式下运行，而不是使用 <code>getty</code> 进行登录。</p>
+<h3 id="amd64-和-i386">amd64 和 i386<a class="headerlink" href="#amd64-和-i386" title="Permanent link">&para;</a></h3>
+<p>要将启动过程配置为使用串行端口作为控制台，你的 <a href="https://man.openbsd.org/amd64/boot.conf">boot.conf(5)</a> 文件应包含以下行：</p>
+<pre><code>set tty com0
+</code></pre>
+<p>请将这个文件放在你的启动驱动器上，它也放在你的安装介质中。如果你需要 9600bps 以外的波特率，请使用 <code>stty</code> 选项。</p>
+<p>某些系统可能能够在机器中没有视频卡的情况下运行，但肯定不是所有系统——许多人认为这是一种错误情况。其他人能够通过配置选项将所有 BIOS 键盘和屏幕活动重定向到串行端口，因此可以完全通过串行端口维护机器。你的结果可能会有所不同。使用此功能时，某些 BIOS 实现可能会阻止引导加载程序看到串行端口，因此不会告诉内核使用它。可能有一个 BIOS 选项 “Continue Console Redirection after POST.”。这应该设置为 <code>OFF</code>，以便引导加载程序和内核可以处理他们自己的控制台。</p>
+<p>要在多用户模式下使用机器，你需要按<a href="https://www.openbsd.org/faq/faq7.html#SerContty">上述说明</a>编辑 <code>/etc/ttys</code>。</p>
+<h3 id="sparc64">sparc64<a class="headerlink" href="#sparc64" title="Permanent link">&para;</a></h3>
+<p>这些机器设计为可通过串行控制台进行完全维护。只需从机器上取下键盘，系统就会串行运行。</p>
+<p>在某些系统上，串行端口标记为 <code>ttya</code>、<code>ttyb</code>、<code>ttyh0</code> 或 <code>ttyh1</code>。在多用户模式下使用串行控制台不需要对 <code>/etc/ttys</code> 进行任何更改。</p>
+<p>一些 sparc64 系统将控制台端口的 BREAK 信号解释为与 STOP-A 命令相同。这将使系统回到 Forth 提示符，并在此时停止任何应用程序和操作系统。这在需要时是很方便的，但不幸的是，一些串行终端在断电时和一些 RS-232 开关设备会发送一些被计算机解释为中断信号的东西，使机器停止工作。请在你进入生产之前进行测试。</p>
+<p>如果您连接了键盘和显示器，您仍然可以通过在 <code>ok</code> 提示符下使用以下命令来强制使用串行控制台：</p>
+<pre><code>ok setenv input-device ttya
+ok setenv output-device ttya
+ok reset
+</code></pre>
+<p>如果 <code>ttyC0</code> 在 <code>/etc/ttys</code> 中处于活动状态，<a href="https://www.openbsd.org/faq/faq7.html#SerContty">如上所述</a>，你可以在 X 中使用键盘和监视器。</p>
+<h3 id="macppc">macppc<a class="headerlink" href="#macppc" title="Permanent link">&para;</a></h3>
+<p>macppc 机器通过 OpenFirmware 配置为串行控制台。使用命令：</p>
+<pre><code>ok setenv output-device scca
+ok setenv input-device scca
+ok reset-all
+</code></pre>
+<p>将您的串行控制台设置为 57600bps，8N1。</p>
+<p>不幸的是，在大多数 MacPPC 上不能直接使用串行控制台。虽然这些机器中的大多数都有串行硬件，但在机器外部无法访问。幸运的是，一些公司为几种 Macintosh 型号提供了附加设备，这将使该端口可用作串行控制台。</p>
+<p>你必须将 <code>/etc/ttys</code> 中的 <code>tty00</code> 更改为 <code>on</code> 并将速度设置为 <code>57600</code> 而不是默认的 <code>9600</code>，如<a href="https://www.openbsd.org/faq/faq7.html#SerContty">上面</a>在单用户模式中详述的那样，然后才能启动多用户并让串行控制台正常工作。</p>
+<h3 id="尝试使用我的-tty-设备时出现输入输出错误">尝试使用我的 tty 设备时出现输入/输出错误<a class="headerlink" href="#尝试使用我的-tty-设备时出现输入输出错误" title="Permanent link">&para;</a></h3>
+<p>对于从 OpenBSD 系统发起的连接，您需要使用 <code>/dev/cuaXX</code>。<code>/dev/ttyXX</code> 设备仅用于终端或拨入使用。有关更多详细信息，请参阅 <a href="https://man.openbsd.org/cua">cua(4)</a> 手册。</p>
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="页脚">
+      
+        
+        <a href="../faq6/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 网络配置" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              网络配置
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../faq11/" class="md-footer__link md-footer__link--next" aria-label="下一页: X 窗口系统" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              X 窗口系统
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2021–2022 OpenBSD 中文结社贡献者
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "search": "../../assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.e1a181d9.min.js"></script>
+      
+    
+  </body>
+</html>

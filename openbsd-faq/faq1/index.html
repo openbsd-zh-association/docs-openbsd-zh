@@ -1,0 +1,1137 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.3">
+    
+    
+      
+        <title>OpenBSD 简介 - OpenBSD 中文结社</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.edf004c2.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.e6a45f82.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#ff6e42">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="deep-orange" data-md-color-accent="orange">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#openbsd-faq---对-openbsd-的简介" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="OpenBSD 中文结社" class="md-header__button md-logo" aria-label="OpenBSD 中文结社" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OpenBSD 中文结社
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              OpenBSD 简介
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/openbsd-zh-association/docs-openbsd-zh/" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="OpenBSD 中文结社" class="md-nav__button md-logo" aria-label="OpenBSD 中文结社" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    OpenBSD 中文结社
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/openbsd-zh-association/docs-openbsd-zh/" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        主页
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          OpenBSD FAQ
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="OpenBSD FAQ" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          OpenBSD FAQ
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          OpenBSD 简介
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        OpenBSD 简介
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#关于-openbsd" class="md-nav__link">
+    关于 OpenBSD
+  </a>
+  
+    <nav class="md-nav" aria-label="关于 OpenBSD">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#为什么我要使用openbsd" class="md-nav__link">
+    为什么我要使用OpenBSD？
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#openbsd-真的是自由的吗" class="md-nav__link">
+    OpenBSD 真的是自由的吗？
+  </a>
+  
+    <nav class="md-nav" aria-label="OpenBSD 真的是自由的吗？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#基本系统中包含什么" class="md-nav__link">
+    基本系统中包含什么？
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#为什么-xxx-被包含了没被包含" class="md-nav__link">
+    为什么 xxx 被包含了/没被包含？
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#下一个发行版本何时发布" class="md-nav__link">
+    下一个发行版本何时发布？
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#硬件支持" class="md-nav__link">
+    硬件支持
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#手册页" class="md-nav__link">
+    手册页
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#邮件列表" class="md-nav__link">
+    邮件列表
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#从其他系统迁移到-openbsd" class="md-nav__link">
+    （从其他系统）迁移到 OpenBSD
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#报告-bug" class="md-nav__link">
+    报告 Bug
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#支持本项目" class="md-nav__link">
+    支持本项目
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq4/" class="md-nav__link">
+        安装指南
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq10/" class="md-nav__link">
+        系统管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq14/" class="md-nav__link">
+        配置磁盘
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq15/" class="md-nav__link">
+        软件包管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq5/" class="md-nav__link">
+        从源码构建系统
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq6/" class="md-nav__link">
+        网络配置
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq7/" class="md-nav__link">
+        键盘和显示控制
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq11/" class="md-nav__link">
+        X 窗口系统
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq13/" class="md-nav__link">
+        多媒体
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq16/" class="md-nav__link">
+        虚拟化
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq17/" class="md-nav__link">
+        虚拟专用网络
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          其他
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="其他" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          其他
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../others/upgrade70/" class="md-nav__link">
+        升级向导
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../others/report/" class="md-nav__link">
+        报告 BUG
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../others/current/" class="md-nav__link">
+        跟随 -current 和使用快照
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../others/mail/" class="md-nav__link">
+        邮件列表
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          贡献者指南
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="贡献者指南" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          贡献者指南
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contribution/contributing/" class="md-nav__link">
+        总述
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contribution/translation_rules/" class="md-nav__link">
+        翻译规范
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          关于
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="关于" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          关于
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/international-about/" class="md-nav__link">
+        International About（英文简介）
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/terminology/" class="md-nav__link">
+        术语表
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#关于-openbsd" class="md-nav__link">
+    关于 OpenBSD
+  </a>
+  
+    <nav class="md-nav" aria-label="关于 OpenBSD">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#为什么我要使用openbsd" class="md-nav__link">
+    为什么我要使用OpenBSD？
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#openbsd-真的是自由的吗" class="md-nav__link">
+    OpenBSD 真的是自由的吗？
+  </a>
+  
+    <nav class="md-nav" aria-label="OpenBSD 真的是自由的吗？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#基本系统中包含什么" class="md-nav__link">
+    基本系统中包含什么？
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#为什么-xxx-被包含了没被包含" class="md-nav__link">
+    为什么 xxx 被包含了/没被包含？
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#下一个发行版本何时发布" class="md-nav__link">
+    下一个发行版本何时发布？
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#硬件支持" class="md-nav__link">
+    硬件支持
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#手册页" class="md-nav__link">
+    手册页
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#邮件列表" class="md-nav__link">
+    邮件列表
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#从其他系统迁移到-openbsd" class="md-nav__link">
+    （从其他系统）迁移到 OpenBSD
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#报告-bug" class="md-nav__link">
+    报告 Bug
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#支持本项目" class="md-nav__link">
+    支持本项目
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+<a href="https://github.com/openbsd-zh-association/docs-openbsd-zh/edit/master/docs/openbsd-faq/faq1.md" title="编辑此页" class="md-content__button md-icon">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+</a>
+
+
+<h1 id="openbsd-faq---对-openbsd-的简介">OpenBSD FAQ - 对 OpenBSD 的简介<a class="headerlink" href="#openbsd-faq---对-openbsd-的简介" title="Permanent link">&para;</a></h1>
+<h2 id="关于-openbsd">关于 OpenBSD<a class="headerlink" href="#关于-openbsd" title="Permanent link">&para;</a></h2>
+<p><a href="https://openbsd.org/index.html">OpenBSD 项目</a>提供了一个自由可用的基于 4.4BSD 系统的多平台 UNIX 系操作系统。我们的<a href="https://www.openbsd.org/goals.html">目标</a>聚焦于正确性、安全性、标准化和可移植性。  </p>
+<h3 id="为什么我要使用openbsd">为什么我要使用OpenBSD？<a class="headerlink" href="#为什么我要使用openbsd" title="Permanent link">&para;</a></h3>
+<p>这是我们认为 OpenBSD 是一个很有用操作系统的原因：</p>
+<ul>
+<li>OpenBSD 可以运行在许多不同的硬件平台上  </li>
+<li>OpenBSD 在无数的源代码审查后，被各安全专家视为最<a href="https://www.openbsd.org/security.html">安全</a>的 UNIX 系操作系统  </li>
+<li>OpenBSD 是一个具有免费且具有完整特性的 UNIX 系操作系统，并同时以源代码和二进制格式提供  </li>
+<li>OpenBSD 集成了最先进适用的安全技术，可以被用作<a href="https://www.openbsd.org/faq/pf/example1.html">构建防火墙</a>以及在分布式环境中构建私有网络服务  </li>
+<li>OpenBSD 受益于在各个区域强大的持续开发进程，提供了与新兴技术、国际化开发者社区和最终用户合作的机会  </li>
+<li>OpenBSD 努力最小化自定义和微调的需求。对于庞大的主要用户群体而言，OpenBSD <strong>就在</strong>他们的硬件上为应用而良好工作  </li>
+</ul>
+<h2 id="openbsd-真的是自由的吗">OpenBSD 真的是自由的吗？<a class="headerlink" href="#openbsd-真的是自由的吗" title="Permanent link">&para;</a></h2>
+<p>OpenBSD 完全是自由的。二进制文件是自由的，源代码也一样。OpenBSD 的所有组成部分都有为自由的再发行提供的合理的版权许可条约。更多关于 OpenBSD 的版权政策可以<a href="https://www.openbsd.org/policy.html">在此</a>被找到。  </p>
+<p>OpenBSD 的主要维护者自掏腰包维护此项目。这包括为他们为编程花费的时间，用来支持许多移植的设备，用来为您发行 OpenBSD 所用的网络资源以及解答问题和研究 Bug 报告的时间。OpenBSD 的开发者们并不富有，不过小小的时间，设备以及资源的投入也可以产生极大的作用。</p>
+<h3 id="基本系统中包含什么">基本系统中包含什么？<a class="headerlink" href="#基本系统中包含什么" title="Permanent link">&para;</a></h3>
+<p>OpenBSD发行时带有大量的第三方软件包，包括：</p>
+<ul>
+<li><a href="https://www.x.org/wiki">X.org</a>  </li>
+<li><a href="https://clang.llvm.org/">LLVM/Clang</a>  </li>
+<li><a href="https://gcc.gnu.org/">GCC</a>  </li>
+<li><a href="https://www.perl.org/">Perl</a>  </li>
+<li><a href="https://www.nlnetlabs.nl/projects/nsd">NSD</a> 以及 <a href="https://www.nlnetlabs.nl/projects/unbound">Unbound</a>  </li>
+<li><a href="https://www.gnu.org/software/ncurses">ncurses</a>  </li>
+<li><a href="https://www.gnu.org/software/binutils">binutils</a>  </li>
+<li><a href="https://www.gnu.org/software/gdb/gdb.html">gdb</a>  </li>
+<li><a href="https://github.com/Yubico/libfido2">libfido2</a>  </li>
+</ul>
+<p>OpenBSD 团队经常为第三方产品提供补丁，这通常是为了提升代码的安全性或是质量。很多<a href="https://www.openbsd.org/innovations.html">自制的软件</a>也被包含其中。附加的应用可以作为 <a href="https://www.openbsd.org/faq/faq15.html">package</a> 而可用。  </p>
+<h3 id="为什么-xxx-被包含了没被包含">为什么 xxx 被包含了/没被包含？<a class="headerlink" href="#为什么-xxx-被包含了没被包含" title="Permanent link">&para;</a></h3>
+<p>人们经常询问为什么某个软件被包含或者没有被包含在 OpenBSD 中。答案主要基于两个点：开发者们的愿望和与此项目<a href="https://www.openbsd.org/goals.html">目标</a>的兼容性。授权协议经常是最大的问题：我们希望 OpenBSD 保持对全世界任何人对于任何目的的可用性。  </p>
+<h3 id="下一个发行版本何时发布">下一个发行版本何时发布？<a class="headerlink" href="#下一个发行版本何时发布" title="Permanent link">&para;</a></h3>
+<p>OpenBSD 团队大约每六个月发布一个新版本，预计时间为五月和十一月。更多关于开发周期的信息可以<a href="https://www.openbsd.org/faq/faq5.html#Flavors">在此</a>被找到  </p>
+<h2 id="硬件支持">硬件支持<a class="headerlink" href="#硬件支持" title="Permanent link">&para;</a></h2>
+<p>OpenBSD 可以运行在以下<a href="https://www.openbsd.org/plat.html">平台</a>上：</p>
+<ul>
+<li><a href="https://www.openbsd.org/alpha.html">alpha</a>  </li>
+<li><a href="https://www.openbsd.org/amd64.html">amd64</a>  </li>
+<li><a href="https://www.openbsd.org/arm64.html">arm64</a>  </li>
+<li><a href="https://www.openbsd.org/armv7.html">armv7</a>  </li>
+<li><a href="https://www.openbsd.org/hppa.html">hppa</a>  </li>
+<li><a href="https://www.openbsd.org/i386.html">i386</a>  </li>
+<li><a href="https://www.openbsd.org/landisk.html">landisk</a>  </li>
+<li><a href="https://www.openbsd.org/luna88k.html">luna88k</a>  </li>
+<li><a href="https://www.openbsd.org/macppc.html">macppc</a>  </li>
+<li><a href="https://www.openbsd.org/octeon.html">octeon</a>  </li>
+<li><a href="https://www.openbsd.org/powerpc64.html">powerpc64</a>  </li>
+<li><a href="https://www.openbsd.org/riscv64.html">riscv64</a>  </li>
+<li><a href="https://www.openbsd.org/sparc64.html">sparc64</a>  </li>
+</ul>
+<p>详细的硬件支持细节位于各自的平台页面上。  </p>
+<h2 id="手册页">手册页<a class="headerlink" href="#手册页" title="Permanent link">&para;</a></h2>
+<p>OpenBSD带有大量man页面形式的手册页。它们是OpenBSD权威的信息源，因此相当多的工作被进行来确保他们最新且精确无误。对系统进行更改的开发者应当随他们对代码的更改更新手册页。而对于用户，在寻求帮助前也应当先查看手册页。<br />
+这是一个一些对于新用户有帮助的手册页的列表：</p>
+<ul>
+<li><a href="https://man.openbsd.org/afterboot">afterboot(8)</a> - 在第一次完全启动后应当检查的东西  </li>
+<li><a href="https://man.openbsd.org/help">help(1)</a> - 对于新用户和管理员的帮助  </li>
+<li><a href="https://man.openbsd.org/hier">hier(7)</a> - 文件系统的结构  </li>
+<li><a href="https://man.openbsd.org/man">man(1)</a> - 显示手册页  </li>
+<li><a href="https://man.openbsd.org/adduser">adduser(8)</a> 以及 <a href="https://man.openbsd.org/rmuser">rmuser(8)</a> - 添加和移除新用户  </li>
+<li><a href="https://man.openbsd.org/reboot">reboot(8)</a>, <a href="https://man.openbsd.org/halt">halt(8)</a> 以及 <a href="https://man.openbsd.org/shutdown">shutdown(8)</a> 停止和重启系统  </li>
+<li><a href="https://man.openbsd.org/syspatch">syspatch(8)</a> - 应用安全和可靠性更新  </li>
+<li><a href="https://man.openbsd.org/sysupgrade">sysupgrade(8)</a> - 更新到下一个 OpenBSD 发行版或者一个更新的快照版  </li>
+<li><a href="https://man.openbsd.org/dmesg">dmesg(8)</a> - 重新显示内核启动信息  </li>
+<li><a href="https://man.openbsd.org/doas">doas(1)</a> - 以另一个用户的身份运行命令  </li>
+<li><a href="https://man.openbsd.org/tmux">tmux(1)</a> - 终端复用器  </li>
+<li><a href="https://man.openbsd.org/ifconfig">ifconfig(8)</a> - 配置网络接口参数  </li>
+<li><a href="https://man.openbsd.org/ftp">ftp(1)</a> - 从网络上下载文件(支持 FTP/HTTP/HTTPS 协议)  </li>
+<li><a href="https://man.openbsd.org/login.conf">login.conf(5)</a> - 登陆配置文件的格式  </li>
+<li><a href="https://man.openbsd.org/sendbug">sendbug(1)</a> - 报告一个你找到的 Bug  </li>
+</ul>
+<p>全部的OpenBSD手册页可以在 <a href="https://man.openbsd.org/">man.openbsd.org</a> 网站或 <code>man70.tgz</code> 文件中被找到。  </p>
+<p>总之，如果您知道一个命令或者手册页的名字，你可以通过运行 <code>man 命令</code> 来阅读它。如果你不知道命令的名字，或者如果 <code>man 命令</code> 没有找到手册页，你可以通过运行 <code>apropos 一些东西</code> 或者 <code>man -k 一些东西</code> 来查找数据库，“一些东西”就是一个很可能在您要查找的手册页标题中出现的单词。 </p>
+<pre><code>$ apropos &quot;time zone&quot;
+tzfile(5) - time zone information
+zdump(8) - time zone dumper
+zic(8) - time zone compiler
+</code></pre>
+<p>这些括号里面数字表示该手册页存在的章节。在一些情况下，您可能会遇到分散在不同章节中却有相同标识符的手册页。例如，假设您想要知道cron守护进程的配置文件格式。只要您知道您想要的手册页所在的章节，您可以运行 <code>man n 命令</code>，其中n是手册章节序号。</p>
+<pre><code>$ man -k cron
+cron(8) - clock daemon
+crontab(1) - maintain crontab files for individual users
+crontab(5) - tables for driving cron
+$ man 5 crontab
+</code></pre>
+<h2 id="邮件列表">邮件列表<a class="headerlink" href="#邮件列表" title="Permanent link">&para;</a></h2>
+<p>OpenBSD 项目包含几个你可以订阅和跟进的邮件列表。比较受欢迎的邮件列表有：</p>
+<ul>
+<li>announce - 公告和安全警报  </li>
+<li>bugs - 通过<a href="https://man.openbsd.org/sendbug">sendbug(1)</a>收到的bug反馈及相关讨论  </li>
+<li>misc - 总的用户问题和解答  </li>
+<li>ports - 讨论ports源码树</li>
+<li>source-changes - 自动构建的CVS源码树改动</li>
+<li>tech - OpenBSD开发者和高级用户对技术话题的讨论  </li>
+</ul>
+<p>在向任何邮件列表发送问题之前，请检查邮件列表的归档中已经被无数次问过的问题。即使您可能是第一次遇到此问题，邮件列表中的其他订阅者可能在上周刚见过这个问题几次，不太希望再见到它。如果询问的问题可能与硬件相关，请一定在邮件中包含完整的 <a href="https://man.openbsd.org/dmesg">dmesg(8)</a> 输出。<br />
+你可以找到几个邮件列表的归档，其他的指导和更多的信息位于<a href="https://www.openbsd.org/mail.html">邮件列表页面</a>上。对于邮件列表的订阅可以很容易通过<a href="https://lists.openbsd.org/">Web界面</a>完成。  </p>
+<h2 id="从其他系统迁移到-openbsd">（从其他系统）迁移到 OpenBSD<a class="headerlink" href="#从其他系统迁移到-openbsd" title="Permanent link">&para;</a></h2>
+<p>如果您已经读过其他关于 Unix 类系统的<a href="https://www.openbsd.org/books.html">优秀的著作</a>，理解了 Unix 哲学并也将你的知识面扩展到了某一个特定平台上，您将会对 OpenBSD 感到非常熟悉。</p>
+<p>这里有一些 OpenBSD 和其他 Unix 变种之间最经常被遇到的差别：</p>
+<ul>
+<li>OpenBSD 是一个 BSD 风格的 Unix 系统，紧密遵循这 4.4BSD 的设计思想。Linux 与 Solaris 是 System V 风格的操作系统。一些 Unix 系操作系统混合着 System V 与 BSD 的风格。一个因此经常造成混乱的地方是<a href="https://www.openbsd.org/faq/faq10.html#rc">启动脚本</a>。OpenBSD 使用<a href="https://man.openbsd.org/rc">rc(8)</a>系统。  </li>
+<li>OpenBSD 是一个完整的系统，各个部分应当保持同步。它并不是可以被独立升级的、一个内核和一套工具的聚合体。  </li>
+<li>OpenBSD 维护着一套<a href="https://www.openbsd.org/faq/ports/index.html">ports源码树</a>来提供第三方软件。预编译的<a href="https://www.openbsd.org/faq/faq15.html">包(packages)</a>由 OpenBSD ports 团队创建和维护。  </li>
+<li>OpenBSD 使用 CVS 来追踪代码更改。OpenBSD 提倡<a href="https://www.openbsd.org/anoncvs.html">匿名 CVS</a>，其允许任何人在任何时刻提取 OpenBSD 任何版本的完整源代码。其也包含一个 <a href="https://cvsweb.openbsd.org/">Web 界面</a>。  </li>
+<li>OpenBSD 已经通过了重度不间断的安全性审查来确保代码的质量与安全性。  </li>
+<li>OpenBSD 不支持日志文件系统。相反，我们使用快速文件系统(Fast File System,FFS)的<a href="https://www.openbsd.org/faq/faq14.html#SoftUpdates">软同步</a>特性。  </li>
+<li>OpenBSD 带有<a href="https://www.openbsd.org/faq/pf/index.html">包过滤器(Packet Filter,PF)</a>。这意味着网络地址转换(NAT)，队列等待与包过滤由 <a href="https://man.openbsd.org/pfctl">pfctl(8)</a>，<a href="https://man.openbsd.org/pf">pf(4)</a> 和 <a href="https://man.openbsd.org/pf.conf">pf.conf(5)</a> 处理。  </li>
+<li>OpenBSD 的默认 Shell 是 <a href="https://man.openbsd.org/ksh">ksh</a>，其基于位于公有领域的 Korn Shell。例如 bash 的其他 Shell 可以从<a href="https://www.openbsd.org/faq/faq15.html">包</a>中被添加。  </li>
+<li>设备由驱动程序命名，而不是通过设备类型命名。换而言之，没有 <code>eth0</code> <code>eth1</code> 设备。对于一个 Intel PRO/1000 以太网卡，命名可能是 <code>em0</code>；对于 Broadcom BCM57xx 或者 BCM590x 以太网设备，命名可能是 bge0；对于一个 RaLink 无线设备，命名可能是 ral0，诸如此类。  </li>
+<li>OpenBSD/i386，amd64 和其他几个平台使用双层磁盘分区系统，其中第一层是 <a href="https://www.openbsd.org/faq/faq14.html#fdisk">fdisk</a> BIOS 可见的分区，第二层是盘标（<a href="https://www.openbsd.org/faq/faq14.html#disklabel">disklabel</a>）  </li>
+<li>一些其他的操作系统鼓励你为你的机器定制内核。OpenBSD 用户则被鼓励着使用开发者提供的标准通用内核。  </li>
+</ul>
+<h2 id="报告-bug">报告 Bug<a class="headerlink" href="#报告-bug" title="Permanent link">&para;</a></h2>
+<p>报告 Bug 是最终用户最重要的责任之一。为了确定较严重的问题，需要极其详细的有关细节。例如，以下即是一份恰当的 bug 报告：</p>
+<pre><code>From: user@example.com
+To: bugs@openbsd.org
+Subject: 3.3-beta panics on a SPARCStation2
+
+OpenBSD 3.2 installed from an official CD-ROM installed and ran fine
+on this machine.
+
+After doing a clean install of 3.3-beta from a mirror, I find the
+system randomly panics after a period of use, and predictably and
+quickly when starting X.
+
+This is the dmesg output:
+
+[...]
+
+This is the panic I got when attempting to start X:
+
+panic: pool_get(mclpl): free list modified: magic=78746572; page 0xfaa93000;
+ item addr 0xfaa93000
+Stopped at      Debugger+0x4:   jmpl            [%o7 + 0x8], %g0
+https://www.openbsd.org/ddb.html describes the minimum info required in bug
+reports. Insufficient info makes it difficult to find and fix bugs.
+ddb&gt; trace
+[...]
+
+Thank you!
+
+</code></pre>
+<p>另见<a href="https://www.openbsd.org/report.html">此页面</a>来得到关于创建和提交 Bug 报告的细节。良好的 Bug 报告应该包括关于发生了什么，您计算机的精确配置和重现问题的方式。只要可能，请使用 <a href="https://man.openbsd.org/sendbug">sendbug(1)</a> 来报告您的问题。否则，请至少包括您系统的 <a href="https://man.openbsd.org/dmesg">dmesg(8)</a> 输出。<a href="https://man.openbsd.org/dmesg">sendbug(1)</a> 命令需要你的系统能够发送邮件。  </p>
+<p>OpenBSD 邮件服务器使用 <a href="https://man.openbsd.org/spamd">spamd(8)</a> 实现灰名单垃圾邮件处理，所以在邮件服务器接受您的 Bug 报告前可能有半个小时左右的时间。请耐心等待。<br />
+在提交一个 Bug 反馈之后，您可能会被开发者联系来寻求附加的信息或者是希望您测试的补丁。您也可以关注 <a href="bugs@openbsd.org">bugs@openbsd.org</a> 邮件列表的归档 - 详情见<a href="https://www.openbsd.org/mail.html">邮件列表</a>。  </p>
+<h2 id="支持本项目">支持本项目<a class="headerlink" href="#支持本项目" title="Permanent link">&para;</a></h2>
+<p>我们对曾经为 OpenBSD 项目作出贡献的人和组织表示极大的感激。 </p>
+<p>OpenBSD 项目总是需要来自社区的几种不同种类的支持。如果您觉得 OpenBSD 很有用，您可以找一种方式以为它做出贡献：</p>
+<ul>
+<li><a href="https://www.openbsd.org/donations.html">捐赠资金</a>。这个项目总是需要资金来支付设备和网络链接等等。即使是很小的一笔捐赠也能产生深远的影响。  </li>
+<li><a href="https://www.openbsd.org/want.html">捐赠设备和部分</a>。这个项目总是需要普通的和特定的硬件。  </li>
+<li><a href="https://www.openbsd.org/faq/faq5.html#Diff">捐赠您的时间和技术</a>热爱编写操作系统的程序员很自然总是很受欢迎的，但也有其他的方式可以让人们做出贡献。  </li>
+<li>跟进<a href="https://www.openbsd.org/mail.html">邮件列表</a>并为其他人答疑解惑。</li>
+<li>通过向 <a href="misc@openbsd.org">misc@openbsd.org</a> 发送新的 FAQ 素材来帮助维护文档。  </li>
+<li>组织一个本地的<a href="https://www.openbsd.org/groups.html">用户组</a>并让您的朋友们痴迷于 OpenBSD。</li>
+<li>通过您的雇主为在工作上使用 OpenBSD 创造一个机会。如果您是一名学生，与您的教授讨论将 OpenBSD 作为一个学习计算机科学或者工程学的工具的可能性。</li>
+</ul>
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="页脚">
+      
+        
+        <a href="../.." class="md-footer__link md-footer__link--prev" aria-label="上一页: 主页" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              主页
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../faq4/" class="md-footer__link md-footer__link--next" aria-label="下一页: 安装指南" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              安装指南
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2021–2022 OpenBSD 中文结社贡献者
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "search": "../../assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.e1a181d9.min.js"></script>
+      
+    
+  </body>
+</html>

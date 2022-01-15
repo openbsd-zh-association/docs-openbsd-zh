@@ -1,0 +1,1327 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.3">
+    
+    
+      
+        <title>安装指南 - OpenBSD 中文结社</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.edf004c2.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.e6a45f82.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#ff6e42">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="deep-orange" data-md-color-accent="orange">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#openbsd-faq---安装指南" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="OpenBSD 中文结社" class="md-header__button md-logo" aria-label="OpenBSD 中文结社" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OpenBSD 中文结社
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              安装指南
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/openbsd-zh-association/docs-openbsd-zh/" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="OpenBSD 中文结社" class="md-nav__button md-logo" aria-label="OpenBSD 中文结社" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    OpenBSD 中文结社
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/openbsd-zh-association/docs-openbsd-zh/" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        主页
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          OpenBSD FAQ
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="OpenBSD FAQ" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          OpenBSD FAQ
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq1/" class="md-nav__link">
+        OpenBSD 简介
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          安装指南
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        安装指南
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#安装过程总览" class="md-nav__link">
+    安装过程总览
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#安装前检查清单" class="md-nav__link">
+    安装前检查清单
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#下载-openbsd" class="md-nav__link">
+    下载 OpenBSD
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#创建安装介质" class="md-nav__link">
+    创建安装介质
+  </a>
+  
+    <nav class="md-nav" aria-label="创建安装介质">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#闪存驱动器" class="md-nav__link">
+    闪存驱动器
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cd-roms" class="md-nav__link">
+    CD-ROMs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#执行简单安装" class="md-nav__link">
+    执行简单安装
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#文件集" class="md-nav__link">
+    文件集
+  </a>
+  
+    <nav class="md-nav" aria-label="文件集">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#安装后添加文件集" class="md-nav__link">
+    安装后添加文件集
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#磁盘分区" class="md-nav__link">
+    磁盘分区
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#在安装后发送你的-dmesg" class="md-nav__link">
+    在安装后发送你的 dmesg
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#自定义安装过程" class="md-nav__link">
+    自定义安装过程
+  </a>
+  
+    <nav class="md-nav" aria-label="自定义安装过程">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#site70tgz-文件集" class="md-nav__link">
+    site70.tgz 文件集
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#installsite-和-upgradesite-脚本" class="md-nav__link">
+    install.site 和 upgrade.site 脚本
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#多重引导" class="md-nav__link">
+    多重引导
+  </a>
+  
+    <nav class="md-nav" aria-label="多重引导">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#windows" class="md-nav__link">
+    Windows
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq10/" class="md-nav__link">
+        系统管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq14/" class="md-nav__link">
+        配置磁盘
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq15/" class="md-nav__link">
+        软件包管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq5/" class="md-nav__link">
+        从源码构建系统
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq6/" class="md-nav__link">
+        网络配置
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq7/" class="md-nav__link">
+        键盘和显示控制
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq11/" class="md-nav__link">
+        X 窗口系统
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq13/" class="md-nav__link">
+        多媒体
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq16/" class="md-nav__link">
+        虚拟化
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq17/" class="md-nav__link">
+        虚拟专用网络
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          其他
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="其他" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          其他
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../others/upgrade70/" class="md-nav__link">
+        升级向导
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../others/report/" class="md-nav__link">
+        报告 BUG
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../others/current/" class="md-nav__link">
+        跟随 -current 和使用快照
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../others/mail/" class="md-nav__link">
+        邮件列表
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          贡献者指南
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="贡献者指南" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          贡献者指南
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contribution/contributing/" class="md-nav__link">
+        总述
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contribution/translation_rules/" class="md-nav__link">
+        翻译规范
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          关于
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="关于" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          关于
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/international-about/" class="md-nav__link">
+        International About（英文简介）
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/terminology/" class="md-nav__link">
+        术语表
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#安装过程总览" class="md-nav__link">
+    安装过程总览
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#安装前检查清单" class="md-nav__link">
+    安装前检查清单
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#下载-openbsd" class="md-nav__link">
+    下载 OpenBSD
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#创建安装介质" class="md-nav__link">
+    创建安装介质
+  </a>
+  
+    <nav class="md-nav" aria-label="创建安装介质">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#闪存驱动器" class="md-nav__link">
+    闪存驱动器
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cd-roms" class="md-nav__link">
+    CD-ROMs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#执行简单安装" class="md-nav__link">
+    执行简单安装
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#文件集" class="md-nav__link">
+    文件集
+  </a>
+  
+    <nav class="md-nav" aria-label="文件集">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#安装后添加文件集" class="md-nav__link">
+    安装后添加文件集
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#磁盘分区" class="md-nav__link">
+    磁盘分区
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#在安装后发送你的-dmesg" class="md-nav__link">
+    在安装后发送你的 dmesg
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#自定义安装过程" class="md-nav__link">
+    自定义安装过程
+  </a>
+  
+    <nav class="md-nav" aria-label="自定义安装过程">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#site70tgz-文件集" class="md-nav__link">
+    site70.tgz 文件集
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#installsite-和-upgradesite-脚本" class="md-nav__link">
+    install.site 和 upgrade.site 脚本
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#多重引导" class="md-nav__link">
+    多重引导
+  </a>
+  
+    <nav class="md-nav" aria-label="多重引导">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#windows" class="md-nav__link">
+    Windows
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+<a href="https://github.com/openbsd-zh-association/docs-openbsd-zh/edit/master/docs/openbsd-faq/faq4.md" title="编辑此页" class="md-content__button md-icon">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+</a>
+
+
+<h1 id="openbsd-faq---安装指南">OpenBSD FAQ - 安装指南<a class="headerlink" href="#openbsd-faq---安装指南" title="Permanent link">&para;</a></h1>
+<h2 id="安装过程总览">安装过程总览<a class="headerlink" href="#安装过程总览" title="Permanent link">&para;</a></h2>
+<p>OpenBSD 安装程序使用一个特殊的 ramdisk 内核（<code>bsd.rd</code>），生成一个完全在内存中运行的实时环境。它包含了安装脚本和少量执行完整安装所需的工具。这些实用程序也可用于灾难恢复。</p>
+<p>可以从许多不同的来源引导 ramdisk 内核：</p>
+<ul>
+<li>CD/DVD</li>
+<li>USB 驱动器</li>
+<li>一个已经存在的分区</li>
+<li>通过网络（<a href="https://www.openbsd.org/faq/faq6.html#PXE">PXE</a> 或其他<a href="https://man.openbsd.org/diskless">网络启动选项</a>）</li>
+<li>软盘</li>
+</ul>
+<p>并非每个<a href="https://www.openbsd.org/plat.html">平台</a>都支持所有这些选项。</p>
+<p>如果你有一个正在运行的 OpenBSD 系统，<code>bsd.rd</code> 是你重新安装或升级到更新版本所需的全部内容。为此，请<a href="https://www.openbsd.org/faq/faq4.html#Download">下载并验证</a>新的 <code>bsd.rd</code>，将其放置在现有文件系统上，然后从中启动。引导 <code>bsd.rd</code> 的一般方法是通过平台上使用的任何方式将引导内核从 <code>/bsd</code> 更改为 <code>/bsd.rd</code>。</p>
+<p>在 amd64 系统上从 <code>bsd.rd</code> 引导可以这样完成：</p>
+<pre><code class="language-shell">Using drive 0, partition 3.
+Loading......
+probing: pc0 com0 com1 mem[638K 1918M a20=on]
+disk: hd0+ hd1+
+&gt;&gt; OpenBSD/amd64 BOOT 3.33
+boot&gt; bsd.rd
+</code></pre>
+<p>这将从第一个识别的硬盘的第一个分区引导名为 <code>bsd.rd</code> 的内核。</p>
+<p>如果你需要指定不同的驱动器或分区，只需在内核名称前加上其位置即可。以下示例将从第二个硬盘驱动器的第四个分区启动：</p>
+<pre><code class="language-shell">Using drive 0, partition 3.
+Loading......
+probing: pc0 com0 com1 mem[638K 1918M a20=on]
+disk: hd0+ hd1+
+&gt;&gt; OpenBSD/amd64 BOOT 3.33
+boot&gt; boot hd1d:/bsd.rd
+</code></pre>
+<p>OpenBSD 引导加载器（boot loaders）在特定架构的 <a href="https://man.openbsd.org/boot.8">boot(8)</a> 手册页面中有记录。</p>
+<h2 id="安装前检查清单">安装前检查清单<a class="headerlink" href="#安装前检查清单" title="Permanent link">&para;</a></h2>
+<p>在开始之前，您应该对自己想要的结果有所了解。一些值得事先考虑的事情：</p>
+<ul>
+<li>主机名</li>
+<li>已安装并可用的硬件：</li>
+<li>
+<p>验证 OpenBSD 与你的硬件的兼容性。你可能需要查阅特定于平台的安装说明，尤其是当你使用非 x86 CPU 架构时。它们包含详细说明和任何可能的警告：</p>
+  [<a href="https://ftp.openbsd.org/pub/OpenBSD/7.0/alpha/INSTALL.alpha">alpha</a>] [<a href="https://ftp.openbsd.org/pub/OpenBSD/7.0/amd64/INSTALL.amd64">amd64</a>] [<a href="https://ftp.openbsd.org/pub/OpenBSD/7.0/arm64/INSTALL.arm64">arm64</a>] [<a href="https://ftp.openbsd.org/pub/OpenBSD/7.0/armv7/INSTALL.armv7">armv7</a>] [<a href="https://ftp.openbsd.org/pub/OpenBSD/7.0/hppa/INSTALL.hppa">hppa</a>] [<a href="https://ftp.openbsd.org/pub/OpenBSD/7.0/i386/INSTALL.i386">i386</a>] [<a href="https://ftp.openbsd.org/pub/OpenBSD/7.0/landisk/INSTALL.landisk">landisk</a>] [<a href="https://ftp.openbsd.org/pub/OpenBSD/7.0/luna88k/INSTALL.luna88k">luna88k</a>] [<a href="https://ftp.openbsd.org/pub/OpenBSD/7.0/macppc/INSTALL.macppc">macppc</a>] [<a href="https://ftp.openbsd.org/pub/OpenBSD/7.0/octeon/INSTALL.octeon">octeon</a>] [<a href="https://ftp.openbsd.org/pub/OpenBSD/7.0/powerpc64/INSTALL.powerpc64">powerpc64</a>] [<a href="https://ftp.openbsd.org/pub/OpenBSD/7.0/riscv64/INSTALL.riscv64">riscv64</a>] [<a href="https://ftp.openbsd.org/pub/OpenBSD/7.0/sparc64/INSTALL.sparc64">sparc64</a>]</p>
+</li>
+<li>
+<p>如果无线互联网是你接入网络唯一的选择，你的网卡是否需要<a href="http://firmware.openbsd.org/firmware">额外的固件</a>？如果是这样，你需要手动将其下载到 USB 驱动器或类似设备，然后在安装 OpenBSD 后使用 <a href="https://man.openbsd.org/fw_update">fw_update(1)</a> 启用它。</p>
+</li>
+<li>要使用的安装方法</li>
+<li>所需的磁盘布局：</li>
+<li>现有数据是否需要保存至别处？</li>
+<li>OpenBSD 会在这个系统上与另一个操作系统共存吗？如果是这样，每个系统将如何启动？你需要安装引导管理器吗？</li>
+<li>将整个磁盘用于安装 OpenBSD，还是要保留现有分区/操作系统（或未来划分的磁盘空间）？</li>
+<li>你希望如何对磁盘的 OpenBSD 部分进行子分区？</li>
+<li>你需要<a href="https://www.openbsd.org/faq/faq14.html#softraidFDE">磁盘加密</a>吗？</li>
+<li>网络设置（如果不使用 DHCP）：</li>
+<li>域名和 DNS 地址</li>
+<li>每个 NIC 的 IP 地址和子网掩码</li>
+<li>网关地址</li>
+</ul>
+<h2 id="下载-openbsd">下载 OpenBSD<a class="headerlink" href="#下载-openbsd" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>文件名</th>
+<th>下载方式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>install70.img</td>
+<td>可以写入 USB 闪存驱动器或类似设备的磁盘映像。包括<a href="https://www.openbsd.org/faq/faq4.html#FilesNeeded">文件集（File Sets）</a>。</p><a href="https://cdn.openbsd.org/pub/OpenBSD/7.0/amd64/install70.img">amd64</a>、<a href="https://cdn.openbsd.org/pub/OpenBSD/7.0/arm64/install70.img">arm64</a>、<a href="https://cdn.openbsd.org/pub/OpenBSD/7.0/i386/install70.img">i386</a>、<a href="https://cdn.openbsd.org/pub/OpenBSD/7.0/octeon/install70.img">octeon</a>、<a href="https://cdn.openbsd.org/pub/OpenBSD/7.0/powerpc64/install70.img">powerpc64</a>、<a href="https://cdn.openbsd.org/pub/OpenBSD/7.0/riscv64/install70.img">riscv64</a>、<a href="https://cdn.openbsd.org/pub/OpenBSD/7.0/sparc64/install70.img">sparc64</a></td>
+</tr>
+<tr>
+<td>miniroot70.img</td>
+<td>同上，但不包括文件集。它们可以从 Internet 或本地磁盘下载。</p><a href="https://cdn.openbsd.org/pub/OpenBSD/7.0/alpha/miniroot70.img">alpha</a>、<a href="https://cdn.openbsd.org/pub/OpenBSD/7.0/amd64/miniroot70.img">amd64</a>、<a href="https://cdn.openbsd.org/pub/OpenBSD/7.0/arm64/miniroot70.img">arm64</a>、<a href="https://cdn.openbsd.org/pub/OpenBSD/7.0/armv7/">armv7</a>、<a href="https://cdn.openbsd.org/pub/OpenBSD/7.0/i386/miniroot70.img">i386</a>、<a href="https://cdn.openbsd.org/pub/OpenBSD/7.0/landisk/miniroot70.img">landisk</a>、<a href="https://cdn.openbsd.org/pub/OpenBSD/7.0/luna88k/miniroot70.img">luna88k</a>、<a href="https://cdn.openbsd.org/pub/OpenBSD/7.0/octeon/miniroot70.img">octeon</a>、<a href="https://cdn.openbsd.org/pub/OpenBSD/7.0/powerpc64/miniroot70.img">powerpc64</a>、<a href="https://cdn.openbsd.org/pub/OpenBSD/7.0/riscv64/miniroot70.img">riscv64</a>、<a href="https://cdn.openbsd.org/pub/OpenBSD/7.0/sparc64/miniroot70.img">sparc64</a></td>
+</tr>
+<tr>
+<td>install70.iso</td>
+<td>可用于创建安装 CD/DVD 的 ISO 9660 镜像文件。包括文件集。</p><a href="https://cdn.openbsd.org/pub/OpenBSD/7.0/alpha/install70.iso">alpha</a>、<a href="https://cdn.openbsd.org/pub/OpenBSD/7.0/amd64/install70.iso">amd64</a>、<a href="https://cdn.openbsd.org/pub/OpenBSD/7.0/hppa/install70.iso">hppa</a>、<a href="https://cdn.openbsd.org/pub/OpenBSD/7.0/i386/install70.iso">i386</a>、<a href="https://cdn.openbsd.org/pub/OpenBSD/7.0/macppc/install70.iso">macppc</a>、<a href="https://cdn.openbsd.org/pub/OpenBSD/7.0/powerpc64/install70.iso">powerpc64</a>、<a href="https://cdn.openbsd.org/pub/OpenBSD/7.0/sparc64/install70.iso">sparc64</a></td>
+</tr>
+<tr>
+<td>cd70.iso</td>
+<td>同上，但不包括文件集。</p><a href="https://cdn.openbsd.org/pub/OpenBSD/7.0/alpha/cd70.iso">alpha</a>、<a href="https://cdn.openbsd.org/pub/OpenBSD/7.0/amd64/cd70.iso">amd64</a>、<a href="https://cdn.openbsd.org/pub/OpenBSD/7.0/hppa/cd70.iso">hppa</a>、<a href="https://cdn.openbsd.org/pub/OpenBSD/7.0/i386/cd70.iso">i386</a>、<a href="https://cdn.openbsd.org/pub/OpenBSD/7.0/macppc/cd70.iso">macppc</a>、<a href="https://cdn.openbsd.org/pub/OpenBSD/7.0/sparc64/cd70.iso">sparc64</a></td>
+</tr>
+<tr>
+<td>floppy70.img</td>
+<td>支持一些缺少其他启动选项的旧机器。</p><a href="https://cdn.openbsd.org/pub/OpenBSD/7.0/amd64/floppy70.img">amd64</a>、<a href="https://cdn.openbsd.org/pub/OpenBSD/7.0/i386/floppy70.img">i386</a>、<a href="https://cdn.openbsd.org/pub/OpenBSD/7.0/sparc64/floppy70.img">sparc64</a></td>
+</tr>
+</tbody>
+</table>
+<p>你也可以从许多备用<a href="https://www.openbsd.org/ftp.html">镜像站点</a>下载镜像文件。</p>
+<p>包含校验和的 <code>SHA256</code> 文件可以在与安装文件相同的目录中找到。你可以使用 <code>sha256(1)</code> 命令确认下载的文件在传输过程中都没有被破坏。</p>
+<pre><code class="language-shell">$ sha256 -C SHA256 miniroot*.img
+(SHA256) miniroot70.img: OK
+</code></pre>
+<p>或者，如果你使用带有 GNU coreutils 的操作系统：</p>
+<pre><code class="language-shell">$ sha256sum -c --ignore-missing SHA256
+miniroot70.img: OK
+</code></pre>
+<p>但是，这只检查意外损坏。你可以使用 <code>signify(1)</code> 和 <code>SHA256.sig</code> 文件对下载的镜像文件进行加密验证。</p>
+<pre><code class="language-shell">$ signify -Cp /etc/signify/openbsd-70-base.pub -x SHA256.sig miniroot*.img
+Signature Verified
+miniroot70.img: OK
+</code></pre>
+<p>请注意，其他操作系统上的 signify 包可能不包含所需的公钥，或者它可能安装在其他位置。</p>
+<p><code>install70.iso</code> 和 <code>install70.img</code> 映像不包含 <code>SHA256.sig</code> 文件，因此安装程序会提示它无法检查包含集的签名：</p>
+<pre><code>Directory does not contain SHA256.sig. Continue without verification? [no]
+</code></pre>
+<p>这是因为安装程序验证它们毫无意义。如果有人要制作流氓安装映像，他们当然可以更改安装程序以说明文件是合法的。如果你事先验证了镜像的签名，则在该提示下回答 “Yes” ，表示是安全的。</p>
+<h2 id="创建安装介质">创建安装介质<a class="headerlink" href="#创建安装介质" title="Permanent link">&para;</a></h2>
+<h3 id="闪存驱动器">闪存驱动器<a class="headerlink" href="#闪存驱动器" title="Permanent link">&para;</a></h3>
+<p>你可以通过连接目标设备并使用 <a href="https://man.openbsd.org/dd">dd(1)</a> 复制镜像来创建可引导的 USB 闪存驱动器。</p>
+<p>假定你使用 OpenBSD ，且设备被识别为 sd6：</p>
+<pre><code class="language-shell"># dd if=install*.img of=/dev/rsd6c bs=1m
+</code></pre>
+<p>请注意，使用的是<strong>原始 I/O 设备</strong>：<code>rsd6c</code> 而不是 <code>sd6c</code>。</p>
+<p>其他平台上的操作细节会有所不同。如 GNU 版本的 <code>dd</code> 将需要 <code>bs=1M</code>（注意大写的 M）。 如果您使用不同的操作系统，请务必选择适当的设备名称：例如，Linux 上的 <code>/dev/sdX</code> 或 macOS 上的 <code>/dev/rdiskX</code>。</p>
+<h3 id="cd-roms">CD-ROMs<a class="headerlink" href="#cd-roms" title="Permanent link">&para;</a></h3>
+<p>你可以使用 <a href="https://man.openbsd.org/cdio">cdio(1)</a> 在 OpenBSD 上创建可引导 CD-ROM。</p>
+<pre><code class="language-shell"># cdio tao cd*.iso
+</code></pre>
+<h2 id="执行简单安装">执行简单安装<a class="headerlink" href="#执行简单安装" title="Permanent link">&para;</a></h2>
+<p>如果你需要有关从你偏好的安装介质启动的说明，请查看你的机器的相关<a href="https://www.openbsd.org/plat.html">平台页面</a>。</p>
+<p>安装程序旨在以非常有用的默认配置安装 OpenBSD，并且需要最少的用户干预。事实上，你通常只需按 <code>Enter</code> 键即可获得良好安装的 OpenBSD，仅在输入 root 密码时需将手移到键盘的其余部分即可。</p>
+<p>显示 <code>dmesg(8)</code> 后，你将看到第一个安装程序问题：</p>
+<pre><code class="language-shell">...
+root on rd0a swap on rd0b dump on rd0b
+erase ^?, werase ^W, kill ^U, intr ^C, status ^T
+
+Welcome to the OpenBSD/amd64 7.0 installation program.
+(I)nstall, (U)pgrade, (A)utoinstall or (S)hell?
+</code></pre>
+<p>选择 <code>(I)nstall</code> 并按照说明进行操作。</p>
+<h2 id="文件集">文件集<a class="headerlink" href="#文件集" title="Permanent link">&para;</a></h2>
+<p>完整的 OpenBSD 安装分为多个文件集（File Sets）：</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>bsd</code></td>
+<td>操作系统内核（必需的）</td>
+</tr>
+<tr>
+<td><code>bsd.mp</code></td>
+<td>多处理器内核（仅在某些平台上）</td>
+</tr>
+<tr>
+<td><code>bsd.rd</code></td>
+<td><a href="https://www.openbsd.org/faq/faq4.html#bsd.rd">ramdisk 内核</a></td>
+</tr>
+<tr>
+<td><code>base70.tgz</code></td>
+<td>基础系统（必需的）</td>
+</tr>
+<tr>
+<td><code>comp70.tgz</code></td>
+<td>编译器集合、头文件和库</td>
+</tr>
+<tr>
+<td><code>man70.tgz</code></td>
+<td>手册页</td>
+</tr>
+<tr>
+<td><code>game70.tgz</code></td>
+<td>文字游戏</td>
+</tr>
+<tr>
+<td><code>xbase70.tgz</code></td>
+<td>X11 的基础库和实用程序（需要 <code>xshare70.tgz</code>）</td>
+</tr>
+<tr>
+<td><code>xfont70.tgz</code></td>
+<td>X11 使用的字体</td>
+</tr>
+<tr>
+<td><code>xserv70.tgz</code></td>
+<td>X11 的 X 服务器</td>
+</tr>
+<tr>
+<td><code>xshare70.tgz</code></td>
+<td>X11 的手册页、本地化设置和头文件</td>
+</tr>
+</tbody>
+</table>
+<p>建议新用户全部安装。</p>
+<p>一些来自 <code>xbase70.tgz</code> 的库，如 freetype 或 fontconfig，可以在 X 之外由操作文本或图形的程序使用。此类程序通常需要来自 <code>xfont70.tgz</code> 或字体包的字体。为简单起见，开发人员决定不维护允许大多数非 X 端口运行的最小 <code>xbase70.tgz</code> 集。</p>
+<h3 id="安装后添加文件集">安装后添加文件集<a class="headerlink" href="#安装后添加文件集" title="Permanent link">&para;</a></h3>
+<p>如果你选择在安装时跳过某些文件集，你可能稍后会意识到你确实确实需要它们。要安装额外的文件集，只需从你的根文件系统启动 <a href="https://www.openbsd.org/faq/faq4.html#bsd.rd">bsd.rd</a> 并选择 <code>(U)pgrade</code>。当你进入文件集列表时，选择你需要的文件集。</p>
+<h2 id="磁盘分区">磁盘分区<a class="headerlink" href="#磁盘分区" title="Permanent link">&para;</a></h2>
+<p>OpenBSD 可以安装在 512MB 的小空间中，但是使用这么小的设备是一个只适合有经验的高级用户的方案。在你有一定经验之前，建议使用 8GB 或更多磁盘空间。</p>
+<p>与其他一些操作系统不同，OpenBSD 鼓励用户将他们的磁盘分成多个分区，而不是一两个大的分区。这样做的一些原因是：</p>
+<ul>
+<li>安全性：OpenBSD 的一些默认安全功能依赖于文件系统<a href="https://man.openbsd.org/mount#o">挂载选项</a>，例如 <code>nosuid</code>、<code>nodev</code>、<code>noexec</code> 或 <code>wxallowed</code>。</li>
+<li>稳定性：如果用户或行为不端的程序具有写入权限，则他们可以用垃圾填满文件系统。 你所希望能在不同的文件系统上运行的关键程序不会因此被打断。</li>
+<li><a href="https://man.openbsd.org/fsck">fsck(8)</a>：你可以把从来不需要或很少需要写入的分区挂载为 <code>readonly</code>（只读），这将消除在崩溃或电源中断后进行文件系统检查的需要。</li>
+</ul>
+<p>安装程序将根据你的硬盘大小创建分区计划。虽然这不是适合所有人的完美布局，但它为弄清楚你的需求提供了一个很好的起点。在做出关于自定义分区方案的决定之前，请阅读 disklabel 的<a href="https://man.openbsd.org/disklabel#AUTOMATIC_DISK_ALLOCATION">自动磁盘分配</a>的默认值和 <a href="https://man.openbsd.org/hier">hier(7)</a> 手册页。</p>
+<ul>
+<li>由于一些<a href="https://www.openbsd.org/faq/faq15.html">包</a>需要从 <code>wxallowed</code> 文件系统启动，建议划分一个单独的 <code>/usr/local</code> 分区。</li>
+<li>当你需要升级时，非常小的分区会变得很麻烦。</li>
+<li>一个独立 <code>/home</code> 分区是不错的主意。需要新版本的操作系统？保持你的 <code>/home</code> 分区不变，擦除并重新加载其他一切。</li>
+<li>你可能还需要创建一个 <a href="https://www.openbsd.org/faq/faq14.html#altroot">altroot 分区</a>来备份你的根文件系统。</li>
+<li>暴露在互联网上的系统应该有一个单独的 <code>/var</code> 分区，甚至可能需要一个单独的 <code>/var/log</code> 分区。</li>
+<li>从源代码编译某些 <a href="https://www.openbsd.org/faq/ports/index.html">ports</a> 会在你的 <code>/usr</code> 和 <code>/tmp</code> 分区上占用大量的空间。</li>
+</ul>
+<h2 id="在安装后发送你的-dmesg">在安装后发送你的 dmesg<a class="headerlink" href="#在安装后发送你的-dmesg" title="Permanent link">&para;</a></h2>
+<p>安装成功后，看看 <code>dmesg(8)</code> 命令的输出，看看是否有任何异常。如果一个设备显示为 <code>not configured</code>（未配置），这意味着它目前不被内核所支持。这可能会在将来通过发送 dmesg 而得到改善。引自</p><code>/usr/src/etc/root/root.mail</code>：</p>
+<pre><code class="language-shell">If you wish to ensure that OpenBSD runs better on your machines, please do us
+a favor (after you have your mail system configured!) and type something like:
+
+# (dmesg; sysctl hw.sensors) | \
+   mail -s &quot;Sony VAIO 505R laptop, apm works OK&quot; dmesg@openbsd.org
+
+so that we can see what kinds of configurations people are running.  As shown,
+including a bit of information about your machine in the subject or the body
+can help us even further.  We will use this information to improve device driver
+support in future releases.  (Please do this using the supplied GENERIC kernel,
+not for a custom compiled kernel, unless you're unable to boot the GENERIC
+kernel.  If you have a multi-processor machine, dmesg results of both GENERIC.MP
+and GENERIC kernels are appreciated.)  The device driver information we get from
+this helps us fix existing drivers. Thank you!
+</code></pre>
+<p>译文：</p>
+<pre><code class="language-shell">如果你希望确保 OpenBSD 在您的机器上运行得更好，请帮我们个忙（在你配置好邮件系统之后！）并键入以下内容：
+
+# (dmesg; sysctl hw.sensors) | \
+   mail -s &quot;Sony VAIO 505R laptop, apm works OK&quot; dmesg@openbsd.org
+
+这样我们就可以看到人们正在运行什么样的配置。如图所示，在主题或正文中包括一点关于你的机器的信息可以帮助我们更进一步。我们将使用这些信息来改进未来版本中的设备驱动支持。(请使用提供的 GENERIC 内核来做这个，而不是自定义编译的内核，除非你无法启动 GENERIC 内核。如果你有一台多处理器的机器，请提供 GENERIC.MP 和 GENERIC 内核的 dmesg 结果）。我们从中得到的设备驱动信息有助于我们修复现有的驱动。谢谢你！
+</code></pre>
+<p>或者，将你的 dmesg 输出保存到文本文件并将其内容发送给我们：</p>
+<pre><code class="language-shell">$ (dmesg; sysctl hw.sensors) &gt; ~/dmesg.txt
+</code></pre>
+<p>请配置你的电子邮件客户端以使用纯文本。特别地，不要使用 HTML 格式或强制换行。 请将 dmesg 放入邮件正文中，而不是作为附件发送。</p>
+<h2 id="自定义安装过程">自定义安装过程<a class="headerlink" href="#自定义安装过程" title="Permanent link">&para;</a></h2>
+<h3 id="site70tgz-文件集"><code>site70.tgz</code> 文件集<a class="headerlink" href="#site70tgz-文件集" title="Permanent link">&para;</a></h3>
+<p>OpenBSD 安装和升级脚本允许选择一个用户创建的名为 <code>site70.tgz</code> 的集合。与官方<a href="https://www.openbsd.org/faq/faq4.html#FilesNeeded">文件集</a>一样，这是一个 <a href="https://man.openbsd.org/tar">tar(1)</a> 存档，以 / 为父目录并使用 <code>-xzphf</code> 选项解压。它是最后安装的文件集，因此可用于补充和修改默认安装中的文件。此外，可以使用名为 <code>site70-$(hostname -s).tgz</code> 的主机名相关集。注意：如果你打算通过 HTTP(s) 提供文件集，请将 <code>site70.tgz</code> 放在你的源目录中并将其包含在你的 <code>index.txt</code> 中。 然后它将是安装时的一个选项。</p>
+<h3 id="installsite-和-upgradesite-脚本"><code>install.site</code> 和 <code>upgrade.site</code> 脚本<a class="headerlink" href="#installsite-和-upgradesite-脚本" title="Permanent link">&para;</a></h3>
+<p>如果 <code>site70.tgz</code> 文件集包含一个可执行文件 <code>/install.site</code>，安装程序会在新安装的系统根目录下使用 <a href="https://man.openbsd.org/chroot">chroot(8)</a> 运行它。同样，升级脚本运行 <code>/upgrade.site</code>。后者可以放在系统的根目录下，然后重新启动进行升级。</p>
+<p>用法示例：</p>
+<ul>
+<li>设置系统时间。</li>
+<li>在将新系统公开给世界其他地方之前，立即对其进行备份/存档。</li>
+<li>在第一次启动后运行一组任意命令。如果 <code>install.site</code> 用于将任何此类命令附加到 <a href="https://man.openbsd.org/rc.firsttime">rc.firsttime(8)</a> 文件（附加到此文件是必要的，因为安装程序本身可能会写入此文件），则会发生这种情况。在启动时，<code>rc.firsttime</code> 被执行一次然后被删除。</li>
+</ul>
+<h2 id="多重引导">多重引导<a class="headerlink" href="#多重引导" title="Permanent link">&para;</a></h2>
+<p>多重引导是在一台计算机上拥有多个操作系统，并通过某种方式选择要引导的操作系统。 在开始之前，你可能希望熟悉 <a href="https://www.openbsd.org/faq/faq14.html#BootAmd64">OpenBSD 引导过程</a>。<a href="https://man.openbsd.org/fdisk">fdisk(8)</a> 的简要介绍在<a href="https://www.openbsd.org/faq/faq14.html#fdisk">使用 OpenBSD 的 fdisk</a> 部分。</p>
+<p>如果你要将 OpenBSD 添加到现有系统，您可能需要在安装 OpenBSD 之前创建一些空闲空间。除了现有系统的本机工具外，<a href="https://gparted.org/">gparted</a> 还可用于删除或调整现有分区的大小。最好使用四个主要 MBR 分区之一来引导 OpenBSD。扩展分区可能不起作用。</p>
+<p>据报道，<a href="https://www.rodsbooks.com/refind/">rEFInd</a> 通常有效；<a href="https://www.gnu.org/software/grub/">GRUB</a> 通常会失败。无论哪种情况，你都完全靠自己决定如何操作。</p>
+<h3 id="windows">Windows<a class="headerlink" href="#windows" title="Permanent link">&para;</a></h3>
+<p>启动配置数据 (Boot Configuration Data, BCD) 存储允许通过 <code>bcdedit</code> 启动多个版本的 Windows。你可以在<a href="https://technet.microsoft.com/en-us/library/cc721886%28WS.10%29.aspx">这篇文章</a>中找到一个很好的介绍。如果你想要一个 GUI 替代品，你可能想需要 <a href="https://neosmart.net/EasyBCD/">EasyBCD</a>。</p>
+<p>你将需要一份 OpenBSD 安装的<a href="https://www.openbsd.org/faq/faq14.html#BootAmd64">分区引导记录 (PBR)</a> 的副本。你可以使用类似于以下的过程将其复制到文件中：</p>
+<pre><code class="language-shell"># dd if=/dev/rsd0a of=openbsd.pbr bs=512 count=1
+</code></pre>
+<p>其中 <code>sd0a</code> 是你的启动设备，你需要将 <code>openbsd.pbr</code> 文件放到你的 Windows 系统分区。</p>
+<p>一旦 OpenBSD 的 PBR 被复制到 Windows 系统分区，你需要一个具有管理权限的终端来运行以下命令：</p>
+<pre><code class="language-shell">C:\Windows\system32&gt; bcdedit /create /d &quot;OpenBSD/i386&quot; /application bootsector
+The entry {0154a872-3d41-11de-bd67-a7060316bbb1} was successfully created.
+C:\Windows\system32&gt; bcdedit /set {0154a872-3d41-11de-bd67-a7060316bbb1} device boot
+The operation completed successfully.
+C:\Windows\system32&gt; bcdedit /set {0154a872-3d41-11de-bd67-a7060316bbb1} path \openbsd.pbr
+The operation completed successfully.
+C:\Windows\system32&gt; bcdedit /set {0154a872-3d41-11de-bd67-a7060316bbb1} device partition=c:
+The operation completed successfully.
+C:\Windows\system32&gt; bcdedit /displayorder {0154a872-3d41-11de-bd67-7060316bbb1} /addlast
+The operation completed successfully.
+</code></pre>
+<p>请注意，OpenBSD 希望计算机的实时时钟设置为协调世界时 (UTC)。 有关更多信息，请参阅<a href="https://www.openbsd.org/faq/faq10.html#TimeZone">此部分</a>。</p>
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="页脚">
+      
+        
+        <a href="../faq1/" class="md-footer__link md-footer__link--prev" aria-label="上一页: OpenBSD 简介" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              OpenBSD 简介
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../faq10/" class="md-footer__link md-footer__link--next" aria-label="下一页: 系统管理" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              系统管理
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2021–2022 OpenBSD 中文结社贡献者
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "search": "../../assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.e1a181d9.min.js"></script>
+      
+    
+  </body>
+</html>

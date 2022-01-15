@@ -1,0 +1,1174 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.3">
+    
+    
+      
+        <title>邮件列表 - OpenBSD 中文结社</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.edf004c2.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.e6a45f82.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#ff6e42">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="deep-orange" data-md-color-accent="orange">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#openbsd---邮件列表" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="OpenBSD 中文结社" class="md-header__button md-logo" aria-label="OpenBSD 中文结社" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OpenBSD 中文结社
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              邮件列表
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/openbsd-zh-association/docs-openbsd-zh/" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="OpenBSD 中文结社" class="md-nav__button md-logo" aria-label="OpenBSD 中文结社" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    OpenBSD 中文结社
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/openbsd-zh-association/docs-openbsd-zh/" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        主页
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          OpenBSD FAQ
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="OpenBSD FAQ" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          OpenBSD FAQ
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../openbsd-faq/faq1/" class="md-nav__link">
+        OpenBSD 简介
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../openbsd-faq/faq4/" class="md-nav__link">
+        安装指南
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../openbsd-faq/faq10/" class="md-nav__link">
+        系统管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../openbsd-faq/faq14/" class="md-nav__link">
+        配置磁盘
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../openbsd-faq/faq15/" class="md-nav__link">
+        软件包管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../openbsd-faq/faq5/" class="md-nav__link">
+        从源码构建系统
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../openbsd-faq/faq6/" class="md-nav__link">
+        网络配置
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../openbsd-faq/faq7/" class="md-nav__link">
+        键盘和显示控制
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../openbsd-faq/faq11/" class="md-nav__link">
+        X 窗口系统
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../openbsd-faq/faq13/" class="md-nav__link">
+        多媒体
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../openbsd-faq/faq16/" class="md-nav__link">
+        虚拟化
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../openbsd-faq/faq17/" class="md-nav__link">
+        虚拟专用网络
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          其他
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="其他" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          其他
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../upgrade70/" class="md-nav__link">
+        升级向导
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../report/" class="md-nav__link">
+        报告 BUG
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../current/" class="md-nav__link">
+        跟随 -current 和使用快照
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          邮件列表
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        邮件列表
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#网络礼仪" class="md-nav__link">
+    网络礼仪
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#垃圾邮件" class="md-nav__link">
+    垃圾邮件
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#一般兴趣邮件列表" class="md-nav__link">
+    一般兴趣邮件列表
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#开发者邮件列表" class="md-nav__link">
+    开发者邮件列表
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#报告安全问题" class="md-nav__link">
+    报告安全问题
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#平台特定邮件列表" class="md-nav__link">
+    平台特定邮件列表
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cvs-更改邮件列表" class="md-nav__link">
+    CVS 更改邮件列表
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#镜像相关列表" class="md-nav__link">
+    镜像相关列表
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#通过-majordomo-管理列表成员" class="md-nav__link">
+    通过 Majordomo 管理列表成员
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#通过-web-管理列表成员资格" class="md-nav__link">
+    通过 Web 管理列表成员资格
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#邮件列表技巧" class="md-nav__link">
+    邮件列表技巧
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#摘要" class="md-nav__link">
+    摘要
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#其他列表" class="md-nav__link">
+    其他列表
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#非英语列表" class="md-nav__link">
+    非英语列表
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          贡献者指南
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="贡献者指南" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          贡献者指南
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contribution/contributing/" class="md-nav__link">
+        总述
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contribution/translation_rules/" class="md-nav__link">
+        翻译规范
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          关于
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="关于" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          关于
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/international-about/" class="md-nav__link">
+        International About（英文简介）
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/terminology/" class="md-nav__link">
+        术语表
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#网络礼仪" class="md-nav__link">
+    网络礼仪
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#垃圾邮件" class="md-nav__link">
+    垃圾邮件
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#一般兴趣邮件列表" class="md-nav__link">
+    一般兴趣邮件列表
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#开发者邮件列表" class="md-nav__link">
+    开发者邮件列表
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#报告安全问题" class="md-nav__link">
+    报告安全问题
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#平台特定邮件列表" class="md-nav__link">
+    平台特定邮件列表
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cvs-更改邮件列表" class="md-nav__link">
+    CVS 更改邮件列表
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#镜像相关列表" class="md-nav__link">
+    镜像相关列表
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#通过-majordomo-管理列表成员" class="md-nav__link">
+    通过 Majordomo 管理列表成员
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#通过-web-管理列表成员资格" class="md-nav__link">
+    通过 Web 管理列表成员资格
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#邮件列表技巧" class="md-nav__link">
+    邮件列表技巧
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#摘要" class="md-nav__link">
+    摘要
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#其他列表" class="md-nav__link">
+    其他列表
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#非英语列表" class="md-nav__link">
+    非英语列表
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+<a href="https://github.com/openbsd-zh-association/docs-openbsd-zh/edit/master/docs/others/mail.md" title="编辑此页" class="md-content__button md-icon">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+</a>
+
+
+<h1 id="openbsd---邮件列表">OpenBSD - 邮件列表<a class="headerlink" href="#openbsd---邮件列表" title="Permanent link">&para;</a></h1>
+<p>邮件列表是 OpenBSD 用户和开发人员之间交流的重要手段。除<strong>公告</strong>外，这些列表均未经过审核。我们有意限制不同邮件列表的数量。这有助于减少交叉发布的数量，并确保将信息分发给广泛的受众。</p>
+<h2 id="网络礼仪">网络礼仪<a class="headerlink" href="#网络礼仪" title="Permanent link">&para;</a></h2>
+<p>考虑邮件列表中的其他订阅者。</p>
+<ul>
+<li>
+<p><strong>纯文本，每行 72 个字符。</strong></p>
+    许多订阅者和开发人员在基于文本的邮件程序（如 <a href="https://man.openbsd.org/mail">mail(1)</a>、emacs 或 mutt）上阅读他们的邮件，并且他们经常发现 HTML 格式的邮件（或超过 72 个字符的行）不可读。大多数 OpenBSD 邮件列表会在将 MIME 内容的消息发送到列表的其余部分之前将它们剥离。如果你不使用纯文本，你的邮件将被重新格式化。如果它们不能被重新格式化，它们将被立即拒绝。 唯一允许文件附件的邮件列表是 <strong>bugs</strong>、<strong>ports</strong> 和 <strong>tech</strong> 列表。他们将从其他人的消息中删除。</p>
+</li>
+<li>
+<p><strong>发帖前做好功课。</strong></p>
+    如果你有安装问题，请确保你已阅读相关文档，例如安装目录中的 <code>INSTALL.*</code> 文本文件、<a href="https://www.openbsd.org/faq/index.html">FAQ</a> 和相关手册页（从 <a href="https://man.openbsd.org/afterboot">afterboot(8)</a> 开始）。 还要检查邮件列表档案。 我们想提供帮助，但我们不想剥夺你宝贵的学习经验，而且没有人希望在一个月内第五次在列表中看到相同的问题。</p>
+</li>
+<li>
+<p><strong>包括一个有用的主题行。</strong></p>
+    主题为空的邮件将被退回到列表管理器，并且需要更长的时间才能显示出来。 在消息中包含相关主题将确保更多人真正阅读你所写的内容。此外，请避免使用过多大写的主题行。 “Help!” 或 “I can't get it to work!” 不是有用的主题行。不要在同一主题上更改主题行。你可能知道它是关于什么的，我们其他每天收到数百条消息的人将不知道。</p>
+</li>
+<li>
+<p><strong>修剪你的签名。</strong></p>
+    将邮件底部的签名行保持在合理的长度。PGP 签名和那些自动地址卡只会很烦人并且被剥离了。法律上的免责声明和忠告也是非常令人讨厌的，而且不适合公开的邮件列表。</p>
+</li>
+<li>
+<p><strong>留在话题上。</strong></p>
+    请保持帖子主题与 OpenBSD 用户相关。</p>
+</li>
+<li>
+<p><strong>包含重要信息。</strong></p>
+    不要用一个无望的不完整的问题浪费大家的时间。除了你之外，没有人拥有解决你的问题所需的信息，提供更多的信息比没有足够的细节要好。所有的问题都应该至少包括 OpenBSD 的<a href="https://www.openbsd.org/faq/faq5.html#Flavors">版本</a>。任何与硬件相关的问题都应该提到平台(i386, amd64, 等等)并提供完整的 <a href="https://man.openbsd.org/dmesg">dmesg(8)</a>。不幸的是, 硬件型号并不能说明某台机器或配件的实际内容, 而且对于那些没有确切的机器坐在那里可以轻易辨认的人来说是没有用的。dmesg 的输出告诉我们你的机器里<strong>有什么</strong>，而不是外面有什么贴纸。</p>
+</li>
+<li>
+<p><strong>尊重观点和哲学的差异。</strong></p>
+    聪明的人可能会看到相同的事实并得出截然不同的结论。重复以前不能说服某人的相同观点很少会改变他们的想法，并激怒所有其他读者。</p>
+</li>
+</ul>
+<h2 id="垃圾邮件">垃圾邮件<a class="headerlink" href="#垃圾邮件" title="Permanent link">&para;</a></h2>
+<p>OpenBSD 邮件列表使用 <a href="https://man.openbsd.org/spamd">spamd(8)</a> 和 <a href="https://spamassassin.apache.org/">SpamAssassin</a> 来降低垃圾邮件的数量，但有时也会有一些东西偷偷溜进来——处理它。此外，邮件列表服务器还具有基于正则表达式的规则，可以根据一些常见的垃圾邮件和病毒线索拒绝电子邮件。如果你通过 OpenBSD 邮件列表之一收到垃圾邮件，则无需将副本发送给列表所有者——很可能他已经看到了。另外，请<strong>不要</strong>将通过邮件列表收到的垃圾邮件提交给 <a href="https://www.spamcop.net/">spamcop</a>，因为这会导致邮件列表服务器被添加到他们的 RBL。对邮件列表中的垃圾邮件进行投诉和评论会适得其反，因为它产生的流量比垃圾邮件本身还多。</p>
+<p>请注意，如果你从动态 IP 地址发送邮件，你可能无法投递到邮件列表。 在这种情况下，你应该使用利用 ISP 邮件服务器的智能主机邮件配置。请阅读 <a href="https://man.openbsd.org/smtpd.conf">smtpd.conf(5)</a> 中的示例以了解如何执行此操作。</p>
+<h2 id="一般兴趣邮件列表">一般兴趣邮件列表<a class="headerlink" href="#一般兴趣邮件列表" title="Permanent link">&para;</a></h2>
+<p>大多数 OpenBSD 用户都对这些列表感兴趣。</p>
+<ul>
+<li>
+<p><strong>announce@openbsd.org</strong> (<a href="https://marc.info/?l=openbsd-announce">Archive</a>) </p>
+    公告和安全建议。</p>
+</li>
+<li>
+<p><strong>misc@openbsd.org</strong> (<a href="https://marc.info/?l=openbsd-misc">Archive</a>) </p>
+    用户问答，一般问题。这是最活跃的列表。请阅读<a href="https://www.openbsd.org/faq/index.html">常见问题解答</a>和安装文档，并在发布之前查看<a href="https://www.openbsd.org/report.html">如何报告问题</a>。</p>
+</li>
+<li>
+<p><strong>advocacy@openbsd.org</strong> (<a href="https://marc.info/?l=openbsd-advocacy">Archive</a>) </p>
+    推广使用 OpenBSD。</p>
+</li>
+<li>
+<p><strong>ports@openbsd.org</strong> (<a href="https://marc.info/?l=openbsd-ports">Archive</a>) </p>
+    关于使用和贡献 ports tree 的讨论。</p>
+</li>
+<li>
+<p><strong>misc@opensmtpd.org</strong> (<a href="https://www.mail-archive.com/misc@opensmtpd.org">Archive</a>) </p>
+    关于原生和可移植 OpenSMTPD 的一般讨论、问题和想法。可移植位的补丁应该是 <a href="https://github.com/OpenSMTPD/OpenSMTPD">Github</a> 上的 pull request。要在那里订阅，请按照 <a href="https://opensmtpd.org/list.html">OpenSMTPD 网站</a>上的说明进行操作。</p>
+</li>
+<li>
+<p><strong>users@openbgpd.org</strong> (<a href="https://marc.info/?l=openbgpd-users">Archive</a>) </p>
+关于原生和可移植 OpenBGPD 的一般讨论、问题和想法。可移植位的补丁应该是 <a href="https://github.com/openbgpd-portable/openbgpd-portable">Github</a> 上的 pull request。</p>
+</li>
+</ul>
+<h2 id="开发者邮件列表">开发者邮件列表<a class="headerlink" href="#开发者邮件列表" title="Permanent link">&para;</a></h2>
+<p>这些列表用于 OpenBSD 各个方面的技术讨论。它们不适合初学者或普通用户，不适合报告问题（除非你提供一个好的修复程序），也不适合安装问题。如果你对是否应该将消息发布到这些列表中的任何一个有任何疑问，它可能也不适合。请先改用 misc@opensmtpd.org 询问一下。</p>
+<ul>
+<li>
+<p><strong>bugs@openbsd.org</strong> (<a href="https://marc.info/?l=openbsd-bugs">Archive</a>) </p>
+    通过 <a href="https://man.openbsd.org/sendbug">sendbug(1)</a> 发送的错误报告和后续讨论。</p>
+</li>
+<li>
+<p><strong>tech@openbsd.org</strong> (<a href="https://marc.info/?l=openbsd-tech">Archive</a>) </p>
+    为 OpenBSD 开发人员和高级用户讨论技术主题。这不是一个“技术支持”论坛——不要这样使用它。OpenBSD 开发人员通常会通过此列表制作补丁以实现新功能和其他重要变化的补丁，供公众测试。</p>
+</li>
+<li>
+<p><strong>libressl@openbsd.org</strong> (<a href="https://marc.info/?l=libressl">Archive</a>) </p>
+    关于原生和可移植 LibreSSL 的技术讨论。 可移植位的补丁应该是 <a href="https://github.com/libressl-portable/portable">Github</a> 上的 pull request。</p>
+</li>
+</ul>
+<h2 id="报告安全问题">报告安全问题<a class="headerlink" href="#报告安全问题" title="Permanent link">&para;</a></h2>
+<p>这些私有地址用于向 OpenBSD 团队报告漏洞。</p>
+<ul>
+<li>
+<p><strong>security@openbsd.org</strong> </p>
+    报告与 OpenBSD 相关的漏洞。</p>
+</li>
+<li>
+<p><strong>openssh@openssh.com</strong></p>
+    报告与 OpenSSH 相关的漏洞。</p>
+</li>
+<li>
+<p><strong>libressl-security@openbsd.org</strong></p>
+    报告与 LibreSSL 相关的漏洞。</p>
+</li>
+<li>
+<p><strong>opensmtpd-security@openbsd.org</strong></p>
+    报告与 OpenSMTPD 相关的漏洞。</p>
+</li>
+</ul>
+<h2 id="平台特定邮件列表">平台特定邮件列表<a class="headerlink" href="#平台特定邮件列表" title="Permanent link">&para;</a></h2>
+<p>这些列表侧重于各个平台上的用户问题和开发。</p>
+<ul>
+<li>
+<p><strong>alpha@openbsd.org</strong> (<a href="https://marc.info/?l=openbsd-alpha">Archive</a>) </p>
+    OpenBSD/alpha port</p>
+</li>
+<li>
+<p><strong>arm@openbsd.org</strong> (<a href="https://marc.info/?l=openbsd-arm">Archive</a>) </p>
+    OpenBSD/armv7 和 OpenBSD/arm64 ports</p>
+</li>
+<li>
+<p><strong>hppa@openbsd.org</strong> (<a href="https://marc.info/?l=openbsd-hppa">Archive</a>) </p>
+    OpenBSD/hppa port</p>
+</li>
+<li>
+<p><strong>m88k@openbsd.org</strong> (<a href="https://marc.info/?l=openbsd-m88k">Archive</a>) </p>
+    OpenBSD/luna88k port</p>
+</li>
+<li>
+<p><strong>ppc@openbsd.org</strong> (<a href="https://marc.info/?l=openbsd-ppc">Archive</a>) </p>
+    OpenBSD/macppc 和其他 PowerPC porting 行动 </p>
+</li>
+<li>
+<p><strong>sparc@openbsd.org</strong> (<a href="https://marc.info/?l=openbsd-sparc">Archive</a>) </p>
+    OpenBSD/sparc64 port. </p>
+</li>
+</ul>
+<h2 id="cvs-更改邮件列表">CVS 更改邮件列表<a class="headerlink" href="#cvs-更改邮件列表" title="Permanent link">&para;</a></h2>
+<p>每次开发人员提交对 OpenBSD CVS 树的更改时，都会向这些列表的所有订阅者邮寄一条消息，其中包含提交注释。</p>
+<ul>
+<li>
+<p><strong>source-changes@openbsd.org</strong> (<a href="https://marc.info/?l=openbsd-cvs">Archive</a>) </p>
+    <code>src</code>、<code>xenocara</code> 和 <code>www</code> 存储库中 CVS 源代码树更改的自动邮件。</p>
+</li>
+<li>
+<p><strong>ports-changes@openbsd.org</strong> (<a href="https://marc.info/?l=openbsd-ports-cvs">Archive</a>) </p>
+    <code>ports</code> 存储库中 CVS 源代码树更改的自动邮件。</p>
+</li>
+</ul>
+<h2 id="镜像相关列表">镜像相关列表<a class="headerlink" href="#镜像相关列表" title="Permanent link">&para;</a></h2>
+<p>有关 OpenBSD <a href="https://www.openbsd.org/ftp.html">镜像</a>的公告和讨论。</p>
+<ul>
+<li>
+<p><strong>mirrors-announce@openbsd.org</strong> </p>
+    这是一个审核列表，仅用于向 OpenBSD 镜像操作员发布重要公告。</p>
+</li>
+<li>
+<p><strong>mirrors-discuss@openbsd.org</strong></p>
+    有关 OpenBSD 镜像的讨论。</p>
+</li>
+</ul>
+<h2 id="通过-majordomo-管理列表成员">通过 Majordomo 管理列表成员<a class="headerlink" href="#通过-majordomo-管理列表成员" title="Permanent link">&para;</a></h2>
+<p>如果你想收到一份完整的列表，其中包含 openbsd.org 上提供的所有邮件列表，请将命令 <code>lists</code> 作为邮件正文发送到 <a href="mailto:majordomo@openbsd.org">majordomo@openbsd.org</a>。</p>
+<p>要订阅给定列表，请将邮件发送到 <a href="mailto:majordomo@openbsd.org">majordomo@openbsd.org</a>，邮件正文为 “subscribe <code>mailing-list-name</code>”（其中 <code>mailing-list-name</code> 是你首选列表的名称）。</p>
+<p>如需进一步的帮助，请将 “help” 作为邮件正文发送至 <a href="mailto:majordomo@openbsd.org">majordomo@openbsd.org</a>，你将收到概述所有选项的回复。你的域<strong>必须</strong>正确解析，否则邮件将无法通过！</p>
+<h2 id="通过-web-管理列表成员资格">通过 Web 管理列表成员资格<a class="headerlink" href="#通过-web-管理列表成员资格" title="Permanent link">&para;</a></h2>
+<p>你在 OpenBSD 邮件列表中的成员资格也可以通过 <a href="https://lists.openbsd.org/">lists.openbsd.org</a> 上的 Web 界面进行管理。</p>
+<h2 id="邮件列表技巧">邮件列表技巧<a class="headerlink" href="#邮件列表技巧" title="Permanent link">&para;</a></h2>
+<p>你可以通过<a href="https://lists.openbsd.org/">网页界面</a>或通过 <a href="mailto:majordomo@openbsd.org">Majordomo</a> 来选择许多非常有用的选项。你可以改变你的电子邮件地址，而不必取消订阅和重新订阅，当你去度假时，暂时停止你的信息传递几天，以及更长时间。请你多花一些时间阅读这些选项，你可通过向 <a href="mailto:majordomo@openbsd.org">Majordomo</a> 发送包含 "help" 作为正文的邮件，或通过<a href="https://lists.openbsd.org/">网页界面</a>的 "Help" 标签。</p>
+<p>例如，如果你要休假两周并且不希望收到数千封电子邮件，你可以在假期期间禁用邮件服务器的邮件传递，并在你预定的返回时自动恢复传递 使用命令：</p>
+<pre><code>set ALL nomail-14d 
+</code></pre>
+<p>这将暂停你对所有邮件列表的订阅 14 天 (<code>-14d</code>)。 更多细节和选项可以在 <a href="http://lists.openbsd.org/cgi-bin/mj_wwwusr?&amp;user=&amp;passw=&amp;list=GLOBAL&amp;func=help&amp;extra=overview">Majordomo 概览页面</a>上看到。</p>
+<h2 id="摘要">摘要<a class="headerlink" href="#摘要" title="Permanent link">&para;</a></h2>
+<p>如果你希望查看“摘要”（一段时间内所有消息的合并列表），而不是以“实时”形式单独获取消息，你可以使用以下命令：</p>
+<pre><code>set misc digest-daily
+set source-changes digest-weekly 
+</code></pre>
+<p>用于杂项列表（<strong>misc</strong>）的每日摘要和 <strong>source-changes</strong> 列表的每周摘要。是的，你可以在一封 Majordomo 电子邮件中放置多个命令。</p>
+<h2 id="其他列表">其他列表<a class="headerlink" href="#其他列表" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>pf@benzedrine.ch</strong> (Archive) </p>
+    关于 <a href="https://www.openbsd.org/faq/pf/index.html">OpenBSD 包过滤器</a>的讨论。要订阅，请将消息正文为 “subscribe” 的电子邮件发送到 <a href="mailto:pf-request@benzedrine.ch">pf-request@benzedrine.ch</a>。 更多信息可以在<a href="https://www.benzedrine.ch/mailinglist.html">这里</a>找到。</li>
+</ul>
+<h2 id="非英语列表">非英语列表<a class="headerlink" href="#非英语列表" title="Permanent link">&para;</a></h2>
+<p>几个与 OpenBSD 相关的非英语邮件列表可单独获得。以下是当前已知邮件列表的列表：</p>
+<ul>
+<li>
+<p>法语：<strong>blabla@openbsd.fr.eu.org</strong> (<a href="https://openbsd.fr.eu.org/blabla/">Archive</a>) </p>
+    要订阅，请发送消息至 <a href="mailto:blabla+subscribe@openbsd.fr.eu.org">blabla+subscribe@openbsd.fr.eu.org</a></p>
+</li>
+<li>
+<p>西班牙语：<strong>OpenBSD-Mexico@googlegroups.com</strong> </p>
+    要订阅，请访问以下网址：https://groups.google.com/group/OpenBSD-Mexico</p>
+</li>
+<li>
+<p>乌克兰语：<strong>openbsd@uaoug.org.ua</strong></p>
+    要订阅，请发送空消息至 <a href="mailto:openbsd+subscribe@uaoug.org.ua">openbsd+subscribe@uaoug.org.ua</a></p>
+</li>
+</ul>
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="页脚">
+      
+        
+        <a href="../current/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 跟随 -current 和使用快照" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              跟随 -current 和使用快照
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../../contribution/contributing/" class="md-footer__link md-footer__link--next" aria-label="下一页: 总述" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              总述
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2021–2022 OpenBSD 中文结社贡献者
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "search": "../../assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.e1a181d9.min.js"></script>
+      
+    
+  </body>
+</html>

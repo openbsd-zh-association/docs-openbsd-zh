@@ -1,0 +1,1264 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.3">
+    
+    
+      
+        <title>系统管理 - OpenBSD 中文结社</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.edf004c2.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.e6a45f82.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#ff6e42">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="deep-orange" data-md-color-accent="orange">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#openbsd-faq---系统管理" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="OpenBSD 中文结社" class="md-header__button md-logo" aria-label="OpenBSD 中文结社" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OpenBSD 中文结社
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              系统管理
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/openbsd-zh-association/docs-openbsd-zh/" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="OpenBSD 中文结社" class="md-nav__button md-logo" aria-label="OpenBSD 中文结社" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    OpenBSD 中文结社
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/openbsd-zh-association/docs-openbsd-zh/" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        主页
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          OpenBSD FAQ
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="OpenBSD FAQ" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          OpenBSD FAQ
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq1/" class="md-nav__link">
+        OpenBSD 简介
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq4/" class="md-nav__link">
+        安装指南
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          系统管理
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        系统管理
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#安全更新" class="md-nav__link">
+    安全更新
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#系统守护进程" class="md-nav__link">
+    系统守护进程
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#以其他用户身份执行命令" class="md-nav__link">
+    以其他用户身份执行命令
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#编辑密码文件" class="md-nav__link">
+    编辑密码文件
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#重置root密码" class="md-nav__link">
+    重置Root密码
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#时钟同步" class="md-nav__link">
+    时钟同步
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#时区" class="md-nav__link">
+    时区
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#字符集character-sets及区域" class="md-nav__link">
+    字符集（Character Sets）及区域
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#使用skey" class="md-nav__link">
+    使用S/Key
+  </a>
+  
+    <nav class="md-nav" aria-label="使用S/Key">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#设置skey" class="md-nav__link">
+    设置S/Key
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#生成skey密码" class="md-nav__link">
+    生成S/Key密码
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#使用skey密钥登陆" class="md-nav__link">
+    使用S/Key密钥登陆
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#目录服务" class="md-nav__link">
+    目录服务
+  </a>
+  
+    <nav class="md-nav" aria-label="目录服务">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#yp安全策略" class="md-nav__link">
+    YP安全策略
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#设置一个yp服务器" class="md-nav__link">
+    设置一个YP服务器
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#设置一个yp客户端" class="md-nav__link">
+    设置一个YP客户端
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq14/" class="md-nav__link">
+        配置磁盘
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq15/" class="md-nav__link">
+        软件包管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq5/" class="md-nav__link">
+        从源码构建系统
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq6/" class="md-nav__link">
+        网络配置
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq7/" class="md-nav__link">
+        键盘和显示控制
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq11/" class="md-nav__link">
+        X 窗口系统
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq13/" class="md-nav__link">
+        多媒体
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq16/" class="md-nav__link">
+        虚拟化
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq17/" class="md-nav__link">
+        虚拟专用网络
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          其他
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="其他" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          其他
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../others/upgrade70/" class="md-nav__link">
+        升级向导
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../others/report/" class="md-nav__link">
+        报告 BUG
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../others/current/" class="md-nav__link">
+        跟随 -current 和使用快照
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../others/mail/" class="md-nav__link">
+        邮件列表
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          贡献者指南
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="贡献者指南" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          贡献者指南
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contribution/contributing/" class="md-nav__link">
+        总述
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contribution/translation_rules/" class="md-nav__link">
+        翻译规范
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          关于
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="关于" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          关于
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/international-about/" class="md-nav__link">
+        International About（英文简介）
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/terminology/" class="md-nav__link">
+        术语表
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#安全更新" class="md-nav__link">
+    安全更新
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#系统守护进程" class="md-nav__link">
+    系统守护进程
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#以其他用户身份执行命令" class="md-nav__link">
+    以其他用户身份执行命令
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#编辑密码文件" class="md-nav__link">
+    编辑密码文件
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#重置root密码" class="md-nav__link">
+    重置Root密码
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#时钟同步" class="md-nav__link">
+    时钟同步
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#时区" class="md-nav__link">
+    时区
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#字符集character-sets及区域" class="md-nav__link">
+    字符集（Character Sets）及区域
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#使用skey" class="md-nav__link">
+    使用S/Key
+  </a>
+  
+    <nav class="md-nav" aria-label="使用S/Key">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#设置skey" class="md-nav__link">
+    设置S/Key
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#生成skey密码" class="md-nav__link">
+    生成S/Key密码
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#使用skey密钥登陆" class="md-nav__link">
+    使用S/Key密钥登陆
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#目录服务" class="md-nav__link">
+    目录服务
+  </a>
+  
+    <nav class="md-nav" aria-label="目录服务">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#yp安全策略" class="md-nav__link">
+    YP安全策略
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#设置一个yp服务器" class="md-nav__link">
+    设置一个YP服务器
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#设置一个yp客户端" class="md-nav__link">
+    设置一个YP客户端
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+<a href="https://github.com/openbsd-zh-association/docs-openbsd-zh/edit/master/docs/openbsd-faq/faq10.md" title="编辑此页" class="md-content__button md-icon">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+</a>
+
+
+<h1 id="openbsd-faq---系统管理">OpenBSD FAQ - 系统管理<a class="headerlink" href="#openbsd-faq---系统管理" title="Permanent link">&para;</a></h1>
+<h2 id="安全更新">安全更新<a class="headerlink" href="#安全更新" title="Permanent link">&para;</a></h2>
+<p>当一个关键性的Bug被发现后，修复将会被尽可能快地提交到当前源码树中（并在<a href="https://www.openbsd.org/faq/faq5.html#Flavors">快照构建</a>中可用）。该修复将会以<a href="https://www.openbsd.org/errata.html">补丁(errata)</a>的形式被向后移植至最新的两个OpenBSD发行版中并且相关细节将会被发送到<a href="https://lists.openbsd.org/cgi-bin/mj_wwwusr?func=lists-long-full&amp;extra=announce">公告(announce)</a>邮件列表中。<br />
+有以下获得这些修复的方式：</p>
+<ul>
+<li>应用二进制补丁（在amd64，arm64，i386架构上可用）
+<a href="https://man.openbsd.org/syspatch">syspatch(8)</a>工具可以在任何一个支持的OpenBSD发行版中为任意文件升级安全或可靠性补丁。这是最快速也是最简单的将基础系统更新到最新的方式  </li>
+<li>升级系统到稳定（stable）版本
+通过<a href="https://www.openbsd.org/anoncvs.html">CVS</a>拉取（或升级）您的源代码树，然后<a href="https://www.openbsd.org/stable.html">重新编译</a>内核和用户程序。  </li>
+<li>分别为受影响的文件应用补丁
+虽然通过应用在补丁页上的修复往往要比通过CVS的检出和重构建更快一些，但是这种方式没有亘古不变的方法来做到这一点。有时候你必须为一个应用应用补丁并且重新编译之，有时还要更麻烦一些。  </li>
+<li>升级到当前（current）版本的系统
+由于所有的修复都被应用到当前版本的代码库中，将系统升级到最新的快照版本（snapshot）是一个不错的一次性完成所有修复的方式。但是快照版本的系统并不适用于所有人。</li>
+</ul>
+<p>为通过<a href="https://www.openbsd.org/faq/faq15.html">包</a>安装的第三方软件提供的安全更新通常仅仅被向后移植到最近的发行版。为了应用它们，进行以下操作之一：</p>
+<ul>
+<li>使用二进制包（在amd64，arm64，i386，sparc64上可用）
+为发行版（release）和稳定版（stable）系统提供的更新的二禁止应用包被提供来定位安全问题或者进行其他主要的修复。您可以带有-u选项调用<a href="https://man.openbsd.org/pkg_add">pkg_add(1)</a>来获得更新的软件包。  </li>
+<li>使用稳定版的ports源码树
+拉取（或者更新）您的ports源码树，运行<code>/usr/ports/infastructure/bin/pkg_outdated</code>脚本来列出需要重新构建的软件包，然后在受到影响的port软件包目录中调用<code>make update</code>。某些情况下，已经存在的ports软件包需要在重新构建前被卸载。  </li>
+<li>将您的系统升级到当前版本
+提供给当前版本系统的软件包都会被定期重新构建，这些新的软件包将会包含全部安全补丁。  </li>
+</ul>
+<p>考虑跟进<a href="https://lists.openbsd.org/cgi-bin/mj_wwwusr?func=lists-long-full&amp;extra=ports-changes">ports-changes</a>邮件列表来收到关于port软件包更新的提醒。  </p>
+<h2 id="系统守护进程">系统守护进程<a class="headerlink" href="#系统守护进程" title="Permanent link">&para;</a></h2>
+<p>系统守护进程（换而言之，“服务”）由<a href="https://man.openbsd.org/rc">rc(8)</a>脚本通过<a href="https://man.openbsd.org/rc.d">rc.d(8)</a>启动，停止和控制。<br />
+大多数随OpenBSD发布的守护进程和服务由在<a href="https://man.openbsd.org/rc.conf.8">/etc/rc.conf(8)</a>定义的变量在启动时控制。你将会看到类似以下的内容：</p>
+<pre><code>httpd_flags=NO
+</code></pre>
+<p>这表示<a href="https://man.openbsd.org/httpd.8">httpd(8)</a>不会在启动时由<a href="https://man.openbsd.org/rc.8">rc(8)</a>启动。每一行都含有对于此守护进程或服务的惯用例描述。<br />
+不要直接更改<a href="https://man.openbsd.org/rc.conf">rc.conf(8)</a>文件。取而代之地，使用<a href="https://man.openbsd.org/rcctl.8">rcctl(8)</a>工具来维护<code>/etc/rc.conf.local</code>文件。这样可以简化将来的系统升级，因为更改都发生在一个不会在升级时被修改的文件中。<br />
+例如，为了启动<a href="https://man.openbsd.org/apmd.8">apmd(8)</a>守护进程来进行CPU监控，可以进行以下操作：</p>
+<pre><code># rcctl enable apmd
+# rcctl set apmd flags -A
+# rcctl start apmd
+</code></pre>
+<h2 id="以其他用户身份执行命令">以其他用户身份执行命令<a class="headerlink" href="#以其他用户身份执行命令" title="Permanent link">&para;</a></h2>
+<p><a href="https://man.openbsd.org/doas.1">doas(1)</a>工具给予系统管理员授权特定用户以其他用户的身份运行某些命令的方式。普通用户可以运行管理员命令，而只需要验证自己的身份，不必得知root密码。<br />
+例如，如果doas工具被正确配置了，以下的命令将会显示root用户的<a href="https://man.openbsd.org/crontab.5">crontab(5)</a>文件：</p>
+<pre><code>$ doas -u root crontab -l
+</code></pre>
+<p><a href="https://man.openbsd.org/doas.1">doas(1)</a>调用命令的记录默认储存在<code>/var/log/secure</code>文件。阅读<a href="https://man.openbsd.org/doas.conf.5">doas.conf(5)</a>手册页来获得配置样例。  </p>
+<h2 id="编辑密码文件">编辑密码文件<a class="headerlink" href="#编辑密码文件" title="Permanent link">&para;</a></h2>
+<p>OpenBSD的主要密码文件位于<code>/etc/master.passwd</code>，此文件仅root可读。<a href="https://https://man.openbsd.org/pwd_mkdb">pwd_mkdb(8)</a>工具从主文件中生成通用可读的<code>/etc/passwd</code>文件和密码数据库（<code>/etc/pwd.db</code>以及<code>/etc/spwd.db</code>)。文件的格式位于<a href="https://man.openbsd.org/passwd.5">passwd(5)</a>手册页中。  </p>
+<h2 id="重置root密码">重置Root密码<a class="headerlink" href="#重置root密码" title="Permanent link">&para;</a></h2>
+<p>如果root密码被遗忘了，基本的重新获得访问权限的方式是通过启动单用户模式，挂载<code>/</code>和<code>/usr</code>分区再运行<a href="https://man.openbsd.org/passwd">passwd(1)</a>来更改root用户的密码。  </p>
+<ul>
+<li>启动到单用户模式。这一部分过程因平台而异。对于amd64及i386平台而言，<a href="https://www.openbsd.org/faq/faq14.html#BootAmd64">第二阶段引导程序(second stage boot loader)</a>为提供更改内核启动参数的机会而会等待几秒种时间。在这里可以向<a href="https://man.openbsd.org/OpenBSD-current/i386/boot">boot(8)</a>传入-s参数：</li>
+</ul>
+<pre><code>probing: pc0 com0 com1 mem[638K 1918M a20=on]
+disk: hd0+ hd1+
+&gt;&gt; OpenBSD/amd64 BOOT 3.33
+boot&gt; boot -s
+</code></pre>
+<ul>
+<li>挂载分区。<code>/</code>和<code>/usr</code>都需要以可读写方式被挂载。</li>
+</ul>
+<pre><code># fsck -p / &amp;&amp; mount -uw /
+# fsck -p /usr &amp;&amp; mount /usr
+</code></pre>
+<ul>
+<li>更改root密码。由于系统正运行在单用户模式下，你已经拥有了root特权，所以你不会再被要求提供当前密码。</li>
+</ul>
+<pre><code># passwd
+</code></pre>
+<ul>
+<li>启动到多用户模式。这可以通过按下CTRL-D组合键继续普通启动进程或者键入<code>reboot</code>来完成。  </li>
+</ul>
+<h2 id="时钟同步">时钟同步<a class="headerlink" href="#时钟同步" title="Permanent link">&para;</a></h2>
+<p><a href="https://www.openntpd.org/">OpenNTPD</a>是一个安全、简单且NTP兼容的在你的计算机上提供准确时间的方法。<a href="https://https://man.openbsd.org/ntpd">ntpd(8)</a>守护进程默认被激活且将会基于从NTP同伴收到的数据设置系统时间。一旦时间被正确的设置，其将会通过在<a href="https://man.openbsd.org/ntpd.conf">ntpd.conf(5)</a>中配置的时间服务器高精度地维持。在启动时，<code>ntpd</code>只会向前调整时间。如果您的时间已经被向后调整了，请使用<a href="https://man.openbsd.org/date">date(1)</a>手动调整时间。<br />
+若要将OpenNTPD作为服务器，请在<a href="https://man.openbsd.org/ntpd.conf">ntpd.conf(5)</a>文件中加入一行<code>listen on *</code>并重新启动守护进程。您也可以指定其仅监听某一个特定的地址或者接口。<br />
+当您将<a href="https://man.openbsd.org/ntpd">ntpd(8)</a>用于监听时，其他设备可能不能立刻同步它们的时间。这是因为直到本地时钟以一个合理的稳定水平被同步后，ntpd才会提供时间信息。一旦本地时钟达到此水平，一个"clock now synced"（时间已被同步）信息将会被写入<code>/var/log/daemon</code>。</p>
+<h2 id="时区">时区<a class="headerlink" href="#时区" title="Permanent link">&para;</a></h2>
+<p>默认OpenBSD假设您的硬件时间被设置为协调世界时（UTC）而不是本地时间。这在<a href="https://www.openbsd.org/faq/faq4.html#Multibooting">多启动(multibooting)</a>时会产生问题。许多其他的操作系统可以进行相同的配置进而一同解决问题。<br />
+如果将硬件时间设置为UTC时间确实是一个问题，您可以通过<a href="https://man.openbsd.org/sysctl.conf">sysctl.conf(5</a>更改OpenBSD的默认行为。例如，将下面这一行写入<code>/etc/sysctl.conf</code>可以配置OpenBSD将硬件时间视为美国东部标准时间（慢于UTC时间5个小时，即减去300分钟）：</p>
+<pre><code>kern.utc_offset=-300
+</code></pre>
+<p>查看<a href="https://man.openbsd.org/sysctl.2">sysctl(2)</a>手册页来获取更多信息。<br />
+请注意硬件时间必须在OpenBSD启动前已经按照以上的偏移量被设置，否则系统时间将会在启动时被不正确地调整。<br />
+一般地，时区（time zone）在安装过程中被设置。如果你需要更改时区，你可以创建一个对在<code>/usr/share/zoneinfo</code>中适当时区文件的符号链接。例如，以下命令可以将设备设置为使用EST5EDT时区作为新的本地时区。  </p>
+<pre><code># ln -fs /usr/share/zoneinfo/EST5EDT /etc/localtime
+</code></pre>
+<p>亦见<a href="https://man.openbsd.org/date">date(1)</a>的手册页。  </p>
+<h2 id="字符集character-sets及区域">字符集（Character Sets）及区域<a class="headerlink" href="#字符集character-sets及区域" title="Permanent link">&para;</a></h2>
+<p>OpenBSD基础系统完全支持ASCII字符集和编码，并且部分支持Unicode字符集的部分UTF-8编码。基础系统不支持其他编码，但是ports可以被用来处理它们。UTF-8支持的程度和默认编码配置受程序与库的影响很大。<br />
+为了在支持的地方使用Unicode字符集，将<code>LC_CTYPE</code>环境变量的值设置为<code>en_US.UTF-8</code>：</p>
+<ul>
+<li>如果您通过<a href="https://man.openbsd.org/xenodm">xenodm</a>登陆，请在启动窗口管理器(window manager)前向<code>~/.xsession</code>文件添加<code>export LC_CTYPE="en_US.UTF-8"</code>。对于详细的解释，请见<a href="https://www.openbsd.org/faq/faq11.html#CustomizingX">自定义X系统</a>。  </li>
+<li>如果您通过文本控制台(text console)登陆，向您的<code>~/.profile</code>文件中添加<code>export LC_CTYPE="en_US.UTF-8"</code>。文本控制台的UTF-8编码支持尚在开发之中，因此一些非ASCII字符可能显示不正确。  </li>
+</ul>
+<p>当您通过<a href="https://man.openbsd.org/ssh">ssh(1)</a>登陆到远程系统时，<code>LC_TYPE</code>环境变量不会从远程系统传播至本地。您必须确保本地终端的字符编码在连接前已被设置为远程系统所用的字符编码。如果远程系统的字符编码未知或者不被OpenBSD所支持，请确保您正使用默认的<a href="https://man.openbsd.org/xterm">xterm(1)</a>配置并在连接后在远程Shell中将字符编码设置为<code>LC_CTYPE=en_US.UTF-8</code>。<br />
+OpenBSD基础系统完全忽略除了<code>LC_CTYPE</code>之外的一切地区相关环境变量；即使<code>LC_ALL</code>与<code>LANG</code>也仅仅影响字符编码。一些ports源码包可能会使用其他的<code>LC_*</code>环境变量，但是这种行为以及将<code>LC_CTYPE</code>环境变量设置为除了<code>C</code>，<code>POSIX</code>或<code>en_US.UTF-8</code>之外的任何值都是不被提倡的。  </p>
+<h2 id="使用skey">使用S/Key<a class="headerlink" href="#使用skey" title="Permanent link">&para;</a></h2>
+<p>S/Key是一套“一次性密码（one-time password）”验证系统。它通过一个哈希函数（hash function）从用户的密钥生成一个一次性密码并接受来自服务器的验证。这些哈希函数包括：<a href="https://man.openbsd.org/md5">md5</a>，<a href="https://man.openbsd.org/sha1">sha1</a>与<a href="https://man.openbsd.org/rmd160">rmd160</a>。<br />
+<strong>警告</strong>：一次性密码系统<strong>仅仅</strong>保护验证信息。窃听者仍然可以访问私有信息。此外，如果您正在访问一个安全的系统A，建议您通过另一个可信的系统B来进行这一点。这样可以确保没有人能够通过记录您的击键或者记录、伪造您的终端设备来得到对系统A的访问权限。  </p>
+<h3 id="设置skey">设置S/Key<a class="headerlink" href="#设置skey" title="Permanent link">&para;</a></h3>
+<p>在开始之前，<code>/etc/skey</code>目录必须被创建。如果这个目录不存在，通过以下命令以超级用户身份创建它：</p>
+<pre><code># skeyinit -E
+</code></pre>
+<p>然后使用<a href="https://man.openbsd.org/skyeinit">skeyinit(1)</a>来初始化您的S/Key。您首先需要输入您的登陆密码，此后您会被要求设置您的S/Key口令，此口令必须至少10字符长。  </p>
+<pre><code>$ skeyinit
+Password:
+[Adding ericj with md5]
+Enter new secret passphrase:
+Again secret passphrase:
+
+ID ericj skey is otp-md5 100 oshi45820
+Next login password: HAUL BUS JAKE DING HOT HOG
+</code></pre>
+<p>请注意在最后两行中的信息。程序用来创建您的S/Key密钥的算法是<a href="https://man.openbsd.org/otp-md5">otp-md5(1)</a>，序列号是100并且密钥是<code>oshi45820</code>。这六个短短的单词<code>HAUL BUS JAKE DING HOT HOG</code>构成了具有序列号100的S/Key密钥。</p>
+<h3 id="生成skey密码">生成S/Key密码<a class="headerlink" href="#生成skey密码" title="Permanent link">&para;</a></h3>
+<p>为了为下一次登陆生成S/Key密码，使用<a href="https://man.openbsd.org/skeyinfo">skeyinfo(1)</a>命令来找到我们要输入的密钥。  </p>
+<pre><code>$ skeyinfo -v
+otp-md5 95 oshi45820
+$ otp-md5 95 oshi45820
+Enter secret passphrase:
+NOOK CHUB HOYT SAC DOLE FUME
+</code></pre>
+<p>为了生成一组S/Key密钥，运行：</p>
+<pre><code>$ otp-md5 -n 5 95 oshi45820
+Enter secret passphrase:
+91: SHIM SET LEST HANS SMUG BOOT
+92: SUE ARTY YAW SEED KURD BAND
+93: JOEY SOOT PHI KYLE CURT REEK
+94: WIRE BOGY MESS JUDE RUNT ADD
+95: NOOK CHUB HOYT SAC DOLE FUME
+</code></pre>
+<h3 id="使用skey密钥登陆">使用S/Key密钥登陆<a class="headerlink" href="#使用skey密钥登陆" title="Permanent link">&para;</a></h3>
+<p>这是一个使用S/Key登陆到在<code>localhost</code>的ftp服务器的示例。为了启用S/Key登陆，您需要在您的登陆名后添加<code>:skey</code>后缀。  </p>
+<pre><code>$ ftp localhost
+Connected to localhost.
+220 oshibana.shin.ms FTP server (Version 6.5/OpenBSD) ready.
+Name (localhost:ericj): ericj:skey
+331- otp-md5 93 oshi45820
+331 S/Key Password: JOEY SOOT PHI KYLE CURT REEK
+[...]
+230 User ericj logged in.
+Remote system type is UNIX.
+Using binary mode to transfer files.
+ftp&gt; quit
+221 Goodbye.
+</code></pre>
+<p>相似的，对于<a href="https://man.openbsd.org">ssh(1)</a>：  </p>
+<pre><code>$ ssh -l ericj:skey localhost
+otp-md5 91 oshi45821
+S/Key Password: SHIM SET LEST HANS SMUG BOOT
+Last login: Thu Apr  7 12:21:48 on ttyp1 from 156.63.248.77
+$
+</code></pre>
+<h2 id="目录服务">目录服务<a class="headerlink" href="#目录服务" title="Permanent link">&para;</a></h2>
+<p>OpenBSD可以被用做存储用户凭据，用户组信息和其他网络相关信息的数据库。<br />
+当然，您也可以在OpenBSD上使用各种各样的目录服务。但是YP是唯一一个可以直接从类似<a href="https://man.openbsd.org/getpwent">getpwent(3)</a>，<a href="https://man.openbsd.org/getgrent">getgrent(3)</a>，<a href="https://man.openbsd.org/gethostbyname">gethostbyname(3)</a>等的标准C库函数中被调用的。因此，如果您将您的数据保存在一个YP数据库中，您不再需要将它拷贝到类似<a href="https://man.openbsd.org/master.passwd">master.passwd(5)</a>的文件中就可以直接使用它，例如验证系统用户。<br />
+YP是一个Sun Microsystems NIS（网络信息系统，Network Information System）兼容的目录服务。请见<a href="https://man.openbsd.org/yp">yp(8)</a>来得到可用的手册页的总览。请仔细阅读，因为一些其他包含目录服务的操作系统可能使用了相似的名字但是却是不兼容的，例如NIS+。<br />
+为了使用除YP之外的目录服务，您可以从目录中将数据抽取到本地配置文件中，或者使用一个到目录的YP前端。例如，您可以使用<code>sysutils/login_ldap</code>port实现前者，而<a href="https://man.openbsd.org/ypldap">ypldap(8)</a>守护进程提供了后者。<br />
+对于一些应用而言，简单的在几台设备之间使用类似<a href="https://man.openbsd.org/rdist">rdist(1)</a>，<a href="https://man.openbsd.org/cron">cron(8)</a>，<a href="https://man.openbsd.org/scp">scp(1)</a>或<code>rsync</code>（在ports源中可用）的工具同步少量配置文件也可以被看作一个简单且健壮的替代方案。  </p>
+<h3 id="yp安全策略">YP安全策略<a class="headerlink" href="#yp安全策略" title="Permanent link">&para;</a></h3>
+<p>为了兼容性因素，所有构建金OpenBSD的YP实现中的安全特性默认都被切换为<em>off</em>（即关闭）。即使所有安全特性全部被打开，NIS协议由于两个原因依然是不安全的：所有的数据，包括像密码哈希值一样的敏感数据都在网络中以明文传递，并且服务器和客户端都不能可靠地验证对方的身份。<br />
+因此，在设置任何YP服务器前，您应当考虑这些故有的安全缺点是否在您的应用环境中是可接受的。特别地，如果可能的攻击者能够在物理上访问您的网络，YP的缺点就更加显著了。任何拥有在您传输IP流量的网段中的设备的root权限的人都可以绑定（bind）到您的YP域并访问其数据。在一些情况下，将YP数据通过SSL或者IPSec通道传输可能是一个可用的选项。  </p>
+<h2 id="设置一个yp服务器">设置一个YP服务器<a class="headerlink" href="#设置一个yp服务器" title="Permanent link">&para;</a></h2>
+<p>一个YP服务器服务于一组被叫做“域”（domain）的客户端。您应该首先选择一个域名（domain name）；它应该是一个不以任何方式与DNS域名相关的任意字符串。选择一个像是“Eepoo5vi”的随机名字能够略微增强安全性，尽管这种安全效果主要来源于名字的模糊性。在您需要维护几个不同的YP域时，使用类似“sales”，“marketing”和“research”的描述性名字可能是更好的选择，这样可以预防系统管理员因为模糊性而产生的问题。而且请注意：一些版本的SunOS要求使用主机的DNS域名，所以您的选择可能在包含这些主机的网络中受到限制。<br />
+使用<a href="https://man.openbsd.org/domainname">domainname(1)</a>工具来设置域名，并将它添加到<a href="https://man.openbsd.org/defaultdomain">defaultdomain(5)</a>文件中来使其在系统启动时被自动设置。  </p>
+<pre><code># echo &quot;puffynet&quot; &gt; /etc/defaultdomain
+# domainname `cat /etc/defaultdomain`
+</code></pre>
+<p>使用以下交互式命令来初始化YP服务器：</p>
+<pre><code># ypinit -m
+</code></pre>
+<p>此时，可能还没有必要设置次服务器（slave server）。为了添加次服务器，您可以此后再次带有<code>-u</code>选项运行<a href="https://man.openbsd.org/ypinit">ypinit(8)</a>命令。为每一个域至少设置一台次服务器对于避免服务中断是一个有用的方法。例如，如果主服务器（master server）宕机或丢失网络连接，试图访问YP映射（YP map）的客户端进程将会无限期阻塞直到它们收到请求的信息。因此，YP服务中断通常会导致直到YP服务恢复，客户端主机完全不可用。<br />
+决定储存源文件的位置来生成您的YP映射。保持服务器配置文件与被用于提供服务的配置文件分离有助于控制被共享和不会被共享的信息，所以默认的<code>/etc/</code>目录通常不是最好的选择。<br />
+更改源目录最大的不便利之处是您不能再使用像是<a href="https://man.openbsd.org/user">user(8)</a>和<a href="https://man.openbsd.org/group">group(8)</a>的工具添加，删除和修改该用户。取而代之地，您必须使用一个文本编辑器来编辑它们。<br />
+要定义源目录，修改文件<code>/var/yp/`domainname`/Makefile</code>并更改<code>DIR</code>变量，例如：</p>
+<pre><code>DIR=/etc/yp/src/puffynet
+</code></pre>
+<p>考虑自定义在<code>/var/yp/`domainname`/Makefile</code>中的其它变量。细节请见<a href="https://man.openbsd.org/Makefile.yp">Makefile.yp(8)</a>。<br />
+例如，即使在您使用默认的源目录<code>/etc</code>时，您通常在客户端主机上也不需要所有存在在服务器上的用户和组。特别地，不共享root账户并保密root密码的哈希值经常是有益于安全的。检查<code>MINUID</code>，<code>MAXUID</code>，<code>MINGID</code>和<code>MAXGID</code>的值并根据您的需要调整它们。<br />
+如果您的YP客户端全部运行在OpenBSD或FreeBSD系统上，通过在<code>/var/yp/</code>domainname`/Makefile<code>中设置```UNSECURE=""</code>来从<code>passwd</code>映射中移除加密的密码。<br />
+不再建议曾经直接修改<code>/var/yp/Makefile.yp</code>的做法。对该文件的修改仅影响修改之后初始化的域，却不影响在此之前已经初始化的域。所以这是一种容易出错的方式：您正冒着期望的更改不起作用和忘记它们已对从未期望着生效的域产生影响的风险。<br />
+您可以创建源目录并且向其中写入您需要的配置文件。详见<a href="https://man.openbsd.org/Makefile.yp">Makefile.yp(8)</a>来了解YP映射需要哪些源文件。参照<a href="https://man.openbsd.org/passwd">passwd(5)</a>，<a href="https://man.openbsd.org/group">group(5)</a>，<a href="https://man.openbsd.org/hosts">hosts(5)</a>等等以及查阅<code>/etc/</code>中的例子来查看单独的配置文件格式。<br />
+使用以下的命令创建您初始版本的YP映射：</p>
+<pre><code># cd /var/yp
+# make
+</code></pre>
+<p>不要在意现在来自<a href="https://man.openbsd.org/yppush">yppush(8)</a>的错误信息。YP服务器还没有运行。<br />
+YP使用<a href="https://man.openbsd.org/rpc">rpc(3)</a>（远程过程调用，remote procedure calls）与客户端通信，所以有必要激活<a href="https://man.openbsd.org/portmap">portmap(8)</a>。为了完成此目的，使用<a href="https://man.openbsd.org/rcctl">rcctl(8)</a>。</p>
+<pre><code># rcctl enable portmap
+# rcctl start portmap
+</code></pre>
+<p>考虑使用<a href="https://man.openbsd.org/securenet">securenet(5)</a>或YP服务器的守护进程的安全特性<a href="https://man.openbsd.org/ypsev.acl">ypserv.acl(5)</a>。但请意识到这两者都仅提供基于IP的访问控制。因此，它们只能在可能的攻击者既没有对传输您的YP流量的网段中的硬件的物理访问权限也没有对任何连接到这些网络的设备的root访问权限的情况下才能起到作用。<br />
+最终，启动YP服务器守护进程：</p>
+<pre><code># rcctl enable ypserv
+# rcctl start ypserv
+</code></pre>
+<p>为了测试新的服务器，考虑让其作为自己的客户端，按照下一节的第一部分。在您不希望服务器使用它自己的映射时，您可以在测试后使用以下命令禁用客户端部分：</p>
+<pre><code># rcctl stop ypbind
+# rcctl disable ypbind
+</code></pre>
+<p>记得每一次您修改了源为YP映射的文件后，您必须重新生成您的YP映射。  </p>
+<pre><code># cd /var/yp
+# make
+</code></pre>
+<p>这将更新在<code>/var/yp/`domainname```中的一切数据库文件，只有一个例外：</code>ypservers.db<code>，该文件列出了与该域关联的一切YP主服务器和次服务器并由</code>ypinit -m<code>命令直接创建且仅由</code>ypinit -u<code>命令修改。当您意外地删除了它时，运行</code>ypinit -u``来从修改记录中重新创建它。  </p>
+<h2 id="设置一个yp客户端">设置一个YP客户端<a class="headerlink" href="#设置一个yp客户端" title="Permanent link">&para;</a></h2>
+<p>设置一个YP客户端主要包含独立的两部分。首先，您必须启动客户端的YP守护进程。完成下面的步骤将会使您能够从YP服务器访问数据，但是这些数据不会被系统所使用。<br />
+像是在服务端一样，您必须设置域名并激活端口映射器（portmapper）：</p>
+<pre><code># echo &quot;puffynet&quot; &gt; /etc/defaultdomain
+# domainname `cat /etc/defaultdomain`
+# rcctl enable portmap
+# rcctl start portmap
+</code></pre>
+<p>我们建议您在<code>/etc/yp`domainname```配置文件中提供一个YP服务器的列表。否则，YP客户端守护进程将使用网络广播来查找它自己所属的域的服务器。显式制定服务器使得服务更加健壮也略微减少了被攻击的可能性。如果您还没有设置任何从服务器，请仅将主服务器的主机名（host name）写入</code>/etc/yp/`domainname```文件中。<br />
+通过<a href="https://man.openbsd.org/ypbind">ypbind(8)</a>激活和启动YP客户端守护进程。  </p>
+<pre><code># rcctl enable ypbind
+# rcctl start ypbind
+</code></pre>
+<p>如果一切运行良好，您应该能够使用<a href="https://man.openbsd.rog/ypcat">ypcat(1)</a>向YP服务器查询并得到您的passwd映射。  </p>
+<pre><code># ypcat passwd
+bob:*:5001:5000:Bob Nuggets:/home/bob:/usr/local/bin/zsh
+...
+</code></pre>
+<p>另一个用来调试您的YP设置的有用工具是<a href="https://man.openbsd.org/ypmatch">ypmatch(1)</a>。<br />
+配置YP客户端的第二部分需要编辑本地配置文件来使不同的系统设施使用特定的YP映射。不是所有的服务器共享的所有标准映射都能被操作系统所使用，同时一些服务器也提供附加的非标准映射，但是您并非必须使用它们的全部。哪些可用的映射应该或不应该使用，以及应该出于什么目的被使用完全取决于客户端主机系统的管理员。<br />
+阅读<a href="https://man.openbsd.org/Makefile.yp">Makefile.yp(8)</a>来得到一个包含标准YP映射和它们标准用法的列表。<br />
+如果您想要引入来自YP域的全部用户账号，在主密码文件中添加默认YP标记（default YP marker）并重新构建密码数据库：</p>
+<pre><code># echo '+:*::::::::' &gt;&gt; /etc/master.passwd
+# pwd_mkdb -p /etc/master.passwd
+</code></pre>
+<p>关于详细的挑选要引入的用户账户的方式，请见<a href="https://man.openbsd.org/passwd.5">passwd(5)</a>的手册页。使用<a href="https://man.openbsd.org/id">id(1)</a>工具来测试选中的账户是否真正生效。<br />
+如果您想要在客户端系统上引入来自YP域的全部用户组，在用户组配置文件中添加默认YP标记：  </p>
+<pre><code># echo '+:*::' &gt;&gt; /etc/group
+</code></pre>
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="页脚">
+      
+        
+        <a href="../faq4/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 安装指南" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              安装指南
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../faq14/" class="md-footer__link md-footer__link--next" aria-label="下一页: 配置磁盘" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              配置磁盘
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2021–2022 OpenBSD 中文结社贡献者
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "search": "../../assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.e1a181d9.min.js"></script>
+      
+    
+  </body>
+</html>

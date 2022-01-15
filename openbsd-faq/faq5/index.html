@@ -1,0 +1,1427 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.3">
+    
+    
+      
+        <title>从源码构建系统 - OpenBSD 中文结社</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.edf004c2.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.e6a45f82.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#ff6e42">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="deep-orange" data-md-color-accent="orange">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#openbsd-faq---从源码构建系统" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="OpenBSD 中文结社" class="md-header__button md-logo" aria-label="OpenBSD 中文结社" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OpenBSD 中文结社
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              从源码构建系统
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/openbsd-zh-association/docs-openbsd-zh/" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="OpenBSD 中文结社" class="md-nav__button md-logo" aria-label="OpenBSD 中文结社" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    OpenBSD 中文结社
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/openbsd-zh-association/docs-openbsd-zh/" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        主页
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          OpenBSD FAQ
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="OpenBSD FAQ" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          OpenBSD FAQ
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq1/" class="md-nav__link">
+        OpenBSD 简介
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq4/" class="md-nav__link">
+        安装指南
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq10/" class="md-nav__link">
+        系统管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq14/" class="md-nav__link">
+        配置磁盘
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq15/" class="md-nav__link">
+        软件包管理
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          从源码构建系统
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        从源码构建系统
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#openbsd-的-flavors" class="md-nav__link">
+    OpenBSD 的 flavors
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#开发版快照" class="md-nav__link">
+    开发版快照
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#从源码构建-openbsd" class="md-nav__link">
+    从源码构建 OpenBSD
+  </a>
+  
+    <nav class="md-nav" aria-label="从源码构建 OpenBSD">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#升级到最新的可用二进制文件" class="md-nav__link">
+    升级到最新的可用二进制文件
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#获取源码" class="md-nav__link">
+    获取源码
+  </a>
+  
+    <nav class="md-nav" aria-label="获取源码">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#避免使用-root-权限" class="md-nav__link">
+    避免使用 Root 权限
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#获取--stable" class="md-nav__link">
+    获取 -stable
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#获取--current" class="md-nav__link">
+    获取 -current
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#构建-openbsd" class="md-nav__link">
+    构建 OpenBSD
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#进一步阅读构建过程" class="md-nav__link">
+    进一步阅读构建过程
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#制作一个发行版" class="md-nav__link">
+    制作一个发行版
+  </a>
+  
+    <nav class="md-nav" aria-label="制作一个发行版">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#设置你的系统" class="md-nav__link">
+    设置你的系统
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#使用一个-mfs-noperm-分区" class="md-nav__link">
+    使用一个 mfs noperm 分区
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#构建-x" class="md-nav__link">
+    构建 X
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#编译时的常见问题" class="md-nav__link">
+    编译时的常见问题
+  </a>
+  
+    <nav class="md-nav" aria-label="编译时的常见问题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#我忘了在-make-build-之前-make-obj" class="md-nav__link">
+    我忘了在 make build 之前 make obj
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#构建因为-signal-11-错误而停止" class="md-nav__link">
+    构建因为 “Signal 11” 错误而停止
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#其他问题和提示" class="md-nav__link">
+    其他问题和提示
+  </a>
+  
+    <nav class="md-nav" aria-label="其他问题和提示">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#将你的用户添加到-wobj-组" class="md-nav__link">
+    将你的用户添加到 wobj 组
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#给文件打标签" class="md-nav__link">
+    给文件打标签
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#如何跳过构建树的某些部分" class="md-nav__link">
+    如何跳过构建树的某些部分？
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#我可以使用交叉编译吗" class="md-nav__link">
+    我可以使用交叉编译吗？
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#定制化内核" class="md-nav__link">
+    定制化内核
+  </a>
+  
+    <nav class="md-nav" aria-label="定制化内核">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#boot-time-配置" class="md-nav__link">
+    Boot-Time 配置
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#使用-config8-更改内核选项" class="md-nav__link">
+    使用 config(8) 更改内核选项
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#构建一个自定义内核" class="md-nav__link">
+    构建一个自定义内核
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#准备-diff" class="md-nav__link">
+    准备 Diff
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq6/" class="md-nav__link">
+        网络配置
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq7/" class="md-nav__link">
+        键盘和显示控制
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq11/" class="md-nav__link">
+        X 窗口系统
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq13/" class="md-nav__link">
+        多媒体
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq16/" class="md-nav__link">
+        虚拟化
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq17/" class="md-nav__link">
+        虚拟专用网络
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          其他
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="其他" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          其他
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../others/upgrade70/" class="md-nav__link">
+        升级向导
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../others/report/" class="md-nav__link">
+        报告 BUG
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../others/current/" class="md-nav__link">
+        跟随 -current 和使用快照
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../others/mail/" class="md-nav__link">
+        邮件列表
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          贡献者指南
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="贡献者指南" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          贡献者指南
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contribution/contributing/" class="md-nav__link">
+        总述
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contribution/translation_rules/" class="md-nav__link">
+        翻译规范
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          关于
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="关于" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          关于
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/international-about/" class="md-nav__link">
+        International About（英文简介）
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/terminology/" class="md-nav__link">
+        术语表
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#openbsd-的-flavors" class="md-nav__link">
+    OpenBSD 的 flavors
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#开发版快照" class="md-nav__link">
+    开发版快照
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#从源码构建-openbsd" class="md-nav__link">
+    从源码构建 OpenBSD
+  </a>
+  
+    <nav class="md-nav" aria-label="从源码构建 OpenBSD">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#升级到最新的可用二进制文件" class="md-nav__link">
+    升级到最新的可用二进制文件
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#获取源码" class="md-nav__link">
+    获取源码
+  </a>
+  
+    <nav class="md-nav" aria-label="获取源码">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#避免使用-root-权限" class="md-nav__link">
+    避免使用 Root 权限
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#获取--stable" class="md-nav__link">
+    获取 -stable
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#获取--current" class="md-nav__link">
+    获取 -current
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#构建-openbsd" class="md-nav__link">
+    构建 OpenBSD
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#进一步阅读构建过程" class="md-nav__link">
+    进一步阅读构建过程
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#制作一个发行版" class="md-nav__link">
+    制作一个发行版
+  </a>
+  
+    <nav class="md-nav" aria-label="制作一个发行版">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#设置你的系统" class="md-nav__link">
+    设置你的系统
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#使用一个-mfs-noperm-分区" class="md-nav__link">
+    使用一个 mfs noperm 分区
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#构建-x" class="md-nav__link">
+    构建 X
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#编译时的常见问题" class="md-nav__link">
+    编译时的常见问题
+  </a>
+  
+    <nav class="md-nav" aria-label="编译时的常见问题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#我忘了在-make-build-之前-make-obj" class="md-nav__link">
+    我忘了在 make build 之前 make obj
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#构建因为-signal-11-错误而停止" class="md-nav__link">
+    构建因为 “Signal 11” 错误而停止
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#其他问题和提示" class="md-nav__link">
+    其他问题和提示
+  </a>
+  
+    <nav class="md-nav" aria-label="其他问题和提示">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#将你的用户添加到-wobj-组" class="md-nav__link">
+    将你的用户添加到 wobj 组
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#给文件打标签" class="md-nav__link">
+    给文件打标签
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#如何跳过构建树的某些部分" class="md-nav__link">
+    如何跳过构建树的某些部分？
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#我可以使用交叉编译吗" class="md-nav__link">
+    我可以使用交叉编译吗？
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#定制化内核" class="md-nav__link">
+    定制化内核
+  </a>
+  
+    <nav class="md-nav" aria-label="定制化内核">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#boot-time-配置" class="md-nav__link">
+    Boot-Time 配置
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#使用-config8-更改内核选项" class="md-nav__link">
+    使用 config(8) 更改内核选项
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#构建一个自定义内核" class="md-nav__link">
+    构建一个自定义内核
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#准备-diff" class="md-nav__link">
+    准备 Diff
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+<a href="https://github.com/openbsd-zh-association/docs-openbsd-zh/edit/master/docs/openbsd-faq/faq5.md" title="编辑此页" class="md-content__button md-icon">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+</a>
+
+
+<h1 id="openbsd-faq---从源码构建系统">OpenBSD FAQ - 从源码构建系统<a class="headerlink" href="#openbsd-faq---从源码构建系统" title="Permanent link">&para;</a></h1>
+<h2 id="openbsd-的-flavors">OpenBSD 的 flavors<a class="headerlink" href="#openbsd-的-flavors" title="Permanent link">&para;</a></h2>
+<p>OpenBSD 共有三个版本：</p>
+<ul>
+<li><strong>-release</strong>：每六个月发布一次的 OpenBSD 版本。</li>
+<li><strong>-current</strong>：开发分支。每六个月，-current 被标记并成为下一个 -release。</li>
+<li><strong>-stable</strong>：-release 分支，以及在<a href="https://www.openbsd.org/errata.html">勘误页面</a>上找到的补丁。当对 -current 进行非常重要的修复时，它们会向后移植到受支持的 -stable 分支。</li>
+</ul>
+<p>只有两个最新的 OpenBSD 版本才能获得基本系统的<a href="https://www.openbsd.org/faq/faq10.html#Patches">安全性和可靠性修复</a>。</p>
+<p>新用户应该运行 -stable 或 -release。话虽如此，许多人确实在生产系统上运行 -current 以帮助捕获错误和测试新功能。</p>
+<h2 id="开发版快照">开发版快照<a class="headerlink" href="#开发版快照" title="Permanent link">&para;</a></h2>
+<p>在 OpenBSD 新版本正式发布前，-current 分支的快照会被提供。这些是基于当时在代码树上的所有代码构建的快照。</p>
+<p>最近发布的快照通常是你运行 -current 所需的全部内容。如果你希望从源代码构建它，则需要从最新的快照开始。 检查<a href="https://www.openbsd.org/faq/current.html">以下 -current 和 using 快照页面</a>以了解从源代码构建所需的任何配置更改或额外步骤。</p>
+<p>你可能会发现快照中的错误。这是它们被构建和分发的原因之一。如果你发现错误，请确保<a href="https://www.openbsd.org/report.html">已报告</a>该错误。</p>
+<h2 id="从源码构建-openbsd">从源码构建 OpenBSD<a class="headerlink" href="#从源码构建-openbsd" title="Permanent link">&para;</a></h2>
+<p>从源代码构建 OpenBSD 涉及许多步骤：</p>
+<ul>
+<li>升级到最新的可用二进制文件</li>
+<li>获取源代码</li>
+<li>构建新内核和用户空间，如 <a href="https://man.openbsd.org/release">release(8)</a> 的第 2 步和第 3 步所述</li>
+<li>可选地，<a href="https://www.openbsd.org/faq/faq5.html#Release">发布</a>并<a href="https://www.openbsd.org/faq/faq5.html#Xbld">构建 X</a></li>
+</ul>
+<p>此常见问题部分旨在帮助您进行必要的准备。主要步骤请参考 <code>release(8)</code>。</p>
+<h3 id="升级到最新的可用二进制文件">升级到最新的可用二进制文件<a class="headerlink" href="#升级到最新的可用二进制文件" title="Permanent link">&para;</a></h3>
+<p>不要试图通过从源代码编译来从一个版本转到另一个版本。</p>
+<p>确保您安装了最新的可用二进制文件。如果你想构建 OpenBSD x.y-stable，请升级到最新的 OpenBSD x.y-release；如果你想要构建 -current，请升级到 -current 的最新快照。</p>
+<h3 id="获取源码">获取源码<a class="headerlink" href="#获取源码" title="Permanent link">&para;</a></h3>
+<p>OpenBSD 使用 <a href="https://savannah.nongnu.org/projects/cvs">CVS</a> 版本控制系统来管理其源代码。<a href="https://man.openbsd.org/cvs">cvs(1)</a> 程序用于将所需源的副本下载到本地机器进行编译。cvs(1) 的介绍和获取源代码树的详细说明位于<a href="https://www.openbsd.org/anoncvs.html">匿名 CVS</a> 页面。首先，你必须使用 <code>cvs checkout</code> 检出源代码树。之后，你可以通过运行 <code>cvs update</code> 将更新的文件拉到本地树来维护树。你还可以使用 <code>reposync</code> 程序维护本地 CVS 存储库，该程序作为一个<a href="https://www.openbsd.org/faq/faq15.html">包</a>提供。<a href="https://www.openbsd.org/anoncvs.html#rsync">匿名 CVS</a> 页面上也解释了设置存储库的镜像。</p>
+<h4 id="避免使用-root-权限">避免使用 Root 权限<a class="headerlink" href="#避免使用-root-权限" title="Permanent link">&para;</a></h4>
+<p>避免以 root 身份运行 cvs(1)。 默认情况下，<code>/usr/src</code> 目录（您的源代码通常所在的位置）可由 <code>wsrc</code> 组写入，因此请将需要使用 <code>cvs(1)</code> 的用户添加到该组。</p>
+<pre><code class="language-shell"># user mod -G wsrc &lt;你的用户名&gt;
+</code></pre>
+<p>此更改在下次登录时生效。</p>
+<p>如果要以该用户身份获取 xenocara 或 ports，则必须手动创建目录并设置其权限。</p>
+<pre><code class="language-shell"># cd /usr
+# mkdir -p   xenocara ports
+# chgrp wsrc xenocara ports
+# chmod 775  xenocara ports
+</code></pre>
+<h4 id="获取--stable">获取 -stable<a class="headerlink" href="#获取--stable" title="Permanent link">&para;</a></h4>
+<p>要获取 -stable <code>src</code> 树，请使用 -r 标志指定所需的分支：</p>
+<pre><code class="language-shell">$ cd /usr
+$ cvs -qd anoncvs@anoncvs.example.org:/cvs checkout -rOPENBSD_7_0 -P src
+</code></pre>
+<p>检出树后，你可以稍后更新它：</p>
+<pre><code class="language-shell">$ cd /usr/src
+$ cvs -q up -Pd -rOPENBSD_7_0
+</code></pre>
+<p>根据需要将 <code>src</code> 替换为 <code>xenocara</code> 或 <code>ports</code>。由于 OpenBSD 的所有部分都必须保持同步，因此你使用的所有树都应该同时检出和更新。</p>
+<h4 id="获取--current">获取 -current<a class="headerlink" href="#获取--current" title="Permanent link">&para;</a></h4>
+<p>要获取 -current <code>src</code> 树，您可以使用以下命令：</p>
+<pre><code class="language-shell">$ cd /usr
+$ cvs -qd anoncvs@anoncvs.example.org:/cvs checkout -P src
+</code></pre>
+<p>使用下列指令更新树：</p>
+<pre><code class="language-shell">$ cd /usr/src
+$ cvs -q up -Pd -A
+</code></pre>
+<p>将 <code>src</code> 替换为您想要的模块，例如 <code>xenocara</code> 或 <code>ports</code>。</p>
+<h3 id="构建-openbsd">构建 OpenBSD<a class="headerlink" href="#构建-openbsd" title="Permanent link">&para;</a></h3>
+<p>此时，你已准备好从源代码构建 OpenBSD。</p>
+<p>如果你正在构建 -current，请查看<a href="https://www.openbsd.org/faq/current.html">此页面</a>上列出的更改和特殊构建说明。</p>
+<p>按照 <a href="https://man.openbsd.org/release">release(8)</a> 的步骤 2 和 3 中的详细说明进行操作。</p>
+<h3 id="进一步阅读构建过程">进一步阅读构建过程<a class="headerlink" href="#进一步阅读构建过程" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="https://man.openbsd.org/mk.conf">mk.conf(5)</a></li>
+<li><a href="https://cvsweb.openbsd.org/src/Makefile">src/Makefile</a></li>
+<li><a href="https://cvsweb.openbsd.org/src/share/mk/bsd.README">/usr/share/mk/bsd.README</a></li>
+<li><a href="https://man.openbsd.org/config">config(8)</a></li>
+<li><a href="https://man.openbsd.org/options">options(4)</a> </li>
+</ul>
+<h2 id="制作一个发行版">制作一个发行版<a class="headerlink" href="#制作一个发行版" title="Permanent link">&para;</a></h2>
+<p>发行版（release）是可用于在另一个系统上安装或升级 OpenBSD 的完整文件集。一个示例用途是在一台快速的机器上构建 -stable，然后发布一个安装在所有其他机器上的版本。如果你只有一台运行 OpenBSD 的计算机，你真的没有任何理由发布一个版本，因为上面的构建过程会完成你需要的一切。</p>
+<p>关于发布的说明可在 <a href="https://man.openbsd.org/release">release(8)</a> 中找到。发布过程使用上面构建过程中 <code>/usr/obj</code> 目录中创建的二进制文件。</p>
+<p>注意：如果你希望通过 HTTP(s) 分发生成的文件集以供升级或安装脚本使用，你需要添加一个 <code>index.txt</code> 文件，其中包含新创建的版本中所有文件的列表。</p>
+<pre><code class="language-shell"># ls -nT &gt; index.txt
+</code></pre>
+<p>如果你想对你创建的集合进行加密签名，<a href="https://man.openbsd.org/signify">signify(1)</a> 手册页提供了有关如何执行此操作的详细信息。</p>
+<h3 id="设置你的系统">设置你的系统<a class="headerlink" href="#设置你的系统" title="Permanent link">&para;</a></h3>
+<p>发布发行版需要一个 <code>noperm</code> 分区。这允许构建基础设施在大部分过程中使用非特权 <code>build</code> 用户。</p>
+<p>使用 <code>noperm</code> <a href="https://man.openbsd.org/mount">mount(8)</a> 选项集在 <code>/dest</code> 上创建文件系统。 相应的 <a href="https://man.openbsd.org/fstab">fstab(5)</a> 行可能如下所示：</p>
+<pre><code class="language-shell">c73d2198f83ef845.m /dest ffs rw,nosuid,noperm 1 2
+</code></pre>
+<p>此文件系统的根目录必须由具有 700 权限的 <code>build</code> 用户拥有：</p>
+<pre><code class="language-shell"># chown build /dest
+# chmod 700   /dest
+</code></pre>
+<p>为 base 和 xenocara 创建 DESTDIR 目录：</p>
+<pre><code class="language-shell"># mkdir /dest/{,x}base
+</code></pre>
+<p>你的 <code>RELEASEDIR</code> 不需要位于 <code>noperm</code> 文件系统上。确保它归 <code>build</code> 所有并且至少具有 <code>u=rwx</code> 权限。</p>
+<h3 id="使用一个-mfs-noperm-分区">使用一个 mfs noperm 分区<a class="headerlink" href="#使用一个-mfs-noperm-分区" title="Permanent link">&para;</a></h3>
+<p>你可能希望使用 <a href="https://man.openbsd.org/mount_mfs">mfs</a> 分区而不是物理磁盘。在 <code>/etc/fstab</code> 中添加类似于此的行：</p>
+<pre><code class="language-shell">swap /dest mfs rw,nosuid,noperm,-P/var/dest,-s1.5G,noauto 0 0
+</code></pre>
+<p>创建原始的 DESTDIR 目录：</p>
+<pre><code class="language-shell"># mkdir -p /var/dest/{,x}base
+# chown -R build /var/dest
+# chmod -R 700   /var/dest
+</code></pre>
+<p>现在你可以在发布之前挂载 <code>/dest</code>：</p>
+<pre><code class="language-shell"># mount /dest
+</code></pre>
+<h2 id="构建-x">构建 X<a class="headerlink" href="#构建-x" title="Permanent link">&para;</a></h2>
+<p>从 <a href="https://www.x.org/wiki/">X.Org</a> v7 开始，X 转变为模块化构建系统，将 X.Org 源代码树拆分为三百多个或多或少的独立包。</p>
+<p>为了简化 OpenBSD 用户的操作，OpenBSD 开发了一个名为 <a href="https://xenocara.org/">Xenocara</a> 的元构建。该系统将 X 转换回一棵大树，以便在单一过程中完成构建。作为一个额外的好处，这个构建过程比以前的版本更类似于 OpenBSD 其余部分使用的构建过程。</p>
+<p>构建 X 的官方说明存在于 <a href="https://cvsweb.openbsd.org/xenocara/README">xenocara/README</a> 文件和 <a href="https://man.openbsd.org/release">release(8)</a> 的第 5 步中。</p>
+<h2 id="编译时的常见问题">编译时的常见问题<a class="headerlink" href="#编译时的常见问题" title="Permanent link">&para;</a></h2>
+<p>大多数情况下，构建过程中的问题是由于没有仔细遵循指示造成的。从最新的快照构建 -current 偶尔会出现真正的问题，但是构建 -release 或 -stable 时的失败几乎总是用户操作失误。</p>
+<p>大多数问题通常是以下情况之一：</p>
+<ul>
+<li>无法从<a href="https://www.openbsd.org/faq/faq5.html#BldBinary">合适的二进制文件</a>启动。</li>
+<li><a href="https://www.openbsd.org/faq/faq5.html#BldGetSrc">检查</a>树的错误分支。</li>
+<li>在构建 -current 之前忘记阅读 <a href="https://www.openbsd.org/faq/current.html">following -current</a>。</li>
+<li>在构建和安装新内核后跳过重启步骤。</li>
+</ul>
+<h3 id="我忘了在-make-build-之前-make-obj">我忘了在 <code>make build</code> 之前 <code>make obj</code><a class="headerlink" href="#我忘了在-make-build-之前-make-obj" title="Permanent link">&para;</a></h3>
+<p>通过在执行 <code>make obj</code> 之前执行 <code>make build</code>，你最终会得到分散在 <code>/usr/src</code> 目录中的目标文件。这是一件坏事。如果你希望避免再次重新获取整个 <code>src</code> 树，你可以尝试以下操作来清除 obj 文件：</p>
+<pre><code class="language-shell">$ cd /usr/src
+$ find . -type l -name obj -delete
+$ make cleandir
+$ rm -rf /usr/obj/*
+$ make obj
+</code></pre>
+<h3 id="构建因为-signal-11-错误而停止">构建因为 “Signal 11” 错误而停止<a class="headerlink" href="#构建因为-signal-11-错误而停止" title="Permanent link">&para;</a></h3>
+<p>从源代码构建 OpenBSD 和其他程序是一项对硬件要求较高的任务，需要大量使用 CPU、磁盘和内存。Signal 11 故障通常是由硬件问题引起的。</p>
+<p>你可能会发现最好修理或更换引起故障的组件，因为问题将来可能会以其他方式出现。</p>
+<p>有关更多信息，请参阅 <a href="https://www.bitwizard.nl/sig11/">Sig11 常见问题解答</a>。</p>
+<h2 id="其他问题和提示">其他问题和提示<a class="headerlink" href="#其他问题和提示" title="Permanent link">&para;</a></h2>
+<h3 id="将你的用户添加到-wobj-组">将你的用户添加到 <code>wobj</code> 组<a class="headerlink" href="#将你的用户添加到-wobj-组" title="Permanent link">&para;</a></h3>
+<p>如果你打算在源代码树中编译单个程序——例如，进行开发——你需要将你的用户添加到 <code>wobj</code> 组。这将允许你在 <code>/usr/obj</code> 读写文件。</p>
+<h3 id="给文件打标签">给文件打标签<a class="headerlink" href="#给文件打标签" title="Permanent link">&para;</a></h3>
+<p>作为开发人员的编辑器，<a href="https://man.openbsd.org/mg">mg(1)</a> 和 <a href="https://man.openbsd.org/vi">vi(1)</a> 内置了对 <a href="https://man.openbsd.org/ctags">ctags(1)</a> 文件的支持，允许你快速浏览源代码树。</p>
+<p>在大多数程序或库源目录中，您可以通过运行下列指令来创建 <code>./tags</code> 文件：</p>
+<pre><code class="language-shell">$ make tags
+</code></pre>
+<p>在构建和安装 <code>libc</code> 时，还会创建一个 <code>/var/db/libc.tags</code> 文件。</p>
+<p>默认情况下，每个架构的内核标签（kernel tags）位于 <code>/sys/arch/$(machine)/</code>。 你可以使用 <code>/sys/kern</code> 中的 <code>make</code> 标记创建这些文件。你可能希望以 root 身份运行 <code>make links</code> 以在每个目录和 <code>/var/db/</code> 中放置指向架构内核标记文件的符号链接。</p>
+<h3 id="如何跳过构建树的某些部分">如何跳过构建树的某些部分？<a class="headerlink" href="#如何跳过构建树的某些部分" title="Permanent link">&para;</a></h3>
+<p>使用 <a href="https://man.openbsd.org/mk.conf">mk.conf(5)</a> 的 <code>SKIPDIR</code> 选项。</p>
+<h3 id="我可以使用交叉编译吗">我可以使用交叉编译吗？<a class="headerlink" href="#我可以使用交叉编译吗" title="Permanent link">&para;</a></h3>
+<p>OpenBSD 系统中包含交叉编译工具，供开发人员使用以创建新平台。但是，它们不是为了一般用途而维护的。</p>
+<p>当开发人员提出对新平台的支持时，第一个重大测试之一就是原生构建（native-build）。从源代码构建系统会给操作系统和机器带来相当大的负载，并且可以很好地测试系统的实际工作情况。出于这个原因，OpenBSD 在构建所使用的平台上执行所有构建过程。</p>
+<h2 id="定制化内核">定制化内核<a class="headerlink" href="#定制化内核" title="Permanent link">&para;</a></h2>
+<p>自定义内核的三种方式：</p>
+<ul>
+<li>使用 <a href="https://man.openbsd.org/boot_config">boot_config(8)</a> 临时启动时配置</li>
+<li>使用 <a href="https://man.openbsd.org/config">config(8)</a> 永久修改已编译的内核</li>
+<li>编译自定义内核</li>
+</ul>
+<h3 id="boot-time-配置">Boot-Time 配置<a class="headerlink" href="#boot-time-配置" title="Permanent link">&para;</a></h3>
+<p>OpenBSD 的引导时（boot-time）内核配置 <a href="https://man.openbsd.org/boot_config">boot_config(8)</a> 允许管理员修改某些内核设置，例如启用或禁用对各种设备的支持，而无需重新编译内核本身。</p>
+<p>要进入用户内核配置（User Kernel Config, UKC），请在启动时使用 <code>-c</code> 选项：</p>
+<pre><code class="language-shell">Using drive 0, partition 3.
+Loading......
+probing: pc0 com0 com1 mem[638K 1918M a20=on]
+disk: hd0+ hd1+
+&gt;&gt; OpenBSD/amd64 BOOT 3.33
+boot&gt; boot hd0a:/bsd -c
+</code></pre>
+<p>这样做会弹出一个 UKC 提示。 键入 <code>help</code> 以获取可用命令的列表。</p>
+<p>使用 <a href="https://man.openbsd.org/boot_config">boot_config(8)</a> 仅提供临时更改，这意味着每次重新启动时都必须重复该过程。下一节将解释如何使更改永久化。</p>
+<h3 id="使用-config8-更改内核选项">使用 config(8) 更改内核选项<a class="headerlink" href="#使用-config8-更改内核选项" title="Permanent link">&para;</a></h3>
+<p>使用 <code>-e</code> 标志调用 <a href="https://man.openbsd.org/config">config(8)</a> 允许您在正在运行的系统上进入 UKC。所做的任何更改将在下次重新启动时生效。<code>-u</code> 标志测试以查看在引导期间是否对正在运行的内核进行了任何更改，这意味着您在引导系统时使用了 <code>boot -c</code> 进入 UKC。</p>
+<p>为避免用损坏的内核覆盖正在工作的内核的风险，请考虑使用 <code>-o</code> 标志将更改写入单独的内核文件以进行测试：</p>
+<pre><code class="language-shell"># config -e -o /bsd.new /bsd
+</code></pre>
+<p>这会将您的更改写入 <code>/bsd.new</code> 文件。 一旦你从这个新内核启动并验证一切正常，就可以将所需的更改放置在 <a href="https://man.openbsd.org/bsd.re-config">bsd.re-config(5)</a> 中使其永久化。这样做消除了在启动时选择内核的需要，并确保休眠和内核重新链接（kernel relinking）继续工作。</p>
+<h3 id="构建一个自定义内核">构建一个自定义内核<a class="headerlink" href="#构建一个自定义内核" title="Permanent link">&para;</a></h3>
+<p>OpenBSD 团队仅支持 <code>GENERIC</code> 和 <code>GENERIC.MP</code> 内核。<code>GENERIC</code> 内核配置是 <code>/sys/arch/$(machine)/conf/GENERIC</code> 和 <code>/sys/conf/GENERIC</code> 中选项的组合。报告自定义内核的问题几乎总是会导致你被告知尝试使用 <code>GENERIC</code> 内核重现该问题。</p>
+<p>首先阅读 <a href="https://man.openbsd.org/config">config(8)</a> 和 <a href="https://man.openbsd.org/options">options(4)</a> 手册页。以下步骤是编译自定义内核的一部分：</p>
+<pre><code class="language-shell">$ cd /sys/arch/$(machine)/conf
+$ cp GENERIC CUSTOM
+$ vi CUSTOM    # make your changes
+$ config CUSTOM
+$ cd ../compile/CUSTOM
+$ make
+</code></pre>
+<h2 id="准备-diff">准备 Diff<a class="headerlink" href="#准备-diff" title="Permanent link">&para;</a></h2>
+<p>如果你对要与开发人员共享的源代码进行了更改，请遵循以下约定：</p>
+<ul>
+<li>将你的 Diff（更改）基于 -current 进行总结。</li>
+<li>使用 <code>cvs diff -uNp</code> 生成 diff。</li>
+<li>通过电子邮件将你的 diff 以电子邮件的形式发送到<strong>技术</strong><a href="https://www.openbsd.org/mail.html">邮件列表</a>。请确保你的电子邮件客户端不会将空白处打乱。</li>
+</ul>
+<p>如果你使用的是 OpenBSD 源代码树的 git 镜像，请设置：</p>
+<pre><code class="language-shell">$ git config diff.noprefix true
+</code></pre>
+<p>在你的存储库中并像这样生成你的 diff：</p>
+<pre><code class="language-shell">$ git diff --relative .
+</code></pre>
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="页脚">
+      
+        
+        <a href="../faq15/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 软件包管理" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              软件包管理
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../faq6/" class="md-footer__link md-footer__link--next" aria-label="下一页: 网络配置" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              网络配置
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © 2021–2022 OpenBSD 中文结社贡献者
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "search": "../../assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.e1a181d9.min.js"></script>
+      
+    
+  </body>
+</html>
