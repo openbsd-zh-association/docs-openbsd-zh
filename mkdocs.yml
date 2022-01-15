@@ -21,6 +21,7 @@ nav:
       - 升级向导: 'others/upgrade70.md'
       - 报告 BUG: 'others/report.md'
       - 跟随 -current 和使用快照: 'others/current.md'
+      - 邮件列表: 'others/mail.md'
     - 贡献者指南:
       - 总述: 'contribution/contributing.md'
       - 翻译规范: 'contribution/translation_rules.md'
