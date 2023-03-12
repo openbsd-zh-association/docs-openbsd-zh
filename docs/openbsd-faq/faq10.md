@@ -5,18 +5,18 @@
 有以下获得这些修复的方式：
 
 - 应用二进制补丁（在amd64，arm64，i386架构上可用）
-[syspatch(8)](https://man.openbsd.org/syspatch)工具可以在任何一个支持的OpenBSD发行版中为任意文件升级安全或可靠性补丁。这是最快速也是最简单的将基础系统更新到最新的方式  
+[syspatch(8)](https://man.openbsd.org/syspatch)工具可以在任何一个支持的OpenBSD发行版中为任意文件升级安全或可靠性补丁。这是最快速也是最简单地将基础系统更新到最新的方式  
 - 升级系统到稳定（stable）版本
 通过[CVS](https://www.openbsd.org/anoncvs.html)拉取（或升级）您的源代码树，然后[重新编译](https://www.openbsd.org/stable.html)内核和用户程序。  
 - 分别为受影响的文件应用补丁
-虽然通过应用在补丁页上的修复往往要比通过CVS的检出和重构建更快一些，但是这种方式没有亘古不变的方法来做到这一点。有时候你必须为一个应用应用补丁并且重新编译之，有时还要更麻烦一些。  
+虽然通过应用在补丁页上的修复往往要比通过CVS的检出和重构建更快一些，但是这种方式没有亘古不变的方法来做到这一点。有时候你必须为一个应用打补丁并且重新编译之，有时还要更麻烦一些。  
 - 升级到当前（current）版本的系统
 由于所有的修复都被应用到当前版本的代码库中，将系统升级到最新的快照版本（snapshot）是一个不错的一次性完成所有修复的方式。但是快照版本的系统并不适用于所有人。
 
 为通过[包](https://www.openbsd.org/faq/faq15.html)安装的第三方软件提供的安全更新通常仅仅被向后移植到最近的发行版。为了应用它们，进行以下操作之一：
 
 - 使用二进制包（在amd64，arm64，i386，sparc64上可用）
-为发行版（release）和稳定版（stable）系统提供的更新的二禁止应用包被提供来定位安全问题或者进行其他主要的修复。您可以带有-u选项调用[pkg_add(1)](https://man.openbsd.org/pkg_add)来获得更新的软件包。  
+为发行版（release）和稳定版（stable）系统提供的更新的二进制应用包被提供来定位安全问题或者进行其他主要的修复。您可以带有-u选项调用[pkg_add(1)](https://man.openbsd.org/pkg_add)来获得更新的软件包。  
 - 使用稳定版的ports源码树
 拉取（或者更新）您的ports源码树，运行``/usr/ports/infastructure/bin/pkg_outdated``脚本来列出需要重新构建的软件包，然后在受到影响的port软件包目录中调用``make update``。某些情况下，已经存在的ports软件包需要在重新构建前被卸载。  
 - 将您的系统升级到当前版本
@@ -52,7 +52,7 @@ OpenBSD的主要密码文件位于``/etc/master.passwd``，此文件仅root可�
 ## 重置Root密码  
 如果root密码被遗忘了，基本的重新获得访问权限的方式是通过启动单用户模式，挂载`/`和`/usr`分区再运行[passwd(1)](https://man.openbsd.org/passwd)来更改root用户的密码。  
 
-- 启动到单用户模式。这一部分过程因平台而异。对于amd64及i386平台而言，[第二阶段引导程序(second stage boot loader)](https://www.openbsd.org/faq/faq14.html#BootAmd64)为提供更改内核启动参数的机会而会等待几秒种时间。在这里可以向[boot(8)](https://man.openbsd.org/OpenBSD-current/i386/boot)传入-s参数：
+- 启动到单用户模式。这一部分过程因平台而异。对于amd64及i386平台而言，[第二阶段引导程序(second stage boot loader)](https://www.openbsd.org/faq/faq14.html#BootAmd64)为提供更改内核启动参数的机会而会等待几秒钟时间。在这里可以向[boot(8)](https://man.openbsd.org/OpenBSD-current/i386/boot)传入-s参数：
 ```
 probing: pc0 com0 com1 mem[638K 1918M a20=on]
 disk: hd0+ hd1+
@@ -71,7 +71,7 @@ boot> boot -s
 - 启动到多用户模式。这可以通过按下CTRL-D组合键继续普通启动进程或者键入``reboot``来完成。  
 
 ## 时钟同步  
-[OpenNTPD](https://www.openntpd.org/)是一个安全、简单且NTP兼容的在你的计算机上提供准确时间的方法。[ntpd(8)](https://https://man.openbsd.org/ntpd)守护进程默认被激活且将会基于从NTP同伴收到的数据设置系统时间。一旦时间被正确的设置，其将会通过在[ntpd.conf(5)](https://man.openbsd.org/ntpd.conf)中配置的时间服务器高精度地维持。在启动时，``ntpd``只会向前调整时间。如果您的时间已经被向后调整了，请使用[date(1)](https://man.openbsd.org/date)手动调整时间。  
+[OpenNTPD](https://www.openntpd.org/)是一个安全、简单且NTP兼容的在你的计算机上提供准确时间的方法。[ntpd(8)](https://https://man.openbsd.org/ntpd)守护进程默认被激活且将会基于从NTP同伴收到的数据设置系统时间。一旦时间被正确地设置，其将会通过在[ntpd.conf(5)](https://man.openbsd.org/ntpd.conf)中配置的时间服务器高精度地维持。在启动时，``ntpd``只会向前调整时间。如果您的时间已经被向后调整了，请使用[date(1)](https://man.openbsd.org/date)手动调整时间。  
 若要将OpenNTPD作为服务器，请在[ntpd.conf(5)](https://man.openbsd.org/ntpd.conf)文件中加入一行``listen on *``并重新启动守护进程。您也可以指定其仅监听某一个特定的地址或者接口。  
 当您将[ntpd(8)](https://man.openbsd.org/ntpd)用于监听时，其他设备可能不能立刻同步它们的时间。这是因为直到本地时钟以一个合理的稳定水平被同步后，ntpd才会提供时间信息。一旦本地时钟达到此水平，一个"clock now synced"（时间已被同步）信息将会被写入``/var/log/daemon``。
 
@@ -94,9 +94,9 @@ OpenBSD基础系统完全支持ASCII字符集和编码，并且部分支持Unico
 为了在支持的地方使用Unicode字符集，将``LC_CTYPE``环境变量的值设置为``en_US.UTF-8``：
 
 - 如果您通过[xenodm](https://man.openbsd.org/xenodm)登陆，请在启动窗口管理器(window manager)前向``~/.xsession``文件添加``export LC_CTYPE="en_US.UTF-8"``。对于详细的解释，请见[自定义X系统](https://www.openbsd.org/faq/faq11.html#CustomizingX)。  
-- 如果您通过文本控制台(text console)登陆，向您的``~/.profile``文件中添加``export LC_CTYPE="en_US.UTF-8"``。文本控制台的UTF-8编码支持尚在开发之中，因此一些非ASCII字符可能显示不正确。  
+- 如果您通过文本控制台(text console)登录，向您的``~/.profile``文件中添加``export LC_CTYPE="en_US.UTF-8"``。文本控制台的UTF-8编码支持尚在开发之中，因此一些非ASCII字符可能显示不正确。  
 
-当您通过[ssh(1)](https://man.openbsd.org/ssh)登陆到远程系统时，``LC_TYPE``环境变量不会从远程系统传播至本地。您必须确保本地终端的字符编码在连接前已被设置为远程系统所用的字符编码。如果远程系统的字符编码未知或者不被OpenBSD所支持，请确保您正使用默认的[xterm(1)](https://man.openbsd.org/xterm)配置并在连接后在远程Shell中将字符编码设置为``LC_CTYPE=en_US.UTF-8``。  
+当您通过[ssh(1)](https://man.openbsd.org/ssh)登录到远程系统时，``LC_TYPE``环境变量不会从远程系统传播至本地。您必须确保本地终端的字符编码在连接前已被设置为远程系统所用的字符编码。如果远程系统的字符编码未知或者不被OpenBSD所支持，请确保您正使用默认的[xterm(1)](https://man.openbsd.org/xterm)配置并在连接后在远程Shell中将字符编码设置为``LC_CTYPE=en_US.UTF-8``。  
 OpenBSD基础系统完全忽略除了``LC_CTYPE``之外的一切地区相关环境变量；即使``LC_ALL``与``LANG``也仅仅影响字符编码。一些ports源码包可能会使用其他的``LC_*``环境变量，但是这种行为以及将``LC_CTYPE``环境变量设置为除了``C``，``POSIX``或``en_US.UTF-8``之外的任何值都是不被提倡的。  
 
 ## 使用S/Key  
@@ -108,7 +108,7 @@ S/Key是一套“一次性密码（one-time password）”验证系统。它通�
 ```
 # skeyinit -E
 ```  
-然后使用[skeyinit(1)](https://man.openbsd.org/skyeinit)来初始化您的S/Key。您首先需要输入您的登陆密码，此后您会被要求设置您的S/Key口令，此口令必须至少10字符长。  
+然后使用[skeyinit(1)](https://man.openbsd.org/skyeinit)来初始化您的S/Key。您首先需要输入您的登录密码，此后您会被要求设置您的S/Key口令，此口令必须至少10字符长。  
 ```
 $ skeyinit
 Password:
@@ -122,7 +122,7 @@ Next login password: HAUL BUS JAKE DING HOT HOG
 请注意在最后两行中的信息。程序用来创建您的S/Key密钥的算法是[otp-md5(1)](https://man.openbsd.org/otp-md5)，序列号是100并且密钥是``oshi45820``。这六个短短的单词``HAUL BUS JAKE DING HOT HOG``构成了具有序列号100的S/Key密钥。
 
 ### 生成S/Key密码  
-为了为下一次登陆生成S/Key密码，使用[skeyinfo(1)](https://man.openbsd.org/skeyinfo)命令来找到我们要输入的密钥。  
+为了为下一次登录生成S/Key密码，使用[skeyinfo(1)](https://man.openbsd.org/skeyinfo)命令来找到我们要输入的密钥。  
 ```
 $ skeyinfo -v
 otp-md5 95 oshi45820
@@ -141,8 +141,8 @@ Enter secret passphrase:
 95: NOOK CHUB HOYT SAC DOLE FUME
 ```   
 
-### 使用S/Key密钥登陆 
-这是一个使用S/Key登陆到在``localhost``的ftp服务器的示例。为了启用S/Key登陆，您需要在您的登陆名后添加``:skey``后缀。  
+### 使用S/Key密钥登录 
+这是一个使用S/Key登录到在``localhost``的ftp服务器的示例。为了启用S/Key登录，您需要在您的登录名后添加``:skey``后缀。  
 ```
 $ ftp localhost
 Connected to localhost.
@@ -174,7 +174,7 @@ YP是一个Sun Microsystems NIS（网络信息系统，Network Information Syste
 对于一些应用而言，简单的在几台设备之间使用类似[rdist(1)](https://man.openbsd.org/rdist)，[cron(8)](https://man.openbsd.org/cron)，[scp(1)](https://man.openbsd.org/scp)或``rsync``（在ports源中可用）的工具同步少量配置文件也可以被看作一个简单且健壮的替代方案。  
 
 ### YP安全策略  
-为了兼容性因素，所有构建金OpenBSD的YP实现中的安全特性默认都被切换为*off*（即关闭）。即使所有安全特性全部被打开，NIS协议由于两个原因依然是不安全的：所有的数据，包括像密码哈希值一样的敏感数据都在网络中以明文传递，并且服务器和客户端都不能可靠地验证对方的身份。  
+为了兼容性因素，所有构建金OpenBSD的YP实现中的安全特性默认都被切换为*off*（即关闭）。即使所有安全特性全部被打开，NIS协议由于两个原因依然是不安全的：所有的数据，包括像密码哈希值一样的敏感数据都在网络中以明文传输，并且服务器和客户端都不能可靠地验证对方的身份。  
 因此，在设置任何YP服务器前，您应当考虑这些故有的安全缺点是否在您的应用环境中是可接受的。特别地，如果可能的攻击者能够在物理上访问您的网络，YP的缺点就更加显著了。任何拥有在您传输IP流量的网段中的设备的root权限的人都可以绑定（bind）到您的YP域并访问其数据。在一些情况下，将YP数据通过SSL或者IPSec通道传输可能是一个可用的选项。  
 
 ## 设置一个YP服务器  
@@ -238,7 +238,7 @@ YP使用[rpc(3)](https://man.openbsd.org/rpc)（远程过程调用，remote proc
 # rcctl enable portmap
 # rcctl start portmap
 ```  
-我们建议您在``/etc/yp`domainname```配置文件中提供一个YP服务器的列表。否则，YP客户端守护进程将使用网络广播来查找它自己所属的域的服务器。显式制定服务器使得服务更加健壮也略微减少了被攻击的可能性。如果您还没有设置任何从服务器，请仅将主服务器的主机名（host name）写入``/etc/yp/`domainname```文件中。  
+我们建议您在``/etc/yp`domainname```配置文件中提供一个YP服务器的列表。否则，YP客户端守护进程将使用网络广播来查找它自己所属的域的服务器。显式指定服务器使得服务更加健壮也略微减少了被攻击的可能性。如果您还没有设置任何从服务器，请仅将主服务器的主机名（host name）写入``/etc/yp/`domainname```文件中。  
 通过[ypbind(8)](https://man.openbsd.org/ypbind)激活和启动YP客户端守护进程。  
 ```
 # rcctl enable ypbind
