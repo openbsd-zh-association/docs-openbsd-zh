@@ -108,6 +108,29 @@ Directory does not contain SHA256.sig. Continue without verification? [no]
 
 这是因为安装程序验证它们毫无意义。如果有人要制作流氓安装映像，他们当然可以更改安装程序以说明文件是合法的。如果你事先验证了镜像的签名，则在该提示下回答 “Yes” ，表示是安全的。
 
+## 添加无线固件
+
+由于一些版权原因，某些固件不能与 OpenBSD 映像一同发行。尽管 `fw_update`(8) 可自动下载和安装缺少的固件，但这需要一个可用的互联网连接。
+
+在某些特定设备（如笔记本）上，用户需要手动下载和安装固件才能访问互联网。这可以在安装之前完成，方法是预先将固件文件添加到安装介质，或者在安装系统后完成。
+
+首先，使用 `dmesg`(8) 或 `ifconfig(8)` 查看无线适配器接口名称。
+
+然后，从一个已经安装了 OpenBSD 的环境中，使用 `vnconfig`(8) 将安装介质挂载为虚拟磁盘，并使用 `fw_update`(8) 下载所需要的文件。这里以使用 `iwm`(4) 的无线适配器为例。
+
+```
+# vnconfig install73.img
+vnd0
+# mount /dev/vnd0a /mnt
+# fw_update -Fv -p /mnt iwm
+# umount /mnt
+# vnconfig -u vnd0
+```
+
+在这之后，映像文件可用于创建安装介质。
+
+如果你没有一个可用的 OpenBSD 环境，可以在另一台电脑上从 firmware.openbsd.org 下载专有固件，然后将其放入 USB 驱动器。然后在 OpenBSD 机器上，使用 `mount`(8) 挂载驱动器并使用 `fw_update`(8) 将其安装。
+
 ## 创建安装介质
 
 ### 闪存驱动器
